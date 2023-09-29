@@ -1,7 +1,12 @@
+using UnityEngine;
 using UnityEngine.Events;
 
+// [CreateAssetMenu(fileName = "ShieldModel", menuName = "ScriptableObjects/ShieldModel")]
 public class ShieldModel
 {
+    public static float DefaultShieldStartingHealth = 10f;
+    public static float DefaultShieldMaxHealth = 10f;
+
     /// <summary>
     /// HealthUpdate emits the new percentage of health as a float between 0 and 1
     /// </summary>
@@ -16,6 +21,12 @@ public class ShieldModel
         {
             return health / maxHealth;
         }
+    }
+
+    public ShieldModel(float startingHealth, float maxHealth)
+    {
+        this.health = this.startingHealth = startingHealth;
+        this.maxHealth = maxHealth;
     }
 
     /// <summary>

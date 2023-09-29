@@ -1,11 +1,11 @@
 // the TerrainCube behaviour is placed on the prefab. adjustable damage allows for tweaking and differentiation (ie. terrain types w/ 2x damage)
-public class TerrainCube : IShieldCollidable
+public class Terrain : AbstractCollidable
 {
-    public ShieldCollisionType Type
+    public override ShieldCollisionType Type
     {
         get
         {
-            return ShieldCollisionType.TerrainCube;
+            return ShieldCollisionType.Terrain;
         }
     }
     public float Damage;

@@ -8,7 +8,7 @@ public class ShieldController
     public ShieldController(ShieldView view)
     {
         this.view = view;
-        model = new ShieldModel();
+        model = new ShieldModel(ShieldModel.DefaultShieldStartingHealth, ShieldModel.DefaultShieldMaxHealth);
         view.SetModel(model);
 
         view.ShieldCollision.AddListener(CollisionListener);
@@ -18,9 +18,8 @@ public class ShieldController
     {
         switch (collidable.Type)
         {
-            case ShieldCollisionType.TerrainCube:
-                model.DamageShield(((TerrainCube)collidable).Damage);
-
+            case ShieldCollisionType.Terrain:
+                model.DamageShield(((Terrain)collidable).Damage);
                 break;
             case ShieldCollisionType.Mine:
                 model.DamageShield(((Mine)collidable).Damage);

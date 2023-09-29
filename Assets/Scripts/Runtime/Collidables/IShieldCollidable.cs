@@ -8,7 +8,7 @@ public interface IShieldCollidable
 
 public enum ShieldCollisionType
 {
-    TerrainCube,
+    Terrain,
     Mine,
     ShieldBoost
 }
