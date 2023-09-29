@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelCubeGenerator : MonoBehaviour
 {
+    [SerializeField] private GameObject finishLineBlockPrefab;
     [SerializeField] private GameObject levelCubePrefab;
     [SerializeField] private GameObject shieldCubePrefab;
     [SerializeField] private GameObject mineCubePrefab;
@@ -68,6 +69,23 @@ public class LevelCubeGenerator : MonoBehaviour
             }
             cubeY++;
         }
+
+        //Add 1 giant finishline cube
+        float finishLineHeight = 2f;
+        cube = GameObject.Instantiate(finishLineBlockPrefab, new Vector3(transform.position.x, cubeY + finishLineHeight * .5f, transform.position.z), Quaternion.identity, transform.parent);
+        cube.transform.localScale = new Vector3(transform.lossyScale.x, finishLineHeight, cube.transform.localScale.z);
+
+        // Add 2 rows of Finish Line Cubes
+        // prefab = finishLineBlockPrefab;
+        // for (int i = 0; i < 2; i++)
+        // {
+        //     for (cubeX = startX; cubeX < endX; cubeX++)
+        //     {
+        //         cube = GameObject.Instantiate(prefab, new Vector3(cubeX, cubeY + i, transform.position.z), Quaternion.identity, transform.parent);
+        //         cube.transform.localScale = Vector3.one;
+        //     }
+        // }
+
 
         statusText.TotalMines = TotalMines;
         statusText.TotalShields = TotalShields;

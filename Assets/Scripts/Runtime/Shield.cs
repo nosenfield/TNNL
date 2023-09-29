@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Shield : MonoBehaviour
 {
+    public static UnityAction<float> ShieldChanged;
     SphereCollider sphereCollider;
     Player player;
     float shieldStartingScale;
@@ -18,7 +20,9 @@ public class Shield : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        LevelCube levelCube = other.GetComponent<LevelCube>();
+        LevelCube levelCube = other.GetComponentInParent<LevelCube>();
+
+        if (levelCube == null) return;
 
         if (levelCube.Type == LevelCube.CubeType.DEFAULT)
         {
@@ -35,7 +39,7 @@ public class Shield : MonoBehaviour
             statusText.ShieldCollected();
         }
 
-        other.gameObject.SetActive(false);
+        levelCube.Container.SetActive(false);
     }
 
     public void DamageShield(float amount)
@@ -59,6 +63,8 @@ public class Shield : MonoBehaviour
     {
         transform.localScale -= new Vector3(amount, amount, 0f);
         sphereCollider.radius = colliderStartingRadius * transform.localScale.x / shieldStartingScale;
+
+        ShieldChanged.Invoke((transform.localScale.x - 1f) / (shieldStartingScale - 1f));
     }
 
 
@@ -67,6 +73,14 @@ public class Shield : MonoBehaviour
         sphereCollider.radius = colliderStartingRadius;
         transform.localScale = new Vector3(shieldStartingScale, shieldStartingScale, transform.localScale.z);
         sphereCollider.enabled = true;
+    }
+
+    public void SetShieldHealth(float totalHealth)
+    {
+        // the shield health should be tracked separately from the transform size.
+        // the transform is just a display mechanism for the underlying data
+
+        ShieldChanged.Invoke((transform.localScale.x - 1f) / (shieldStartingScale - 1f));
     }
 
 }

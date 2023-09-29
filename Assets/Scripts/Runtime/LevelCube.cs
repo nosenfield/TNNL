@@ -12,4 +12,5 @@ public class LevelCube : MonoBehaviour
     }
     public CubeType Type;
     public float Damage;
+    public GameObject Container;
 }

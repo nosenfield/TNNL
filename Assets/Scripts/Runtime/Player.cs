@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public UnityAction GameOverAction;
     public float CenterpointX = 0f; // the centerpoint x-position of the ship in units
     public float Displacement = 50f; // the maximum displacement to either side of the centerpoint
     public float PeriodInMilliseconds = 1000f; // the time the ship takes to complete 1 full cycle from minX to maxX and back to minX
@@ -23,12 +22,15 @@ public class Player : MonoBehaviour
         {
             if (value)
             {
-                GameOverAction.Invoke();
+                Main.GameOverAction.Invoke();
             }
 
             isDead = value;
+            DoUpdateShip = false;
         }
     }
+
+    public bool DoUpdateShip;
 
     public InputActionAsset actions;
     private InputAction boostAction;
@@ -50,13 +52,14 @@ public class Player : MonoBehaviour
     public void StartRun()
     {
         isDead = false;
+        DoUpdateShip = true;
         OnBoost();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsDead)
+        if (DoUpdateShip)
         {
             // if we're boosting, pause our left/right movement 
             timeInPeriod += isBoosting ? 0f : Time.deltaTime * 1000;
