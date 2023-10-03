@@ -33,4 +33,10 @@ public class StaticShaderAdjustment : MonoBehaviour
             time = 0f;
         }
     }
+
+    void OnDisable()
+    {
+        mat.SetFloat("_Min", startingMin);
+        mat.SetFloat("_Max", startingMax);
+    }
 }

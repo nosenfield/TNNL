@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c267bd048b24a5084fb7e2fb8cbdfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  note: "README\n\nStatic Material uses StaticShaderGraph.\n\nStaticShaderGraph uses
-    a rotating UV to seed a random number within a range. Note: this will generate
+  note: "README\n\nThis scene tests/demos different static noise shaders on 3D objects
+    and canvas objects.\n\nStatic Material uses StaticShaderGraph.\n\nStaticShaderGraph
+    uses a rotating UV to seed a random number within a range. Note: this will generate
     the same pattern\_on each rotation\n\nThe range correlates to a correlate to
     white-to-black gradient with a hard .5/.5 split.\nWhite: <= .5\nBlack: > .5\n\nThe
     random value from within the range represents where in the gradient (left to
@@ -161,9 +162,9 @@ MonoBehaviour:
     at .5-1 is the minimum number of white pixels we could pull that are more than
     0.\n\nThe StaticShaderAdjustment script on the Plane adjusts the Static Material.\n\nThe
     Static Material is demonstrated rendering on a Plane and on the Canvas/Image.\n\nThe
-    Static Material-Alt uses a similar method to generate static, but the static
-    is kind of nicer. Unfortunately we cannot expose the material properties needed
-    to animate the material with a script."
+    Static Material-Alt uses a similar method to generate static, but the \"size\"
+    of the static can be scaled which produces a better effect. Unfortunately we
+    cannot expose the material properties needed to animate the material with a script."
 --- !u!4 &449522899
 Transform:
   m_ObjectHideFlags: 0
@@ -449,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1243005644
 MeshCollider:
   m_ObjectHideFlags: 0

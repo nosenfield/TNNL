@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 52de0d005acfc47488539624638d0242, type: 3}
+        m_Texture: {fileID: 2800000, guid: ae5e9a3d5f2864161afa429fdf7f6812, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -78,9 +78,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Max: 0.99788797
+    - _Max: 3
     - _Metallic: 0
-    - _Min: 0.49788797
+    - _Min: 0.503
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
