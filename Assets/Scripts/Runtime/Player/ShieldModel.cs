@@ -8,7 +8,9 @@ public class ShieldModel
     public static float DefaultShieldMaxHealth = 10f;
 
     /// <summary>
-    /// HealthUpdate emits the new percentage of health as a float between 0 and 1
+    /// HealthUpdate emits the new percentage of health as a float between 0 and 1. this currently throws an error because it has no listeners.
+    /// Who needs to listen to this event and how will they get the reference to the event through this model which is instantiated by the controller?
+    /// Emit a registration as the "active" model?
     /// </summary>
     public UnityEvent<float> HealthUpdate;
 
