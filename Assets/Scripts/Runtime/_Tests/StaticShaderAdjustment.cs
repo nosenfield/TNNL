@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class increases the static by shifting the range of the available the gradient toward the white end (0)
+/// </summary>
 public class StaticShaderAdjustment : MonoBehaviour
 {
     [SerializeField] Material mat;

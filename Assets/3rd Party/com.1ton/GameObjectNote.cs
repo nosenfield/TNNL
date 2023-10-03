@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class GameObjectNote : MonoBehaviour
 {
-    [TextArea][SerializeField] private string note;
+    [TextArea(20, 40)][SerializeField] private string note;
 }

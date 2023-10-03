@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StaticNoise Material
+  m_Name: Static Material
   m_Shader: {fileID: -6465566751694194690, guid: cb6206bd3961f48b99ed3e7767a28161, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -59,8 +59,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_cbc65d0097114158a1b413e00a98b4a9_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: f98585c01f24347adb7788be366931a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52de0d005acfc47488539624638d0242, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -74,7 +78,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Max: 0.99788797
     - _Metallic: 0
+    - _Min: 0.49788797
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02

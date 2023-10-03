@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StaticNoise Material 1
+  m_Name: Static Material-Alt
   m_Shader: {fileID: -6465566751694194690, guid: 361206eee843f4496a0050f49f54a80c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
