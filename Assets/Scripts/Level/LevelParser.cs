@@ -32,9 +32,8 @@ public class LevelParser : MonoBehaviour
             int notatedRow = section.Notations[i].Index / section.Width;
             int notatedCol = section.Notations[i].Index % section.Width;
 
-            while (curRow != notatedRow && curCol != notatedCol)
+            while (curRow != notatedRow || curCol != notatedCol)
             {
-
                 // make default cube
                 cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
 
