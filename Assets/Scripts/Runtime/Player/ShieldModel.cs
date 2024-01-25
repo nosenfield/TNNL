@@ -29,6 +29,7 @@ public class ShieldModel
     {
         this.health = this.startingHealth = startingHealth;
         this.maxHealth = maxHealth;
+        HealthUpdate = new UnityEvent<float>();
     }
 
     /// <summary>

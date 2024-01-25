@@ -7,4 +7,6 @@ public abstract class AbstractCollidable : MonoBehaviour, IShieldCollidable
     {
         get;
     }
+
+    public abstract void OnTriggerEnter(Collider other);
 }
