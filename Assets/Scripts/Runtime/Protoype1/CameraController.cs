@@ -1,25 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace TNNL.Prototype_1
 {
-    public GameObject playerGameObject;
 
-    // Start is called before the first frame update
-    void Start()
+    public class CameraController : MonoBehaviour
     {
+        public GameObject playerGameObject;
 
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdatePosition(playerGameObject.transform.position.y);
-    }
+        }
 
-    public void UpdatePosition(float y)
-    {
-        transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        // Update is called once per frame
+        void Update()
+        {
+            UpdatePosition(playerGameObject.transform.position.y);
+        }
+
+        public void UpdatePosition(float y)
+        {
+            transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        }
     }
 }

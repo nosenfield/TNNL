@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+namespace TNNL.Prototype_1
 {
+    public class Ship : MonoBehaviour
+    {
 
+    }
 }

@@ -1,18 +1,23 @@
 using UnityEngine;
 
-public interface IShieldCollidable
+namespace TNNL.Collidables
 {
-    ShieldCollisionType Type
+    public interface IShieldCollidable
     {
-        get;
+        ShieldCollisionType Type
+        {
+            get;
+        }
+
+        void OnTriggerEnter(Collider other);
     }
 
-    void OnTriggerEnter(Collider other);
-}
+    public enum ShieldCollisionType
+    {
+        Terrain,
+        Mine,
+        ShieldBoost,
+        FinishLine
+    }
 
-public enum ShieldCollisionType
-{
-    Terrain,
-    Mine,
-    ShieldBoost
 }

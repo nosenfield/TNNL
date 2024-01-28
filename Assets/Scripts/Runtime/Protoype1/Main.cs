@@ -1,54 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
-public class Main : MonoBehaviour
+namespace TNNL.Prototype_1
 {
-    public static UnityAction GameOverAction;
-    public static UnityAction FinishLineContact;
-    [SerializeField] GameObject gameoverScreen;
-    [SerializeField] GameObject successScreen;
-    [SerializeField] Player player;
-    [SerializeField] StatusText statusText;
-    [SerializeField] LevelCubeGenerator levelCubeGenerator;
-
-    void Awake()
+    public class Main : MonoBehaviour
     {
-        GameOverAction += GameOverListener;
-        FinishLineContact += FinishLineContactListener;
+        public static UnityAction GameOverAction;
+        public static UnityAction FinishLineContact;
+        [SerializeField] GameObject gameoverScreen;
+        [SerializeField] GameObject successScreen;
+        [SerializeField] Player player;
+        [SerializeField] StatusText statusText;
+        [SerializeField] LevelCubeGenerator levelCubeGenerator;
 
-        gameoverScreen.SetActive(false);
-    }
+        void Awake()
+        {
+            GameOverAction += GameOverListener;
+            FinishLineContact += FinishLineContactListener;
 
-    public void StartRunOnClick()
-    {
-        gameoverScreen.SetActive(false);
-        successScreen.SetActive(false);
+            gameoverScreen.SetActive(false);
+        }
 
-        statusText.IncreaseAttempts();
-        player.ResetShip();
-        player.StartRun();
-    }
+        public void StartRunOnClick()
+        {
+            gameoverScreen.SetActive(false);
+            successScreen.SetActive(false);
 
-    public void ResetLevelOnClick()
-    {
-        levelCubeGenerator.ResetLevel();
-        statusText.Reset();
-    }
+            statusText.IncreaseAttempts();
+            player.ResetShip();
+            player.StartRun();
+        }
 
-    public void GameOverListener()
-    {
-        gameoverScreen.SetActive(true);
-    }
+        public void ResetLevelOnClick()
+        {
+            levelCubeGenerator.ResetLevel();
+            statusText.Reset();
+        }
 
-    public void FinishLineContactListener()
-    {
-        Debug.Log("FinishLineContactListener");
-        successScreen.SetActive(true);
-        statusText.IncreaseWinCount();
-        player.DoUpdateShip = false;
+        public void GameOverListener()
+        {
+            gameoverScreen.SetActive(true);
+        }
+
+        public void FinishLineContactListener()
+        {
+            Debug.Log("FinishLineContactListener");
+            successScreen.SetActive(true);
+            statusText.IncreaseWinCount();
+            player.DoUpdateShip = false;
+        }
     }
 }

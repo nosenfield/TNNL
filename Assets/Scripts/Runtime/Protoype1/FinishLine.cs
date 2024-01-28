@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishLine : MonoBehaviour
+namespace TNNL.Prototype_1
 {
-    private void OnTriggerEnter(Collider other)
+    public class FinishLine : MonoBehaviour
     {
-        Ship ship = other.GetComponent<Ship>();
-
-        if (ship != null)
+        private void OnTriggerEnter(Collider other)
         {
-            Main.FinishLineContact.Invoke();
+            Ship ship = other.GetComponent<Ship>();
+
+            if (ship != null)
+            {
+                Main.FinishLineContact.Invoke();
+            }
         }
     }
 }

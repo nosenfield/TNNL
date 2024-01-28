@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelCube : MonoBehaviour
+namespace TNNL.Prototype_1
 {
-    public enum CubeType
+    public class LevelCube : MonoBehaviour
     {
-        DEFAULT,
-        MINE,
-        SHIELD
+        public enum CubeType
+        {
+            DEFAULT,
+            MINE,
+            SHIELD
+        }
+        public CubeType Type;
+        public float Damage;
+        public GameObject Container;
     }
-    public CubeType Type;
-    public float Damage;
-    public GameObject Container;
 }

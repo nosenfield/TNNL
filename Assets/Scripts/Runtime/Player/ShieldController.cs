@@ -1,55 +1,59 @@
+using TNNL.Collidables;
 using UnityEngine;
 
-public class ShieldController
+namespace TNNL.Player
 {
-    private ShieldModel model;
-    private ShieldView view;
-
-    public ShieldController(ShieldView view)
+    public class ShieldController
     {
-        this.view = view;
-        model = new ShieldModel(ShieldModel.DefaultShieldStartingHealth, ShieldModel.DefaultShieldMaxHealth);
-        view.SetModel(model);
+        private ShieldModel model;
+        private ShieldView view;
 
-        view.ShieldCollision.AddListener(CollisionListener);
-
-        Debug.Log(model);
-        Debug.Log(model.HealthUpdate);
-
-        model.HealthUpdate.AddListener(HealthUpdateListener);
-    }
-
-    private void CollisionListener(IShieldCollidable collidable)
-    {
-        switch (collidable.Type)
+        public ShieldController(ShieldView view)
         {
-            case ShieldCollisionType.Terrain:
-                model.DamageShield(((Terrain)collidable).Damage);
-                break;
-            case ShieldCollisionType.Mine:
-                Debug.Log("Hit a mine!");
-                model.DamageShield(((Mine)collidable).Damage);
-                break;
-            case ShieldCollisionType.ShieldBoost:
-                Debug.Log("Grabbed a shield!");
-                model.HealShield(((ShieldBoost)collidable).Amount);
-                break;
+            this.view = view;
+            model = new ShieldModel(ShieldModel.DefaultShieldStartingHealth, ShieldModel.DefaultShieldMaxHealth);
+            view.SetModel(model);
+
+            view.ShieldCollision.AddListener(CollisionListener);
+
+            Debug.Log(model);
+            Debug.Log(model.HealthUpdate);
+
+            model.HealthUpdate.AddListener(HealthUpdateListener);
         }
-    }
 
-    private void HealthUpdateListener(float percentHealth)
-    {
-        Debug.Log("HealthUpdateListener");
-        Debug.Log($"Current Health: {percentHealth}");
-        Debug.Log($"model.PercentHealth: {model.PercentHealth}");
-
-        if (percentHealth <= 0)
+        private void CollisionListener(IShieldCollidable collidable)
         {
-            Debug.Log("Shield is destroyed!");
+            switch (collidable.Type)
+            {
+                case ShieldCollisionType.Terrain:
+                    model.DamageShield(((Collidables.Terrain)collidable).Damage);
+                    break;
+                case ShieldCollisionType.Mine:
+                    Debug.Log("Hit a mine!");
+                    model.DamageShield(((Mine)collidable).Damage);
+                    break;
+                case ShieldCollisionType.ShieldBoost:
+                    Debug.Log("Grabbed a shield!");
+                    model.HealShield(((ShieldBoost)collidable).Amount);
+                    break;
+            }
         }
-        else
-        {
 
+        private void HealthUpdateListener(float percentHealth)
+        {
+            Debug.Log("HealthUpdateListener");
+            Debug.Log($"Current Health: {percentHealth}");
+            Debug.Log($"model.PercentHealth: {model.PercentHealth}");
+
+            if (percentHealth <= 0)
+            {
+                Debug.Log("Shield is destroyed!");
+            }
+            else
+            {
+
+            }
         }
     }
 }
