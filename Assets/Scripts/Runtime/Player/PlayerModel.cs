@@ -91,7 +91,6 @@ namespace TNNL.Player
             if (!DoUpdate) return;
 
             boostTime = CalculateBoostTime();
-            Debug.Log($"BoostTime: {boostTime}");
         }
 
         public void FixedUpdate()
@@ -119,7 +118,6 @@ namespace TNNL.Player
                 }
                 else if (!BoostRequested && boostTime >= boostTimeOnContact)
                 {
-                    Debug.Log($"Min boost achieved. Stop boost. {Time.time}");
                     isBoosting = false;
                 }
             }

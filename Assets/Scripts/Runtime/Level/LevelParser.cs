@@ -88,7 +88,7 @@ namespace TNNL.Level
                 }
             }
 
-            Debug.Log($"curRow: {curRow}, curCol: {curCol}");
+            // Debug.Log($"curRow: {curRow}, curCol: {curCol}");
 
             levelContainer.transform.position = new Vector3(-section.Width * .5f, levelContainer.transform.position.y, levelContainer.transform.position.z);
             levelBacking.transform.position = new Vector3(levelContainer.transform.position.x + section.Width * .5f, levelContainer.transform.position.y + section.Height * .5f, levelBacking.transform.position.z);

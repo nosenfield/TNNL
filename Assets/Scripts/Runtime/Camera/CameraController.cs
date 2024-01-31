@@ -27,8 +27,8 @@ namespace TNNL.Camera
 
         void UpdateSize(float levelWidth)
         {
-            DefaultLogger.Instance.Log(LogLevel.DEBUG, $"CameraController.UpdateSize: {levelWidth}");
-            this.GetComponent<UnityEngine.Camera>().orthographicSize = Screen.height * levelWidth * .5f / Screen.width;
+            // fit the viewport to the level width, unless it makes the height smaller than the width
+            this.GetComponent<UnityEngine.Camera>().orthographicSize = Mathf.Max(Screen.height * levelWidth * .5f / Screen.width, levelWidth * .5f);
         }
     }
 }
