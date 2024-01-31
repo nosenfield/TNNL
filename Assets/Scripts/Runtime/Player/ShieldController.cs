@@ -1,3 +1,4 @@
+using System;
 using TNNL.Collidables;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ namespace TNNL.Player
 {
     public class ShieldController
     {
+        public static Action ShieldDestroyed;
         private ShieldModel model;
         private ShieldView view;
 
@@ -14,12 +16,8 @@ namespace TNNL.Player
             model = new ShieldModel(ShieldModel.DefaultShieldStartingHealth, ShieldModel.DefaultShieldMaxHealth);
             view.SetModel(model);
 
-            view.ShieldCollision.AddListener(CollisionListener);
-
-            Debug.Log(model);
-            Debug.Log(model.HealthUpdate);
-
-            model.HealthUpdate.AddListener(HealthUpdateListener);
+            view.ShieldCollision += CollisionListener;
+            model.HealthUpdate += HealthUpdateListener;
         }
 
         private void CollisionListener(IShieldCollidable collidable)
@@ -42,18 +40,25 @@ namespace TNNL.Player
 
         private void HealthUpdateListener(float percentHealth)
         {
-            Debug.Log("HealthUpdateListener");
-            Debug.Log($"Current Health: {percentHealth}");
-            Debug.Log($"model.PercentHealth: {model.PercentHealth}");
-
             if (percentHealth <= 0)
             {
                 Debug.Log("Shield is destroyed!");
+                ShieldDestroyed.Invoke();
             }
             else
             {
 
             }
+        }
+
+        // NOTE
+        // This is not yet called by our view object to which it is tied.
+        // We could attach to another view which is instantiated without the createController attribute
+        ///
+        public void OnDestroy()
+        {
+            view.ShieldCollision -= CollisionListener;
+            model.HealthUpdate -= HealthUpdateListener;
         }
     }
 }

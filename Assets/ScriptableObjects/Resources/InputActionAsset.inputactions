@@ -1,0 +1,76 @@
+{
+    "name": "InputActionAsset",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "89c540d9-dc72-4fc2-9451-b517d911a3a6",
+            "actions": [
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "d08c246d-b191-4d0d-b6a9-7dd0ac6e0e5e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Release",
+                    "type": "Button",
+                    "id": "9fe5d8f5-b6f1-49c3-bdc0-3bd1972e81b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ea68f3d2-14a8-4ba1-9062-725d40006567",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82d14918-2d9e-4041-9059-1c3d7b7236e9",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2b29dc9-0e84-4e69-b940-51ecf4a9e45d",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Release",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2360c762-f46d-4aa5-a37a-a4f1beb9f633",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Release",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

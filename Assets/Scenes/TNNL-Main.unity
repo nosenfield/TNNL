@@ -163,6 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531877489}
+  - component: {fileID: 531877490}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -187,6 +188,21 @@ Transform:
   - {fileID: 600558903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531877490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531877488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d382a7ca6ed14d97b638b73f24d22be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: ff26f04991c994056a46562eba6f83f2, type: 3}
+  GenerateController: 1
+  DoUpdate: 0
 --- !u!1 &600558902
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +462,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -527,6 +544,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bdcb046f3104468b720e72b130b9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShip: {fileID: 531877490}
 --- !u!1 &1009220989
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +570,7 @@ GameObject:
   - component: {fileID: 1009220994}
   - component: {fileID: 1009220993}
   - component: {fileID: 1009220992}
-  - component: {fileID: 1009220991}
+  - component: {fileID: 1009220996}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -563,18 +593,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 531877489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1009220991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009220989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d003eba96ab4817a86c8e767f093c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1009220992
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -673,6 +691,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009220989}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1009220996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009220989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aea807c85ce44288b71fe593d033214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1086595478
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +921,7 @@ MonoBehaviour:
   defaultTerrainPrefab: {fileID: 2505928986221501812, guid: 384f1059ebc6a42e5971614552eb588e, type: 3}
   minePrefab: {fileID: 9134359135241263543, guid: ad82ca5c7a009421cbefaeb0ce916dac, type: 3}
   shieldPrefab: {fileID: 8367612401388265235, guid: b67de98db4ef04a2db024cef2ba08137, type: 3}
+  finishLinePrefab: {fileID: 244819861968602584, guid: 3c764c9cbe0d24acc954af7bc8fbd172, type: 3}
   section: {fileID: 11400000, guid: a317759c7d33148f8bf1edd4ed57635c, type: 2}
 --- !u!4 &2085311132
 Transform:

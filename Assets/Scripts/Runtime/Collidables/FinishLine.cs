@@ -2,17 +2,19 @@
 using UnityEngine;
 using UnityEngine.Events;
 using TNNL.Player;
+using nosenfield.Logging;
+using System;
 
 namespace TNNL.Collidables
 {
     public class FinishLine : MonoBehaviour
     {
-        public static UnityEvent FinishLineCollision;
+        public static event Action FinishLineCollision;
 
         // Handle my collision with objects of different types
         public void OnTriggerEnter(Collider other)
         {
-            PlayerShip player = other.GetComponentInParent<PlayerShip>();
+            PlayerView player = other.GetComponentInParent<PlayerView>();
 
             switch (player)
             {
@@ -26,7 +28,9 @@ namespace TNNL.Collidables
 
         private void ReportSectionComplete()
         {
-            FinishLineCollision.Invoke();
+            DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
+
+            FinishLineCollision?.Invoke();
         }
     }
 }

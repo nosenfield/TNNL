@@ -1,19 +1,29 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TNNL.Level
 {
     public class LevelParser : MonoBehaviour
     {
+        public static event Action<float> LevelCreated;
+
         [SerializeField] private GameObject levelContainer;
         [SerializeField] private GameObject levelBacking;
         [SerializeField] private GameObject defaultTerrainPrefab;
         [SerializeField] private GameObject minePrefab;
         [SerializeField] private GameObject shieldPrefab;
         [SerializeField] private GameObject finishLinePrefab;
+        private int FINISH_LINE_ROWS = 2;
 
         [SerializeField] private LevelSection section;
         private List<GameObject> cubes;
+
+        void Awake()
+        {
+
+        }
 
         void Start()
         {
@@ -62,8 +72,8 @@ namespace TNNL.Level
                         cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                     case LevelBlockType.FinishLine:
-                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(curCol + section.Width * .5f, curRow, 0f), Quaternion.identity, levelContainer.transform);
-                        cube.transform.localScale = new Vector3(section.Width, 2f, cube.transform.localScale.z);
+                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(curCol + section.Width * .5f, section.Height + FINISH_LINE_ROWS * .5f, 0f), Quaternion.identity, levelContainer.transform);
+                        cube.transform.localScale = new Vector3(section.Width, FINISH_LINE_ROWS, cube.transform.localScale.z);
                         break;
                 }
 
@@ -83,6 +93,8 @@ namespace TNNL.Level
             levelContainer.transform.position = new Vector3(-section.Width * .5f, levelContainer.transform.position.y, levelContainer.transform.position.z);
             levelBacking.transform.position = new Vector3(levelContainer.transform.position.x + section.Width * .5f, levelContainer.transform.position.y + section.Height * .5f, levelBacking.transform.position.z);
             levelBacking.transform.localScale = new Vector3(section.Width, section.Height, 1);
+
+            LevelCreated?.Invoke(section.Width);
 
             // while (cubeY < endY)
             // {

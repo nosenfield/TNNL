@@ -1,3 +1,4 @@
+using System;
 using TNNL.Collidables;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,7 +8,7 @@ namespace TNNL.Player
     public class ShieldView : MonoBehaviour
     {
         // events
-        public UnityEvent<IShieldCollidable> ShieldCollision;
+        public Action<IShieldCollidable> ShieldCollision;
 
         // mvc 
         [SerializeField] private bool GenerateController;

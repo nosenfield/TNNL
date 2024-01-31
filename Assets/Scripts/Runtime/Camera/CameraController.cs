@@ -1,25 +1,34 @@
+using nosenfield.Logging;
+using TNNL.Level;
 using TNNL.Player;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace TNNL.Camera
 {
-    public GameObject playerGameObject;
-    public GameObject levelContainer;
-
-    // Start is called before the first frame update
-    void Start()
+    public class CameraController : MonoBehaviour
     {
-        playerGameObject = PlayerShip.Instance.gameObject;
-    }
+        [SerializeField] private PlayerView playerShip;
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdatePosition(playerGameObject.transform.position.y);
-    }
+        void Awake()
+        {
+            LevelParser.LevelCreated += UpdateSize;
+        }
 
-    public void UpdatePosition(float y)
-    {
-        transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        // Update is called once per frame
+        void Update()
+        {
+            UpdatePosition(playerShip.gameObject.transform.position.y);
+        }
+
+        void UpdatePosition(float y)
+        {
+            transform.position = new Vector3(transform.position.x, y, transform.position.z);
+        }
+
+        void UpdateSize(float levelWidth)
+        {
+            DefaultLogger.Instance.Log(LogLevel.DEBUG, $"CameraController.UpdateSize: {levelWidth}");
+            this.GetComponent<UnityEngine.Camera>().orthographicSize = Screen.height * levelWidth * .5f / Screen.width;
+        }
     }
 }

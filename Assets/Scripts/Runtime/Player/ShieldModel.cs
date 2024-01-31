@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace TNNL.Player
 {
+    [Serializable]
     public class ShieldModel
     {
         public static float DefaultShieldStartingHealth = 10f;
@@ -13,11 +15,11 @@ namespace TNNL.Player
         /// Who needs to listen to this event and how will they get the reference to the event through this model which is instantiated by the controller?
         /// Emit a registration as the "active" model?
         /// </summary>
-        public UnityEvent<float> HealthUpdate;
+        public Action<float> HealthUpdate;
 
-        private float health;
-        private float maxHealth;
-        private float startingHealth;
+        [SerializeField] private float health;
+        [SerializeField] private float maxHealth;
+        [SerializeField] private float startingHealth;
         public float PercentHealth
         {
             get
@@ -30,7 +32,6 @@ namespace TNNL.Player
         {
             this.health = this.startingHealth = startingHealth;
             this.maxHealth = maxHealth;
-            HealthUpdate = new UnityEvent<float>();
         }
 
         /// <summary>
