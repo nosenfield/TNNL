@@ -1,5 +1,6 @@
 using System;
 using TNNL.Collidables;
+using TNNL.UI.UIToolkit;
 using UnityEngine;
 
 namespace TNNL.Player
@@ -18,6 +19,13 @@ namespace TNNL.Player
 
             view.ShieldCollision += CollisionListener;
             model.HealthUpdate += HealthUpdateListener;
+
+            OverlayUI.ResetShipClicked += ResetShield;
+        }
+
+        private void ResetShield()
+        {
+            model.ResetShield();
         }
 
         private void CollisionListener(IShieldCollidable collidable)
