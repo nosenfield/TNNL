@@ -1,0 +1,327 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
+  m_Name: TestSection 1
+  m_EditorClassIdentifier: 
+  Width: 60
+  Height: 800
+  ChanceForShieldInLine: 0.03
+  ChanceForMineInLine: 0.1
+  TotalMines: 75
+  TotalShields: 25
+  Notations:
+  - Index: 54
+    IsActive: 1
+    Type: 1
+  - Index: 607
+    IsActive: 1
+    Type: 1
+  - Index: 766
+    IsActive: 1
+    Type: 1
+  - Index: 945
+    IsActive: 1
+    Type: 1
+  - Index: 1056
+    IsActive: 1
+    Type: 1
+  - Index: 1226
+    IsActive: 1
+    Type: 1
+  - Index: 2531
+    IsActive: 1
+    Type: 2
+  - Index: 3648
+    IsActive: 1
+    Type: 2
+  - Index: 4158
+    IsActive: 1
+    Type: 1
+  - Index: 4289
+    IsActive: 1
+    Type: 1
+  - Index: 4530
+    IsActive: 1
+    Type: 1
+  - Index: 4818
+    IsActive: 1
+    Type: 1
+  - Index: 4968
+    IsActive: 1
+    Type: 2
+  - Index: 5398
+    IsActive: 1
+    Type: 1
+  - Index: 5996
+    IsActive: 1
+    Type: 2
+  - Index: 6095
+    IsActive: 1
+    Type: 1
+  - Index: 6145
+    IsActive: 1
+    Type: 2
+  - Index: 6385
+    IsActive: 1
+    Type: 1
+  - Index: 7019
+    IsActive: 1
+    Type: 1
+  - Index: 7218
+    IsActive: 1
+    Type: 1
+  - Index: 7902
+    IsActive: 1
+    Type: 1
+  - Index: 8123
+    IsActive: 1
+    Type: 2
+  - Index: 8527
+    IsActive: 1
+    Type: 2
+  - Index: 8803
+    IsActive: 1
+    Type: 1
+  - Index: 9190
+    IsActive: 1
+    Type: 2
+  - Index: 9854
+    IsActive: 1
+    Type: 1
+  - Index: 9905
+    IsActive: 1
+    Type: 1
+  - Index: 10139
+    IsActive: 1
+    Type: 2
+  - Index: 10717
+    IsActive: 1
+    Type: 1
+  - Index: 11867
+    IsActive: 1
+    Type: 1
+  - Index: 11900
+    IsActive: 1
+    Type: 1
+  - Index: 12571
+    IsActive: 1
+    Type: 1
+  - Index: 12739
+    IsActive: 1
+    Type: 1
+  - Index: 12899
+    IsActive: 1
+    Type: 1
+  - Index: 13347
+    IsActive: 1
+    Type: 1
+  - Index: 14366
+    IsActive: 1
+    Type: 2
+  - Index: 14482
+    IsActive: 1
+    Type: 1
+  - Index: 15187
+    IsActive: 1
+    Type: 1
+  - Index: 16749
+    IsActive: 1
+    Type: 1
+  - Index: 17110
+    IsActive: 1
+    Type: 1
+  - Index: 17999
+    IsActive: 1
+    Type: 1
+  - Index: 18460
+    IsActive: 1
+    Type: 1
+  - Index: 19046
+    IsActive: 1
+    Type: 2
+  - Index: 19683
+    IsActive: 1
+    Type: 2
+  - Index: 20659
+    IsActive: 1
+    Type: 1
+  - Index: 20951
+    IsActive: 1
+    Type: 1
+  - Index: 21092
+    IsActive: 1
+    Type: 1
+  - Index: 21238
+    IsActive: 1
+    Type: 1
+  - Index: 21370
+    IsActive: 1
+    Type: 1
+  - Index: 22169
+    IsActive: 1
+    Type: 2
+  - Index: 22548
+    IsActive: 1
+    Type: 1
+  - Index: 22650
+    IsActive: 1
+    Type: 1
+  - Index: 23403
+    IsActive: 1
+    Type: 2
+  - Index: 25175
+    IsActive: 1
+    Type: 1
+  - Index: 25899
+    IsActive: 1
+    Type: 1
+  - Index: 27535
+    IsActive: 1
+    Type: 1
+  - Index: 27606
+    IsActive: 1
+    Type: 1
+  - Index: 28022
+    IsActive: 1
+    Type: 1
+  - Index: 28101
+    IsActive: 1
+    Type: 1
+  - Index: 28206
+    IsActive: 1
+    Type: 1
+  - Index: 29141
+    IsActive: 1
+    Type: 1
+  - Index: 29428
+    IsActive: 1
+    Type: 1
+  - Index: 30102
+    IsActive: 1
+    Type: 1
+  - Index: 30623
+    IsActive: 1
+    Type: 1
+  - Index: 31315
+    IsActive: 1
+    Type: 1
+  - Index: 32509
+    IsActive: 1
+    Type: 2
+  - Index: 32603
+    IsActive: 1
+    Type: 1
+  - Index: 32672
+    IsActive: 1
+    Type: 1
+  - Index: 33200
+    IsActive: 1
+    Type: 1
+  - Index: 33904
+    IsActive: 1
+    Type: 1
+  - Index: 34883
+    IsActive: 1
+    Type: 1
+  - Index: 34971
+    IsActive: 1
+    Type: 2
+  - Index: 35598
+    IsActive: 1
+    Type: 2
+  - Index: 35653
+    IsActive: 1
+    Type: 1
+  - Index: 35881
+    IsActive: 1
+    Type: 2
+  - Index: 36134
+    IsActive: 1
+    Type: 1
+  - Index: 36236
+    IsActive: 1
+    Type: 2
+  - Index: 36417
+    IsActive: 1
+    Type: 1
+  - Index: 36946
+    IsActive: 1
+    Type: 1
+  - Index: 37131
+    IsActive: 1
+    Type: 2
+  - Index: 37772
+    IsActive: 1
+    Type: 1
+  - Index: 38296
+    IsActive: 1
+    Type: 1
+  - Index: 38530
+    IsActive: 1
+    Type: 1
+  - Index: 38583
+    IsActive: 1
+    Type: 1
+  - Index: 40302
+    IsActive: 1
+    Type: 1
+  - Index: 40434
+    IsActive: 1
+    Type: 1
+  - Index: 40501
+    IsActive: 1
+    Type: 1
+  - Index: 40634
+    IsActive: 1
+    Type: 2
+  - Index: 40689
+    IsActive: 1
+    Type: 2
+  - Index: 41842
+    IsActive: 1
+    Type: 2
+  - Index: 42636
+    IsActive: 1
+    Type: 1
+  - Index: 42668
+    IsActive: 1
+    Type: 2
+  - Index: 42792
+    IsActive: 1
+    Type: 2
+  - Index: 43101
+    IsActive: 1
+    Type: 1
+  - Index: 44391
+    IsActive: 1
+    Type: 1
+  - Index: 44925
+    IsActive: 1
+    Type: 1
+  - Index: 45531
+    IsActive: 1
+    Type: 1
+  - Index: 46293
+    IsActive: 1
+    Type: 1
+  - Index: 47134
+    IsActive: 1
+    Type: 1
+  - Index: 47286
+    IsActive: 1
+    Type: 1
+  - Index: 47999
+    IsActive: 1
+    Type: 0
+  - Index: 48000
+    IsActive: 1
+    Type: 3

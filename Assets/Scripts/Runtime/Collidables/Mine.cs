@@ -47,8 +47,13 @@ namespace TNNL.Collidables
             IEnumerator Routine()
             {
                 yield return null;
-                gameObject.SetActive(false);
+                container.SetActive(false);
             }
+        }
+
+        public override void Activate()
+        {
+            container.SetActive(true);
         }
     }
 }

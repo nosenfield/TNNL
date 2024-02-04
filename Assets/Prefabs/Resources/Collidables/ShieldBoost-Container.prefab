@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldBoost
       objectReference: {fileID: 0}
+    - target: {fileID: 3391179761066156256, guid: cf577d857d62a46058937f668f4cf256, type: 3}
+      propertyPath: container
+      value: 
+      objectReference: {fileID: 8367612401388265235}
     - target: {fileID: 5165441103781924062, guid: cf577d857d62a46058937f668f4cf256, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TNNL.Collidables;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +8,10 @@ namespace TNNL.Level
 {
     public class LevelParser : MonoBehaviour
     {
+        public static LevelParser Instance;
         public static event Action<float> LevelCreated;
+
+        [SerializeField] private LevelSection[] levelSections;
 
         [SerializeField] private GameObject levelContainer;
         [SerializeField] private GameObject levelBacking;
@@ -18,24 +22,30 @@ namespace TNNL.Level
         private int FINISH_LINE_ROWS = 2;
 
         [SerializeField] private LevelSection section;
-        private List<GameObject> cubes;
+        private List<AbstractCollidable> cubes;
+
+        int levelIndex = -1;
 
         void Awake()
         {
-
+            Instance = this;
         }
 
-        void Start()
+        public void LoadPrevLevel()
         {
-            if (section != null)
-            {
-                ParseLevel(section);
-            }
+            levelIndex = levelIndex == 0 ? levelSections.Length - 1 : levelIndex - 1;
+            ParseLevel(levelSections[levelIndex]);
         }
 
-        public void ParseLevel(LevelSection section)
+        public void LoadNextLevel()
         {
-            cubes = new List<GameObject>();
+            levelIndex = levelIndex == levelSections.Length - 1 ? 0 : levelIndex + 1;
+            ParseLevel(levelSections[levelIndex]);
+        }
+
+        private void ParseLevel(LevelSection section)
+        {
+            cubes = new List<AbstractCollidable>();
             GameObject cube = null;
 
             int curRow = 0;
@@ -50,6 +60,7 @@ namespace TNNL.Level
                 {
                     // make default cube
                     cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
+                    cubes.Add(cube.GetComponent<AbstractCollidable>());
 
                     curCol++;
                     if (curCol == section.Width)
@@ -78,7 +89,7 @@ namespace TNNL.Level
                 }
 
                 cube.SetActive(section.Notations[i].IsActive);
-
+                cubes.Add(cube.GetComponent<AbstractCollidable>());
 
                 curCol++;
                 if (curCol == section.Width)
@@ -149,6 +160,25 @@ namespace TNNL.Level
             //         cube.transform.localScale = Vector3.one;
             //     }
             // }
+        }
+
+        public void ResetLevel()
+        {
+            Debug.Log("LevelParse.ResetLevel");
+
+            if (cubes == null)
+            {
+                LoadNextLevel();
+            }
+            else
+            {
+                Debug.Log($"cubes.Count: {cubes.Count}");
+
+                foreach (AbstractCollidable cube in cubes)
+                {
+                    cube.Activate();
+                }
+            }
         }
     }
 }
