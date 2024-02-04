@@ -49,6 +49,17 @@
                 },
                 {
                     "name": "",
+                    "id": "26260808-06a4-4756-9c8b-98b65f01d381",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b2b29dc9-0e84-4e69-b940-51ecf4a9e45d",
                     "path": "<Keyboard>/anyKey",
                     "interactions": "",
@@ -62,6 +73,17 @@
                     "name": "",
                     "id": "2360c762-f46d-4aa5-a37a-a4f1beb9f633",
                     "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Release",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55b44698-1677-4a2a-876f-5d22fe369cf8",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
