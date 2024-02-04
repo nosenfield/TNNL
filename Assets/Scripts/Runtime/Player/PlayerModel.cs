@@ -38,8 +38,12 @@ namespace TNNL.Player
         [SerializeField] private float boostDistanceMultiplier; // the Y multiplier while boosting
         [SerializeField] private float boostTimeOnContact; // the time in seconds to keep boost active on first contact
         [SerializeField] private float boostTime; // the current time since the player started boosting
+        public float BoostTime { get { return boostTime; } }
+
         [SerializeField] private float boostAllowThreshold; // the value the boost must return to after entering recovery before allowing another boost
         [SerializeField] private float boostMaxTime; // the maximum boost time before "overload"
+        public float BoostMaxTime { get { return boostMaxTime; } }
+
         [SerializeField] private float recoveryRateMultiplier; // the time multiplier for boost recovery
         [SerializeField] private float overloadRecoveryThreshold; // the minimum value needed to re-enable boost after overload
 
@@ -47,6 +51,11 @@ namespace TNNL.Player
         [SerializeField] private float overloadPenalty; // the penalty time added to the standard recovery time for going into overload
 
         public PlayerModel()
+        {
+            SetDefaults();
+        }
+
+        public void SetDefaults()
         {
             isBoosting = false;
             BoostRequested = false;
@@ -63,6 +72,9 @@ namespace TNNL.Player
 
             overloadPenalty = 1f;
             overloadRecoveryThreshold = 0f;
+
+            xPosition = 0;
+            yPosition = 0;
         }
 
         /// <summary>
