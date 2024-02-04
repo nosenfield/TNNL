@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TNNL-Main.unity
+    guid: 52018def1a4a448e39bc1f9fb7a69d04
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: df09ee7a4904f4f4e9515b76d314a3df, type: 2}
