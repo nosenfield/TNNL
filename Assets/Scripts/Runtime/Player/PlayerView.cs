@@ -12,7 +12,7 @@ namespace TNNL.Player
         public bool DoUpdate;
         // [SerializeField] private GameObject boostAnim;
 
-        void Awake()
+        void Start()
         {
             if (GenerateController)
             {
@@ -27,7 +27,7 @@ namespace TNNL.Player
 
         public void FixedUpdate()
         {
-            controller.FixedUpdate();
+            controller?.FixedUpdate();
 
             if (model != null && DoUpdate)
             {
@@ -37,7 +37,7 @@ namespace TNNL.Player
 
         public void Update()
         {
-            controller.Update();
+            controller?.Update();
 
             if (model != null && DoUpdate)
             {
@@ -47,11 +47,11 @@ namespace TNNL.Player
 
         void OnEnable()
         {
-            actions.FindActionMap("Gameplay").Enable();
+            actions?.FindActionMap("Gameplay").Enable();
         }
         void OnDisable()
         {
-            actions.FindActionMap("Gameplay").Disable();
+            actions?.FindActionMap("Gameplay").Disable();
         }
     }
 }
