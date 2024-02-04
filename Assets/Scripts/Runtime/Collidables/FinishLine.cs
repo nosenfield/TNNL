@@ -14,15 +14,11 @@ namespace TNNL.Collidables
         // Handle my collision with objects of different types
         public void OnTriggerEnter(Collider other)
         {
-            PlayerView player = other.GetComponentInParent<PlayerView>();
+            Ship player = other.GetComponentInParent<Ship>();
 
-            switch (player)
+            if (player != null)
             {
-                case null:
-                    break;
-                default:
-                    ReportSectionComplete();
-                    break;
+                ReportSectionComplete();
             }
         }
 
