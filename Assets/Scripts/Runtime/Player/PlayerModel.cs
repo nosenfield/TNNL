@@ -7,6 +7,7 @@ namespace TNNL.Player
     [Serializable]
     public class PlayerModel
     {
+        public static float Direction = -1f;
         public bool DoUpdate;
         public bool BoostRequested;
 
@@ -48,6 +49,13 @@ namespace TNNL.Player
         [SerializeField] private float overloadRecoveryThreshold; // the minimum value needed to re-enable boost after overload
 
         [SerializeField] private bool isOverloaded;
+        public bool IsOverloaded
+        {
+            get
+            {
+                return isOverloaded;
+            }
+        }
         [SerializeField] private float overloadPenalty; // the penalty time added to the standard recovery time for going into overload
 
         public PlayerModel()
@@ -161,12 +169,12 @@ namespace TNNL.Player
 
         private float CalculateYPosition()
         {
-            return yPosition += yVelocity * Time.fixedDeltaTime;
+            return yPosition += yVelocity * Time.fixedDeltaTime * Direction;
         }
 
         private float CalculateBoostedYPosition()
         {
-            return yPosition += yVelocity * boostDistanceMultiplier * Time.fixedDeltaTime;
+            return yPosition += yVelocity * boostDistanceMultiplier * Time.fixedDeltaTime * Direction;
         }
 
         private float CalculateBoostTime()

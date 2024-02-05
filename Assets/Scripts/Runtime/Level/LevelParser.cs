@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TNNL.Collidables;
+using TNNL.Player;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -59,7 +60,7 @@ namespace TNNL.Level
                 while (curRow != notatedRow || curCol != notatedCol)
                 {
                     // make default cube
-                    cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
+                    cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                     cubes.Add(cube.GetComponent<AbstractCollidable>());
 
                     curCol++;
@@ -74,16 +75,16 @@ namespace TNNL.Level
                 switch (section.Notations[i].Type)
                 {
                     case LevelBlockType.Mine:
-                        cube = GameObject.Instantiate(minePrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
+                        cube = GameObject.Instantiate(minePrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                     case LevelBlockType.ShieldBoost:
-                        cube = GameObject.Instantiate(shieldPrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
+                        cube = GameObject.Instantiate(shieldPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                     case LevelBlockType.DefaultTerrain:
-                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow, 0f), Quaternion.identity, levelContainer.transform);
+                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                     case LevelBlockType.FinishLine:
-                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(curCol + section.Width * .5f, section.Height + FINISH_LINE_ROWS * .5f, 0f), Quaternion.identity, levelContainer.transform);
+                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(curCol + section.Width * .5f, (section.Height + FINISH_LINE_ROWS * .5f) * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         cube.transform.localScale = new Vector3(section.Width, FINISH_LINE_ROWS, cube.transform.localScale.z);
                         break;
                 }
@@ -102,7 +103,7 @@ namespace TNNL.Level
             // Debug.Log($"curRow: {curRow}, curCol: {curCol}");
 
             levelContainer.transform.position = new Vector3(-section.Width * .5f, levelContainer.transform.position.y, levelContainer.transform.position.z);
-            levelBacking.transform.position = new Vector3(levelContainer.transform.position.x + section.Width * .5f, levelContainer.transform.position.y + section.Height * .5f, levelBacking.transform.position.z);
+            levelBacking.transform.position = new Vector3(levelContainer.transform.position.x + section.Width * .5f, (levelContainer.transform.position.y + section.Height * .5f) * PlayerModel.Direction, levelBacking.transform.position.z);
             levelBacking.transform.localScale = new Vector3(section.Width, section.Height, 1);
 
             LevelCreated?.Invoke(section.Width);
