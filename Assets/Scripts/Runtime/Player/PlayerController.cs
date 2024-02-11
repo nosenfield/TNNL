@@ -68,11 +68,13 @@ namespace TNNL.Player
         // Boost the ship forward
         void OnPress(InputAction.CallbackContext context)
         {
+            Debug.Log("OnPress");
             model.BoostRequested = true;
         }
 
         void OnRelease(InputAction.CallbackContext context)
         {
+            Debug.Log("OnRelease");
             model.BoostRequested = false;
         }
 

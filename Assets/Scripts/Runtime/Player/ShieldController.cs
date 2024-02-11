@@ -7,6 +7,7 @@ namespace TNNL.Player
 {
     public class ShieldController
     {
+        public static Action<AbstractCollidable> ShieldCollision;
         public static Action ShieldDestroyed;
         private ShieldModel model;
         private ShieldView view;
@@ -28,7 +29,7 @@ namespace TNNL.Player
             model.ResetShield();
         }
 
-        private void CollisionListener(IShieldCollidable collidable)
+        private void CollisionListener(AbstractCollidable collidable)
         {
             switch (collidable.Type)
             {
@@ -44,6 +45,8 @@ namespace TNNL.Player
                     model.HealShield(((ShieldBoost)collidable).Amount);
                     break;
             }
+
+            ShieldCollision.Invoke(collidable);
         }
 
         private void HealthUpdateListener(float percentHealth)

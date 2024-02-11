@@ -2,6 +2,7 @@ using nosenfield.Logging;
 using TNNL.Collidables;
 using TNNL.Level;
 using TNNL.Player;
+using TNNL.UI;
 using TNNL.UI.UIToolkit;
 using UnityEngine;
 
@@ -10,16 +11,21 @@ namespace TNNL
     public class Main : MonoBehaviour
     {
         [SerializeField] private GameObject overlayUI;
+        [SerializeField] private PlayerData playerData;
+
         void Awake()
         {
             OverlayUI.ResetLevelClicked += ResetLevel;
             OverlayUI.ResetShipClicked += ResetPlayer;
             PlayerController.PlayerShipDestroyed += GameOver;
+
+            playerData = new PlayerData();
         }
 
         void Start()
         {
             ResetLevel();
+            GameplayOverlayUI.Instance.SetPlayerData(playerData);
         }
 
         void ResetPlayer()

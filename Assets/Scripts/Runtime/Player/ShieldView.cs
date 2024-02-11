@@ -8,7 +8,7 @@ namespace TNNL.Player
     public class ShieldView : MonoBehaviour
     {
         // events
-        public Action<IShieldCollidable> ShieldCollision;
+        public Action<AbstractCollidable> ShieldCollision;
 
         // mvc 
         [SerializeField] private bool GenerateController;
@@ -50,12 +50,12 @@ namespace TNNL.Player
         {
             // set the visual scale of the orb and the scale of the collider
             float newScale = MinScale + (MaxScale - MinScale) * percentHealth;
-            transform.localScale = new Vector3(newScale, newScale, newScale);
+            transform.localScale = new Vector3(newScale, newScale, transform.localScale.z);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            IShieldCollidable collidable = other.GetComponentInParent<IShieldCollidable>();
+            AbstractCollidable collidable = other.GetComponentInParent<AbstractCollidable>();
 
             switch (collidable)
             {
