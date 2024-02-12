@@ -61,7 +61,7 @@ namespace TNNL.Level
                 {
                     // make default cube
                     cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
-                    cubes.Add(cube.GetComponent<AbstractCollidable>());
+                    cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
 
                     curCol++;
                     if (curCol == section.Width)
@@ -89,8 +89,8 @@ namespace TNNL.Level
                         break;
                 }
 
+                cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
                 cube.SetActive(section.Notations[i].IsActive);
-                cubes.Add(cube.GetComponent<AbstractCollidable>());
 
                 curCol++;
                 if (curCol == section.Width)

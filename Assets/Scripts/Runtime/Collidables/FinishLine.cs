@@ -7,12 +7,20 @@ using System;
 
 namespace TNNL.Collidables
 {
-    public class FinishLine : MonoBehaviour
+    public class FinishLine : AbstractCollidable
     {
+        public override ShieldCollisionType Type
+        {
+            get
+            {
+                return ShieldCollisionType.FinishLine;
+            }
+        }
+
         public static event Action FinishLineCollision;
 
         // Handle my collision with objects of different types
-        public void OnTriggerEnter(Collider other)
+        public override void OnTriggerEnter(Collider other)
         {
             Ship player = other.GetComponentInParent<Ship>();
 
@@ -27,6 +35,11 @@ namespace TNNL.Collidables
             DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
 
             FinishLineCollision?.Invoke();
+        }
+
+        public override void Activate()
+        {
+            container.SetActive(true);
         }
     }
 }
