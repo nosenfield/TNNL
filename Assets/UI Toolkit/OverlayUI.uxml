@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/OverlayUI.uss?fileID=7433441132597879392&amp;guid=1e4b78af2194a43d4aebdf769b3d4461&amp;type=3#OverlayUI" />
     <ui:VisualElement style="flex-grow: 1; justify-content: flex-end;">
         <ui:VisualElement name="BottomBar" style="flex-grow: 0.1; justify-content: space-around; flex-direction: row; max-height: 48px;">
-            <ui:Button text="Reset Ship" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResetShipButton" class="button-default" style="flex-grow: 1; flex-shrink: 0;" />
+            <ui:Button text="Start Run" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartRunButton" class="button-default" style="flex-grow: 1; flex-shrink: 0;" />
             <ui:Button text="Reset Level" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResetLevelButton" class="button-default" style="flex-grow: 0; flex-shrink: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>

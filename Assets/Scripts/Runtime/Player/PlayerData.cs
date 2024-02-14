@@ -5,9 +5,9 @@ using TNNL.Player;
 [Serializable]
 public class PlayerData
 {
-    public int TotalPoints;
+    public int TotalPoints = 0;
     public int StartingLives = 3;
-    public int CurrentLives;
+    public int CurrentLives = -1;
 
     int TerrainCollisionPoints = 1;
     int MineCollisionPoints = -1000;
@@ -15,7 +15,6 @@ public class PlayerData
 
     public PlayerData()
     {
-        ResetPlayerData();
         ShieldController.ShieldCollision += ShieldCollisionListener;
     }
 
@@ -25,7 +24,7 @@ public class PlayerData
         TotalPoints = 0;
     }
 
-    void ShieldCollisionListener(IShieldCollidable collidable)
+    void ShieldCollisionListener(IShieldCollidable collidable, float shieldHealth)
     {
         switch (collidable.Type)
         {

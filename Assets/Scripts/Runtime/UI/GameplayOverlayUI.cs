@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using TNNL.Animation;
 using TNNL.Collidables;
@@ -20,9 +22,14 @@ namespace TNNL.UI
         PlayerData playerData;
         int lastScore;
         [SerializeField] TextMeshProUGUI scoreText;
+        [SerializeField] TextMeshProUGUI healthText;
         [SerializeField] GameObject mineCollisionPointAnim;
         [SerializeField] GameObject shieldCollisionPointAnim;
         [SerializeField] RectTransform animationLayer;
+        [SerializeField] RectTransform lifeIconContainer;
+        [SerializeField] GameObject lifeIconPrefab;
+        List<LifeIcon> lifeIcons;
+
 
         void Awake()
         {
@@ -32,11 +39,31 @@ namespace TNNL.UI
         void Start()
         {
             ShieldController.ShieldCollision += ShieldCollisionListener;
+            ShieldController.ShieldDestroyed += ShieldDestroyedListener;
         }
 
         public void SetPlayerData(PlayerData playerData)
         {
             this.playerData = playerData;
+            ResetUI();
+        }
+
+        public void ResetUI()
+        {
+            foreach (RectTransform child in lifeIconContainer)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+
+            lifeIcons = new List<LifeIcon>();
+
+            for (int i = 0; i < playerData.CurrentLives; i++)
+            {
+                lifeIcons.Add(GameObject.Instantiate(lifeIconPrefab, lifeIconContainer).GetComponent<LifeIcon>());
+                lifeIcons[i].SetDeathIconActive(false);
+            }
+
+            scoreText.text = playerData?.TotalPoints.ToString();
         }
 
         void Update()
@@ -48,7 +75,7 @@ namespace TNNL.UI
             scoreText.text = playerData?.TotalPoints.ToString();
         }
 
-        void ShieldCollisionListener(AbstractCollidable collidable)
+        void ShieldCollisionListener(AbstractCollidable collidable, float shieldHealth)
         {
             GameObject prefab = null;
             switch (collidable.Type)
@@ -66,6 +93,8 @@ namespace TNNL.UI
                     break;
             }
 
+            healthText.text = $"{Math.Round(shieldHealth * 100).ToString()}%";
+
             if (prefab != null)
             {
                 GameObject anim = GameObject.Instantiate(prefab, animationLayer);
@@ -80,6 +109,11 @@ namespace TNNL.UI
                 // - event at end of animation to trigger gameobject removal
                 ///
             }
+        }
+
+        void ShieldDestroyedListener()
+        {
+            lifeIcons[playerData.CurrentLives - 1].SetDeathIconActive(true);
         }
     }
 }

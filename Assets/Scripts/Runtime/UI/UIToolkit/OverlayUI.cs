@@ -10,13 +10,13 @@ namespace TNNL.UI.UIToolkit
         Button resetShip;
         Button resetLevel;
 
-        public static Action ResetShipClicked;
+        public static Action StartRunClicked;
         public static Action ResetLevelClicked;
 
         void OnEnable()
         {
             VisualElement root = GetComponentInParent<UIDocument>().rootVisualElement;
-            resetShip = root.Q<Button>("ResetShipButton");
+            resetShip = root.Q<Button>("StartRunButton");
             resetLevel = root.Q<Button>("ResetLevelButton");
 
             resetShip.clicked += ResetShipClickedHandler;
@@ -34,7 +34,7 @@ namespace TNNL.UI.UIToolkit
         void ResetShipClickedHandler()
         {
             Debug.Log("ResetShipClickedHandler");
-            ResetShipClicked.Invoke();
+            StartRunClicked.Invoke();
         }
 
         void ResetLevelClickedHandler()

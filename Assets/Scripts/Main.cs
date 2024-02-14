@@ -16,7 +16,7 @@ namespace TNNL
         void Awake()
         {
             OverlayUI.ResetLevelClicked += ResetLevel;
-            OverlayUI.ResetShipClicked += ResetPlayer;
+            OverlayUI.StartRunClicked += StartRun;
             PlayerController.PlayerShipDestroyed += GameOver;
 
             playerData = new PlayerData();
@@ -28,8 +28,16 @@ namespace TNNL
             GameplayOverlayUI.Instance.SetPlayerData(playerData);
         }
 
-        void ResetPlayer()
+        void StartRun()
         {
+            playerData.CurrentLives--;
+            if (playerData.CurrentLives <= 0)
+            {
+                ResetLevel();
+                playerData.ResetPlayerData();
+                GameplayOverlayUI.Instance.ResetUI();
+            }
+
             PlayerController.Instance.ResetPlayer();
             StartGameplay();
         }
@@ -39,6 +47,7 @@ namespace TNNL
             Debug.Log("Main.ResetLevel");
 
             LevelParser.Instance.ResetLevel();
+            playerData.CurrentLives = 0;
         }
 
         void GameOver()

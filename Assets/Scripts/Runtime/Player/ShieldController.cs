@@ -7,7 +7,7 @@ namespace TNNL.Player
 {
     public class ShieldController
     {
-        public static Action<AbstractCollidable> ShieldCollision;
+        public static Action<AbstractCollidable, float> ShieldCollision;
         public static Action ShieldDestroyed;
         private ShieldModel model;
         private ShieldView view;
@@ -21,7 +21,7 @@ namespace TNNL.Player
             view.ShieldCollision += CollisionListener;
             model.HealthUpdate += HealthUpdateListener;
 
-            OverlayUI.ResetShipClicked += ResetShield;
+            OverlayUI.StartRunClicked += ResetShield;
         }
 
         private void ResetShield()
@@ -46,7 +46,7 @@ namespace TNNL.Player
                     break;
             }
 
-            ShieldCollision.Invoke(collidable);
+            ShieldCollision.Invoke(collidable, model.PercentHealth);
         }
 
         private void HealthUpdateListener(float percentHealth)
