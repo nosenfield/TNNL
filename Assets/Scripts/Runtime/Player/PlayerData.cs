@@ -9,9 +9,9 @@ public class PlayerData
     public int StartingLives = 3;
     public int CurrentLives = -1;
 
-    int TerrainCollisionPoints = 1;
-    int MineCollisionPoints = -1000;
-    int ShieldCollisionPoints = 1000;
+    public int TerrainCollisionPoints = 1;
+    public int MineCollisionPoints = -500;
+    public int ShieldCollisionPoints = 1000;
 
     public PlayerData()
     {

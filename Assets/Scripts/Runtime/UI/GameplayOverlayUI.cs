@@ -23,13 +23,10 @@ namespace TNNL.UI
         int lastScore;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI healthText;
+        [SerializeField] TextMeshProUGUI livesText;
         [SerializeField] GameObject mineCollisionPointAnim;
         [SerializeField] GameObject shieldCollisionPointAnim;
         [SerializeField] RectTransform animationLayer;
-        [SerializeField] RectTransform lifeIconContainer;
-        [SerializeField] GameObject lifeIconPrefab;
-        List<LifeIcon> lifeIcons;
-
 
         void Awake()
         {
@@ -39,31 +36,17 @@ namespace TNNL.UI
         void Start()
         {
             ShieldController.ShieldCollision += ShieldCollisionListener;
-            ShieldController.ShieldDestroyed += ShieldDestroyedListener;
         }
 
         public void SetPlayerData(PlayerData playerData)
         {
             this.playerData = playerData;
-            ResetUI();
         }
 
-        public void ResetUI()
+        public void UpdateUI()
         {
-            foreach (RectTransform child in lifeIconContainer)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-
-            lifeIcons = new List<LifeIcon>();
-
-            for (int i = 0; i < playerData.CurrentLives; i++)
-            {
-                lifeIcons.Add(GameObject.Instantiate(lifeIconPrefab, lifeIconContainer).GetComponent<LifeIcon>());
-                lifeIcons[i].SetDeathIconActive(false);
-            }
-
             scoreText.text = playerData?.TotalPoints.ToString();
+            livesText.text = $"x{playerData?.CurrentLives.ToString()}";
         }
 
         void Update()
@@ -78,18 +61,22 @@ namespace TNNL.UI
         void ShieldCollisionListener(AbstractCollidable collidable, float shieldHealth)
         {
             GameObject prefab = null;
+            int points = 0;
+
             switch (collidable.Type)
             {
                 case ShieldCollisionType.Terrain:
-
+                    points = playerData.TerrainCollisionPoints;
                     break;
 
                 case ShieldCollisionType.Mine:
                     prefab = mineCollisionPointAnim;
+                    points = playerData.MineCollisionPoints;
                     break;
 
                 case ShieldCollisionType.ShieldBoost:
                     prefab = shieldCollisionPointAnim;
+                    points = playerData.ShieldCollisionPoints;
                     break;
             }
 
@@ -98,6 +85,7 @@ namespace TNNL.UI
             if (prefab != null)
             {
                 GameObject anim = GameObject.Instantiate(prefab, animationLayer);
+                anim.GetComponentInChildren<TextMeshProUGUI>().text = points > 0 ? "+" + points.ToString() : points.ToString();
                 Vector3 position = RectTransformUtility.WorldToScreenPoint(UnityEngine.Camera.main, collidable.transform.TransformPoint(Vector3.zero));
                 anim.transform.position = position;
 
@@ -109,11 +97,6 @@ namespace TNNL.UI
                 // - event at end of animation to trigger gameobject removal
                 ///
             }
-        }
-
-        void ShieldDestroyedListener()
-        {
-            lifeIcons[playerData.CurrentLives - 1].SetDeathIconActive(true);
         }
     }
 }

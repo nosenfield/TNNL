@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6725613401912806485}
   - component: {fileID: 8861434685334001999}
   m_Layer: 0
-  m_Name: Mine
+  m_Name: Mine-Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

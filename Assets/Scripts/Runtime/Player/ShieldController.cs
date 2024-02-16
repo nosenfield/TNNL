@@ -46,7 +46,7 @@ namespace TNNL.Player
                     break;
             }
 
-            ShieldCollision.Invoke(collidable, model.PercentHealth);
+            ShieldCollision.Invoke(collidable, Mathf.Max(0f, model.PercentHealth));
         }
 
         private void HealthUpdateListener(float percentHealth)

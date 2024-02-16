@@ -75,9 +75,18 @@ namespace TNNL.Level
                 switch (section.Notations[i].Type)
                 {
                     case LevelBlockType.Mine:
+
+                        // create a default terrain block behind the mine
+                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+                        cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
+
                         cube = GameObject.Instantiate(minePrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                     case LevelBlockType.ShieldBoost:
+                        // create a default terrain block behind the shield
+                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+                        cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
+
                         cube = GameObject.Instantiate(shieldPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                     case LevelBlockType.DefaultTerrain:

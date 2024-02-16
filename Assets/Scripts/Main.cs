@@ -26,6 +26,7 @@ namespace TNNL
         {
             ResetLevel();
             GameplayOverlayUI.Instance.SetPlayerData(playerData);
+            GameplayOverlayUI.Instance.UpdateUI();
         }
 
         void StartRun()
@@ -35,8 +36,9 @@ namespace TNNL
             {
                 ResetLevel();
                 playerData.ResetPlayerData();
-                GameplayOverlayUI.Instance.ResetUI();
             }
+
+            GameplayOverlayUI.Instance.UpdateUI();
 
             PlayerController.Instance.ResetPlayer();
             StartGameplay();
@@ -44,10 +46,7 @@ namespace TNNL
 
         void ResetLevel()
         {
-            Debug.Log("Main.ResetLevel");
-
             LevelParser.Instance.ResetLevel();
-            playerData.CurrentLives = 0;
         }
 
         void GameOver()
