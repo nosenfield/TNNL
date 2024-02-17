@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace TNNL.UI
 {
-    public class BoostUI : MonoBehaviour
+    public class BoostBarUI : MonoBehaviour
     {
         [SerializeField] GameObject overloadGraphic;
         [SerializeField] Slider slider;
