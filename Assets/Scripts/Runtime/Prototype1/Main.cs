@@ -6,7 +6,6 @@ namespace TNNL.Prototype_1
     public class Main : MonoBehaviour
     {
         public static UnityAction GameOverAction;
-        public static UnityAction FinishLineContact;
         [SerializeField] GameObject gameoverScreen;
         [SerializeField] GameObject successScreen;
         [SerializeField] Player player;
@@ -16,7 +15,7 @@ namespace TNNL.Prototype_1
         void Awake()
         {
             GameOverAction += GameOverListener;
-            FinishLineContact += FinishLineContactListener;
+            FinishLine.FinishLineContact += FinishLineContactListener;
 
             gameoverScreen.SetActive(false);
         }
