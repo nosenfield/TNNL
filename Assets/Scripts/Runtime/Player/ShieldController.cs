@@ -46,7 +46,7 @@ namespace TNNL.Player
                     break;
             }
 
-            ShieldCollision.Invoke(collidable, Mathf.Max(0f, model.PercentHealth));
+            ShieldCollision?.Invoke(collidable, Mathf.Max(0f, model.PercentHealth));
         }
 
         private void HealthUpdateListener(float percentHealth)
@@ -54,7 +54,7 @@ namespace TNNL.Player
             if (percentHealth <= 0)
             {
                 Debug.Log("Shield is destroyed!");
-                ShieldDestroyed.Invoke();
+                ShieldDestroyed?.Invoke();
             }
             else
             {

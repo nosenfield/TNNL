@@ -34,13 +34,13 @@ namespace TNNL.UI.UIToolkit
         void ResetShipClickedHandler()
         {
             Debug.Log("ResetShipClickedHandler");
-            StartRunClicked.Invoke();
+            StartRunClicked?.Invoke();
         }
 
         void ResetLevelClickedHandler()
         {
             Debug.Log("ResetLevelClickedHandler");
-            ResetLevelClicked.Invoke();
+            ResetLevelClicked?.Invoke();
         }
 
     }

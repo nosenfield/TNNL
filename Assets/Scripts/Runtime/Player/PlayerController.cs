@@ -27,12 +27,12 @@ namespace TNNL.Player
             ///
 
             LevelParser.LevelCreated += UpdatePlayerForLevel;
-            ShieldController.ShieldDestroyed += PlayerDestroyed;
+            ShieldController.ShieldDestroyed += ShieldDestroyed;
 
             view.actions.FindActionMap("Gameplay").FindAction("Press").performed += OnPress;
             view.actions.FindActionMap("Gameplay").FindAction("Release").performed += OnRelease;
 
-            PlayerModelCreated.Invoke(model);
+            PlayerModelCreated?.Invoke(model);
 
             Instance = this;
         }
@@ -78,10 +78,10 @@ namespace TNNL.Player
             model.BoostRequested = false;
         }
 
-        void PlayerDestroyed()
+        void ShieldDestroyed()
         {
             model.DoUpdate = false;
-            PlayerShipDestroyed.Invoke();
+            PlayerShipDestroyed?.Invoke();
         }
     }
 }
