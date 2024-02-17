@@ -15,7 +15,7 @@ namespace TNNL.Player
         /// Who needs to listen to this event and how will they get the reference to the event through this model which is instantiated by the controller?
         /// Emit a registration as the "active" model?
         /// </summary>
-        internal Action<float> HealthUpdate;
+        public static Action<float> HealthUpdate;
 
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;

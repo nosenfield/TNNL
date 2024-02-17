@@ -19,7 +19,7 @@ namespace TNNL.Player
             view.SetModel(model);
 
             view.ShieldCollision += CollisionListener;
-            model.HealthUpdate += HealthUpdateListener;
+            ShieldModel.HealthUpdate += HealthUpdateListener;
 
             OverlayUI.StartRunClicked += ResetShield;
         }
@@ -69,7 +69,7 @@ namespace TNNL.Player
         public void OnDestroy()
         {
             view.ShieldCollision -= CollisionListener;
-            model.HealthUpdate -= HealthUpdateListener;
+            ShieldModel.HealthUpdate -= HealthUpdateListener;
         }
     }
 }

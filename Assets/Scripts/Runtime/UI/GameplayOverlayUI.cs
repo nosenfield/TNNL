@@ -22,7 +22,6 @@ namespace TNNL.UI
         PlayerData playerData;
         int lastScore;
         [SerializeField] TextMeshProUGUI scoreText;
-        [SerializeField] TextMeshProUGUI healthText;
         [SerializeField] TextMeshProUGUI livesText;
         [SerializeField] GameObject mineCollisionPointAnim;
         [SerializeField] GameObject shieldCollisionPointAnim;
@@ -79,8 +78,6 @@ namespace TNNL.UI
                     points = playerData.ShieldCollisionPoints;
                     break;
             }
-
-            healthText.text = $"{Math.Round(shieldHealth * 100).ToString()}%";
 
             if (prefab != null)
             {
