@@ -20,12 +20,33 @@ namespace TNNL.Level
         [SerializeField] private GameObject minePrefab;
         [SerializeField] private GameObject shieldPrefab;
         [SerializeField] private GameObject finishLinePrefab;
+        [SerializeField] private GameObject wormHolePrefab;
         private int FINISH_LINE_ROWS = 2;
 
         [SerializeField] private LevelSection section;
         private List<AbstractCollidable> cubes;
 
         int levelIndex = -1;
+        public string CurrentLevelName
+        {
+            get
+            {
+
+                return levelSections[levelIndex].DisplayName;
+            }
+        }
+
+        public int HighScore
+        {
+            get
+            {
+                return levelSections[levelIndex].HighScore;
+            }
+            set
+            {
+                levelSections[levelIndex].HighScore = value;
+            }
+        }
 
         void Awake()
         {
@@ -34,14 +55,27 @@ namespace TNNL.Level
 
         public void LoadPrevLevel()
         {
+            ClearLevel();
             levelIndex = levelIndex == 0 ? levelSections.Length - 1 : levelIndex - 1;
             ParseLevel(levelSections[levelIndex]);
         }
 
         public void LoadNextLevel()
         {
+            ClearLevel();
             levelIndex = levelIndex == levelSections.Length - 1 ? 0 : levelIndex + 1;
             ParseLevel(levelSections[levelIndex]);
+        }
+
+        private void ClearLevel()
+        {
+            if (cubes != null)
+            {
+                foreach (AbstractCollidable cube in cubes)
+                {
+                    GameObject.Destroy(cube.gameObject);
+                }
+            }
         }
 
         private void ParseLevel(LevelSection section)
@@ -51,6 +85,8 @@ namespace TNNL.Level
 
             int curRow = 0;
             int curCol = 0;
+
+            levelContainer.transform.position = Vector3.zero;
 
             for (int i = 0; i < section.Notations.Length; i++)
             {
@@ -74,6 +110,10 @@ namespace TNNL.Level
                 // we've hit the notated index
                 switch (section.Notations[i].Type)
                 {
+                    case LevelBlockType.DefaultTerrain:
+                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+                        break;
+
                     case LevelBlockType.Mine:
 
                         // create a default terrain block behind the mine
@@ -82,6 +122,7 @@ namespace TNNL.Level
 
                         cube = GameObject.Instantiate(minePrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
+
                     case LevelBlockType.ShieldBoost:
                         // create a default terrain block behind the shield
                         cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
@@ -89,12 +130,17 @@ namespace TNNL.Level
 
                         cube = GameObject.Instantiate(shieldPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
-                    case LevelBlockType.DefaultTerrain:
-                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
-                        break;
+
                     case LevelBlockType.FinishLine:
-                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(curCol + section.Width * .5f, (section.Height + FINISH_LINE_ROWS * .5f) * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(curCol + section.Width * .5f, (curRow - 1 + FINISH_LINE_ROWS * .5f) * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         cube.transform.localScale = new Vector3(section.Width, FINISH_LINE_ROWS, cube.transform.localScale.z);
+                        break;
+
+                    case LevelBlockType.WormHole:
+                        cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+                        cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
+
+                        cube = GameObject.Instantiate(wormHolePrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         break;
                 }
 
@@ -116,60 +162,6 @@ namespace TNNL.Level
             levelBacking.transform.localScale = new Vector3(section.Width, section.Height, 1);
 
             LevelCreated?.Invoke(section.Width);
-
-            // while (cubeY < endY)
-            // {
-            //     cubeX = startX;
-
-            //     bool generateShield = Random.Range(0f, 1f) < ChanceForShieldInLine;
-            //     bool generateMine = Random.Range(0f, 1f) < ChanceForMineInLine;
-            //     float shieldPos = generateShield ? Random.Range(startX, endX) : -1f;
-            //     float minePos = generateMine ? Random.Range(startX, endX) : -1f;
-
-            //     while (cubeX < endX)
-            //     {
-
-            //         if (generateShield && cubeX >= shieldPos)
-            //         {
-            //             prefab = shieldCubePrefab;
-            //             TotalShields++;
-            //             generateShield = false;
-            //         }
-            //         else if (generateMine && cubeX >= minePos)
-            //         {
-            //             prefab = mineCubePrefab;
-            //             TotalMines++;
-            //             generateMine = false;
-            //         }
-            //         else
-            //         {
-            //             prefab = levelCubePrefab;
-            //         }
-
-            //         cube = GameObject.Instantiate(prefab, new Vector3(cubeX, cubeY, transform.position.z), Quaternion.identity, transform.parent);
-            //         cube.transform.localScale = Vector3.one;
-            //         cubes.Add(cube);
-
-            //         cubeX++;
-            //     }
-            //     cubeY++;
-            // }
-
-            // //Add 1 giant finishline cube
-            // float finishLineHeight = 2f;
-            // cube = GameObject.Instantiate(finishLineBlockPrefab, new Vector3(transform.position.x, cubeY + finishLineHeight * .5f, transform.position.z), Quaternion.identity, transform.parent);
-            // cube.transform.localScale = new Vector3(transform.lossyScale.x, finishLineHeight, cube.transform.localScale.z);
-
-            // Add 2 rows of Finish Line Cubes
-            // prefab = finishLineBlockPrefab;
-            // for (int i = 0; i < 2; i++)
-            // {
-            //     for (cubeX = startX; cubeX < endX; cubeX++)
-            //     {
-            //         cube = GameObject.Instantiate(prefab, new Vector3(cubeX, cubeY + i, transform.position.z), Quaternion.identity, transform.parent);
-            //         cube.transform.localScale = Vector3.one;
-            //     }
-            // }
         }
 
         public void ResetLevel()

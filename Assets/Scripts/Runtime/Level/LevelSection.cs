@@ -7,6 +7,8 @@ namespace TNNL.Level
     [CreateAssetMenu(fileName = "LevelSection", menuName = "ScriptableObjects/LevelSection", order = 1)]
     public class LevelSection : ScriptableObject
     {
+        public string DisplayName;
+        public int HighScore;
         public int Width;
         public int Height;
         public float ChanceForShieldInLine = 0.01f;
@@ -40,7 +42,8 @@ namespace TNNL.Level
         DefaultTerrain,
         Mine,
         ShieldBoost,
-        FinishLine
+        FinishLine,
+        WormHole
     }
 
 }

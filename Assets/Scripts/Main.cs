@@ -11,15 +11,16 @@ namespace TNNL
     public class Main : MonoBehaviour
     {
         [SerializeField] private GameObject overlayUI;
-        [SerializeField] private PlayerData playerData;
+        [SerializeField] private UserData playerData;
 
         void Awake()
         {
             OverlayUI.ResetLevelClicked += ResetLevel;
             OverlayUI.StartRunClicked += StartRun;
+            OverlayUI.NextLevelClicked += LoadNextLevel;
             PlayerController.PlayerShipDestroyed += GameOver;
 
-            playerData = new PlayerData();
+            playerData = new UserData();
         }
 
         void Start()
@@ -31,8 +32,8 @@ namespace TNNL
 
         void StartRun()
         {
-            playerData.CurrentLives--;
-            if (playerData.CurrentLives <= 0)
+            playerData.CurrentRun--;
+            if (playerData.CurrentRun <= 0)
             {
                 ResetLevel();
                 playerData.ResetPlayerData();
@@ -41,6 +42,7 @@ namespace TNNL
             GameplayOverlayUI.Instance.UpdateUI();
 
             PlayerController.Instance.ResetPlayer();
+            GameplayOverlayUI.Instance.GameplayStarted();
             StartGameplay();
         }
 
@@ -49,8 +51,16 @@ namespace TNNL
             LevelParser.Instance.ResetLevel();
         }
 
+        void LoadNextLevel()
+        {
+            LevelParser.Instance.LoadNextLevel();
+            playerData.ResetPlayerData();
+            GameplayOverlayUI.Instance.UpdateUI();
+        }
+
         void GameOver()
         {
+            GameplayOverlayUI.Instance.GameplayEnded();
             ShowMenuBar();
         }
 
@@ -73,8 +83,22 @@ namespace TNNL
         {
             DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
             FinishLine.FinishLineCollision -= FinishLineCollisionListener;
+
+            RecordScore();
+
+            GameplayOverlayUI.Instance.UpdateUI();
+
             PauseGameplay();
+            GameplayOverlayUI.Instance.GameplayEnded();
             ShowMenuBar();
+        }
+
+        void RecordScore()
+        {
+            if (playerData.TotalPoints > LevelParser.Instance.HighScore)
+            {
+                LevelParser.Instance.HighScore = playerData.TotalPoints;
+            }
         }
 
         void PauseGameplay()

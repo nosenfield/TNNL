@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using TNNL.Animation;
 using TNNL.Collidables;
+using TNNL.Level;
 using TNNL.Player;
 using UnityEngine;
 
@@ -19,10 +20,13 @@ namespace TNNL.UI
             }
         }
 
-        PlayerData playerData;
+        UserData playerData;
         int lastScore;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI livesText;
+        [SerializeField] TextMeshProUGUI levelNameDisplay;
+        [SerializeField] TextMeshProUGUI highScoreDisplay;
+        [SerializeField] GameObject levelInfo;
         [SerializeField] GameObject mineCollisionPointAnim;
         [SerializeField] GameObject shieldCollisionPointAnim;
         [SerializeField] RectTransform animationLayer;
@@ -37,7 +41,7 @@ namespace TNNL.UI
             ShieldController.ShieldCollision += ShieldCollisionListener;
         }
 
-        public void SetPlayerData(PlayerData playerData)
+        public void SetPlayerData(UserData playerData)
         {
             this.playerData = playerData;
         }
@@ -45,7 +49,9 @@ namespace TNNL.UI
         public void UpdateUI()
         {
             scoreText.text = playerData?.TotalPoints.ToString();
-            livesText.text = $"x{playerData?.CurrentLives.ToString()}";
+            livesText.text = $"x{playerData?.CurrentRun.ToString()}";
+            levelNameDisplay.text = LevelParser.Instance.CurrentLevelName;
+            highScoreDisplay.text = LevelParser.Instance.HighScore.ToString();
         }
 
         void Update()
@@ -64,16 +70,16 @@ namespace TNNL.UI
 
             switch (collidable.Type)
             {
-                case ShieldCollisionType.Terrain:
+                case CollisionType.Terrain:
                     points = playerData.TerrainCollisionPoints;
                     break;
 
-                case ShieldCollisionType.Mine:
+                case CollisionType.Mine:
                     prefab = mineCollisionPointAnim;
                     points = playerData.MineCollisionPoints;
                     break;
 
-                case ShieldCollisionType.ShieldBoost:
+                case CollisionType.ShieldBoost:
                     prefab = shieldCollisionPointAnim;
                     points = playerData.ShieldCollisionPoints;
                     break;
@@ -94,6 +100,16 @@ namespace TNNL.UI
                 // - event at end of animation to trigger gameobject removal
                 ///
             }
+        }
+
+        public void GameplayStarted()
+        {
+            levelInfo.SetActive(false);
+        }
+
+        public void GameplayEnded()
+        {
+            levelInfo.SetActive(true);
         }
     }
 }
