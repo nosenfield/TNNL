@@ -1,17 +1,55 @@
 // the base collidable behaviour that all collidable game objects can extend
+using System.Collections;
 using UnityEngine;
 
 namespace TNNL.Collidables
 {
-    public abstract class AbstractCollidable : MonoBehaviour, IShieldCollidable
+    public enum CollisionType
+    {
+        Terrain,
+        Mine,
+        ShieldBoost,
+        FinishLine,
+        WormHole,
+    }
+
+    public abstract class AbstractCollidable : MonoBehaviour
     {
         public GameObject container;
-        public abstract ShieldCollisionType Type
+        public abstract CollisionType Type
         {
             get;
         }
 
+        protected bool dirty;
+
         public abstract void OnTriggerEnter(Collider other);
-        public abstract void Activate();
+        public void Activate()
+        {
+            container.SetActive(true);
+            dirty = false;
+        }
+
+        /// <summary>
+        /// We wrap the deactivation in a yielded method for 1 frame so that we don't interrupt the ShieldView processing its half of the collision
+        /// </summary>
+        protected void Deactivate()
+        {
+            if (dirty) return;
+            dirty = true;
+
+            StartCoroutine(Routine());
+
+            IEnumerator Routine()
+            {
+                yield return null;
+                container.SetActive(false);
+            }
+        }
+
+        void OnDestroy()
+        {
+            GameObject.Destroy(container);
+        }
     }
 }

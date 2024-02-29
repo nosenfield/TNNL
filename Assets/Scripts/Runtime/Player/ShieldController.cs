@@ -33,14 +33,14 @@ namespace TNNL.Player
         {
             switch (collidable.Type)
             {
-                case ShieldCollisionType.Terrain:
+                case CollisionType.Terrain:
                     model.DamageShield(((Collidables.Terrain)collidable).Damage);
                     break;
-                case ShieldCollisionType.Mine:
+                case CollisionType.Mine:
                     Debug.Log("Hit a mine!");
                     model.DamageShield(((Mine)collidable).Damage);
                     break;
-                case ShieldCollisionType.ShieldBoost:
+                case CollisionType.ShieldBoost:
                     Debug.Log("Grabbed a shield!");
                     model.HealShield(((ShieldBoost)collidable).Amount);
                     break;

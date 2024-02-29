@@ -1,4 +1,3 @@
-// the Mine behaviour is placed on the prefab. adjustable damage allows for tweaking and differentiation (ie. Supermine w/ 2x damage)
 using UnityEngine;
 using UnityEngine.Events;
 using TNNL.Player;
@@ -9,11 +8,11 @@ namespace TNNL.Collidables
 {
     public class FinishLine : AbstractCollidable
     {
-        public override ShieldCollisionType Type
+        public override CollisionType Type
         {
             get
             {
-                return ShieldCollisionType.FinishLine;
+                return CollisionType.FinishLine;
             }
         }
 
@@ -22,9 +21,9 @@ namespace TNNL.Collidables
         // Handle my collision with objects of different types
         public override void OnTriggerEnter(Collider other)
         {
-            Ship player = other.GetComponentInParent<Ship>();
+            ShipView shipView = other.GetComponentInParent<ShipView>();
 
-            if (player != null)
+            if (shipView != null)
             {
                 ReportSectionComplete();
             }
@@ -35,11 +34,6 @@ namespace TNNL.Collidables
             DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
 
             FinishLineCollision?.Invoke();
-        }
-
-        public override void Activate()
-        {
-            container.SetActive(true);
         }
     }
 }

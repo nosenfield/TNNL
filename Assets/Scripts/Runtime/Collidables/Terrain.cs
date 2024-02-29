@@ -1,17 +1,19 @@
-// the TerrainCube behaviour is placed on the prefab. adjustable damage allows for tweaking and differentiation (ie. terrain types w/ 2x damage)
 using System.Collections;
 using TNNL.Player;
 using UnityEngine;
 
 namespace TNNL.Collidables
 {
+    /// <summary>
+    /// the TerrainCube behaviour is placed on the prefab. adjustable damage allows for tweaking and differentiation (ie. terrain types w/ 2x damage)
+    /// </summary>
     public class Terrain : AbstractCollidable
     {
-        public override ShieldCollisionType Type
+        public override CollisionType Type
         {
             get
             {
-                return ShieldCollisionType.Terrain;
+                return CollisionType.Terrain;
             }
         }
         public float Damage;
@@ -20,7 +22,6 @@ namespace TNNL.Collidables
         public override void OnTriggerEnter(Collider other)
         {
             ShieldView shield = other.GetComponentInParent<ShieldView>();
-
             switch (shield)
             {
                 case null:
@@ -29,25 +30,6 @@ namespace TNNL.Collidables
                     Deactivate();
                     break;
             }
-        }
-
-        /// <summary>
-        /// We wrap the deactivation in a yielded method for 1 frame so that we don't interrupt the ShieldView processing its half of the collision
-        /// </summary>
-        private void Deactivate()
-        {
-            StartCoroutine(Routine());
-
-            IEnumerator Routine()
-            {
-                yield return null;
-                container.SetActive(false);
-            }
-        }
-
-        public override void Activate()
-        {
-            container.SetActive(true);
         }
     }
 }
