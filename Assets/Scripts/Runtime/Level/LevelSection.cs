@@ -13,8 +13,25 @@ namespace TNNL.Level
         public int Height;
         public float ChanceForShieldInLine = 0.01f;
         public float ChanceForMineInLine = 0.1f;
-        public int TotalMines;
-        public int TotalShields;
+        public bool GenerateWarp = false;
+        /// <summary>
+        /// the minimum percentage of map before a warp can appear
+        /// </summary>
+        public float MinWarpLocationByPercent = .25f;
+        /// <summary>
+        /// the maximum percentage of map before which a warp should appear
+        /// </summary>
+        public float MaxWarpLocationByPercent = .75f;
+        /// <summary>
+        /// the minimum percentage of map between warp points
+        /// </summary>
+        public float MinWarpDistance = .1f;
+        /// <summary>
+        /// the maximum percentage of map between warp points
+        /// </summary>
+        public float MaxWarpDistance = .5f;
+        public int MineCount;
+        public int ShieldCount;
         public LevelBlockNotation[] Notations; // this is an array notating all non-default cubes & inactive default cubes
     }
 

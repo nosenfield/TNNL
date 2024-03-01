@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
+  m_Name: TestSection Mini
+  m_EditorClassIdentifier: 
+  DisplayName: WarpTestSection 3
+  HighScore: 0
+  Width: 60
+  Height: 20
+  ChanceForShieldInLine: 0.05
+  ChanceForMineInLine: 0.1
+  GenerateWarp: 1
+  MinWarpLocationByPercent: 0.25
+  MaxWarpLocationByPercent: 0.75
+  MinWarpDistance: 0.1
+  MaxWarpDistance: 0.5
+  MineCount: 3
+  ShieldCount: 1
+  Notations:
+  - Index: 345
+    IsActive: 1
+    Type: 4
+  - Index: 414
+    IsActive: 1
+    Type: 1
+  - Index: 466
+    IsActive: 1
+    Type: 2
+  - Index: 521
+    IsActive: 1
+    Type: 1
+  - Index: 661
+    IsActive: 1
+    Type: 1
+  - Index: 912
+    IsActive: 1
+    Type: 4
+  - Index: 1199
+    IsActive: 1
+    Type: 0
+  - Index: 1200
+    IsActive: 1
+    Type: 3

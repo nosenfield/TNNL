@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestSection 1
   m_EditorClassIdentifier: 
   DisplayName: Section 1 (75m/25s)
+  HighScore: 0
   Width: 60
   Height: 800
   ChanceForShieldInLine: 0.03

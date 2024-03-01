@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using nosenfield.Logging;
 using UnityEngine;
 
 namespace TNNL.Level
@@ -13,8 +14,8 @@ namespace TNNL.Level
         {
             List<LevelBlockNotation> notations = new List<LevelBlockNotation>();
 
-            int TotalShields = 0;
-            int TotalMines = 0;
+            int ShieldCount = 0;
+            int MineCount = 0;
 
             for (int i = 0; i < section.Height; i++)
             {
@@ -24,12 +25,12 @@ namespace TNNL.Level
                 if (generateShield)
                 {
                     notations.Add(new LevelBlockNotation(section.Width * i + Random.Range(0, section.Width), LevelBlockType.ShieldBoost, true));
-                    TotalShields++;
+                    ShieldCount++;
                 }
                 else if (generateMine)
                 {
                     notations.Add(new LevelBlockNotation(section.Width * i + Random.Range(0, section.Width), LevelBlockType.Mine, true));
-                    TotalMines++;
+                    MineCount++;
                 }
             }
 
@@ -43,10 +44,86 @@ namespace TNNL.Level
 
             notations.Add(new LevelBlockNotation(finalIndex + 1, LevelBlockType.FinishLine, true));
 
+            if (section.GenerateWarp)
+            {
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"Generating warp...");
+
+                float availableDistance = section.MaxWarpLocationByPercent - section.MinWarpLocationByPercent;
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"availableDistance: {availableDistance}");
+                float minWarpDistance = Mathf.Min(section.MinWarpDistance, availableDistance);
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"minWarpDistance: {minWarpDistance}");
+                float maxWarpDistance = Mathf.Min(section.MaxWarpDistance, availableDistance);
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"maxWarpDistance: {maxWarpDistance}");
+
+                float warpDistance = Random.Range(minWarpDistance, maxWarpDistance);
+
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpDistance: {warpDistance}");
+
+                if (section.MinWarpDistance > availableDistance)
+                {
+                    DefaultLogger.Instance.Log(LogLevel.WARN, $"MinWarpDistance ({section.MinWarpDistance}) is greater than availableDistance ({availableDistance}). Using maximum available distance.");
+                }
+
+                if (section.MaxWarpDistance > availableDistance)
+                {
+                    DefaultLogger.Instance.Log(LogLevel.WARN, $"MaxWarpDistance ({section.MaxWarpDistance}) is greater than availableDistance ({availableDistance}). Using maximum available distance.");
+                }
+
+                int warpRowA = Mathf.RoundToInt(section.Height * Random.Range(section.MinWarpLocationByPercent, section.MaxWarpLocationByPercent - warpDistance));
+                int warpColA = Random.Range(0, section.Width);
+
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpRowA: {warpRowA}");
+
+                int warpRowB = warpRowA + Mathf.RoundToInt(section.Height * warpDistance);
+                int warpColB = Random.Range(0, section.Width);
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpRowB: {warpRowB}");
+
+                int indexA = section.Width * warpRowA + warpColA;
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"indexA: {indexA}");
+                int indexB = section.Width * warpRowB + warpColB;
+                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"indexB: {indexB}");
+
+                int j;
+                for (j = 0; j < notations.Count; j++)
+                {
+                    if (indexA > notations[j].Index)
+                    {
+                        continue;
+                    }
+                    else if (indexA < notations[j].Index)
+                    {
+                        notations.Insert(j, new LevelBlockNotation(indexA, LevelBlockType.WormHole, true));
+                        break;
+                    }
+                    else // if (indexA == notations[j].Index)
+                    {
+                        notations[j] = new LevelBlockNotation(indexA, LevelBlockType.WormHole, true);
+                        break;
+                    }
+                }
+
+                for (j = j + 1; j < notations.Count; j++)
+                {
+                    if (indexB > notations[j].Index)
+                    {
+                        continue;
+                    }
+                    else if (indexB < notations[j].Index)
+                    {
+                        notations.Insert(j, new LevelBlockNotation(indexB, LevelBlockType.WormHole, true));
+                        break;
+                    }
+                    else // if (indexB == notations[j].Index)
+                    {
+                        notations[j] = new LevelBlockNotation(indexB, LevelBlockType.WormHole, true);
+                        break;
+                    }
+                }
+            }
 
             section.Notations = notations.ToArray();
-            section.TotalShields = TotalShields;
-            section.TotalMines = TotalMines;
+            section.ShieldCount = ShieldCount;
+            section.MineCount = MineCount;
         }
     }
 }
