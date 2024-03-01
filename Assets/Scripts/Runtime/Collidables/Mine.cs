@@ -22,7 +22,13 @@ namespace TNNL.Collidables
         }
         public float Damage;
 
-        new public float CollisionPoints = -500;
+        public override int CollisionPoints
+        {
+            get
+            {
+                return -500;
+            }
+        }
 
         // Handle my collision with objects of different types
         public override void OnTriggerEnter(Collider other)

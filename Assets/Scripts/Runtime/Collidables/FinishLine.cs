@@ -16,7 +16,13 @@ namespace TNNL.Collidables
             }
         }
 
-        new public float CollisionPoints = 10000;
+        public override int CollisionPoints
+        {
+            get
+            {
+                return 10000;
+            }
+        }
 
         public static event Action FinishLineCollision;
 

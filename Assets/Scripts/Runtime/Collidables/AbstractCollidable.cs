@@ -22,7 +22,13 @@ namespace TNNL.Collidables
         }
 
         protected bool dirty;
-        public int CollisionPoints = 0;
+        public virtual int CollisionPoints
+        {
+            get
+            {
+                return 0;
+            }
+        }
 
         public abstract void OnTriggerEnter(Collider other);
         public void Activate()

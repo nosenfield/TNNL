@@ -35,11 +35,6 @@ namespace TNNL.UI
             instance = this;
         }
 
-        void Start()
-        {
-            ShieldController.ShieldCollision += ShieldCollisionListener;
-        }
-
         public void SetPlayerData(UserData playerData)
         {
             this.playerData = playerData;
@@ -59,45 +54,6 @@ namespace TNNL.UI
             ///
 
             scoreText.text = playerData?.TotalPoints.ToString();
-        }
-
-        void ShieldCollisionListener(AbstractCollidable collidable)
-        {
-            GameObject prefab = null;
-            int points = 0;
-
-            switch (collidable.Type)
-            {
-                case CollisionType.Terrain:
-                    points = playerData.TerrainCollisionPoints;
-                    break;
-
-                case CollisionType.Mine:
-                    prefab = mineCollisionPointAnim;
-                    points = playerData.MineCollisionPoints;
-                    break;
-
-                case CollisionType.ShieldBoost:
-                    prefab = shieldCollisionPointAnim;
-                    points = playerData.ShieldCollisionPoints;
-                    break;
-            }
-
-            if (prefab != null)
-            {
-                GameObject anim = GameObject.Instantiate(prefab, animationLayer);
-                anim.GetComponentInChildren<TextMeshProUGUI>().text = points > 0 ? "+" + points.ToString() : points.ToString();
-                Vector3 position = RectTransformUtility.WorldToScreenPoint(UnityEngine.Camera.main, collidable.transform.TransformPoint(Vector3.zero));
-                anim.transform.position = position;
-
-                // Utilities.AnimateGameObjectToPosition(this, anim, anim.transform.position, anim.transform.position + new Vector3(0f, 100f, 0f), 1f, EasingFunction.EaseOutSine);
-                // NOTE
-                // Animating the point values is now done via an animator w/ the following properties:
-                // - anchored position.y + 100
-                // - text color.a fade  = 0
-                // - event at end of animation to trigger gameobject removal
-                ///
-            }
         }
 
         public void GameplayStarted()

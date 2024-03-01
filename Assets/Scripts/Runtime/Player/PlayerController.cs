@@ -1,5 +1,4 @@
 using System;
-using System.Timers;
 using TNNL.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -63,6 +62,12 @@ namespace TNNL.Player
         public void Update()
         {
             model.Update();
+        }
+
+        public void PausePlayer()
+        {
+            view.DoUpdate = false;
+            model.DoUpdate = false;
         }
 
         // Boost the ship forward

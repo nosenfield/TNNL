@@ -15,7 +15,13 @@ namespace TNNL.Collidables
             }
         }
 
-        new public float CollisionPoints = 1000;
+        public override int CollisionPoints
+        {
+            get
+            {
+                return 1000;
+            }
+        }
 
         public float Amount;
 

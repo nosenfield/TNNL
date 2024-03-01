@@ -61,6 +61,13 @@ namespace TNNL
         void GameOver()
         {
             GameplayOverlayUI.Instance.GameplayEnded();
+
+            // Add score updates
+            RecordScore();
+            GameplayOverlayUI.Instance.UpdateUI();
+
+            // show UI
+            GameplayOverlayUI.Instance.GameplayEnded();
             ShowMenuBar();
         }
 
@@ -70,7 +77,6 @@ namespace TNNL
 
             FinishLine.FinishLineCollision += FinishLineCollisionListener;
             PlayerController.Instance.ActivatePlayer();
-            Time.timeScale = 1;
 
             // count down the user
 
@@ -84,11 +90,13 @@ namespace TNNL
             DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
             FinishLine.FinishLineCollision -= FinishLineCollisionListener;
 
-            RecordScore();
+            PauseGameplay();
 
+            // Add score updates
+            RecordScore();
             GameplayOverlayUI.Instance.UpdateUI();
 
-            PauseGameplay();
+            // show UI
             GameplayOverlayUI.Instance.GameplayEnded();
             ShowMenuBar();
         }
@@ -103,7 +111,7 @@ namespace TNNL
 
         void PauseGameplay()
         {
-            Time.timeScale = 0;
+            PlayerController.Instance.PausePlayer();
         }
 
         void HideMenuBar()

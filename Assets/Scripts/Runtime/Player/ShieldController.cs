@@ -44,6 +44,9 @@ namespace TNNL.Player
                     Debug.Log("Grabbed a shield!");
                     model.HealShield(((ShieldBoost)collidable).Amount);
                     break;
+                default:
+                    Debug.Log("Unspecified shield collision!");
+                    return;
             }
 
             ShieldCollision?.Invoke(collidable);
