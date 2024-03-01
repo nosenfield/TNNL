@@ -7,7 +7,7 @@ namespace TNNL.Player
 {
     public class ShieldController
     {
-        public static Action<AbstractCollidable, float> ShieldCollision;
+        public static Action<AbstractCollidable> ShieldCollision;
         public static Action ShieldDestroyed;
         private ShieldModel model;
         private ShieldView view;
@@ -46,7 +46,7 @@ namespace TNNL.Player
                     break;
             }
 
-            ShieldCollision?.Invoke(collidable, Mathf.Max(0f, model.PercentHealth));
+            ShieldCollision?.Invoke(collidable);
         }
 
         private void HealthUpdateListener(float percentHealth)

@@ -26,7 +26,7 @@ public class UserData
         TotalPoints = 0;
     }
 
-    void ShieldCollisionListener(AbstractCollidable collidable, float shieldHealth)
+    void ShieldCollisionListener(AbstractCollidable collidable)
     {
         // NOTE
         // Points earned in collisions feel more closely related to our meta system than our physics system.

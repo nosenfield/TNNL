@@ -21,7 +21,6 @@ namespace TNNL.UI
         }
 
         UserData playerData;
-        int lastScore;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI livesText;
         [SerializeField] TextMeshProUGUI levelNameDisplay;
@@ -49,7 +48,6 @@ namespace TNNL.UI
         public void UpdateUI()
         {
             scoreText.text = playerData?.TotalPoints.ToString();
-            livesText.text = $"x{playerData?.CurrentRun.ToString()}";
             levelNameDisplay.text = LevelParser.Instance.CurrentLevelName;
             highScoreDisplay.text = LevelParser.Instance.HighScore.ToString();
         }
@@ -63,7 +61,7 @@ namespace TNNL.UI
             scoreText.text = playerData?.TotalPoints.ToString();
         }
 
-        void ShieldCollisionListener(AbstractCollidable collidable, float shieldHealth)
+        void ShieldCollisionListener(AbstractCollidable collidable)
         {
             GameObject prefab = null;
             int points = 0;
