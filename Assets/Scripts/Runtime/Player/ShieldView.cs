@@ -57,16 +57,10 @@ namespace TNNL.Player
         {
             AbstractCollidable collidable = other.GetComponentInParent<AbstractCollidable>();
 
-            switch (collidable)
+            if (collidable != null)
             {
-                case null:
-                    break;
-                default:
-                    ShieldCollision.Invoke(collidable);
-                    break;
+                ShieldCollision?.Invoke(collidable);
             }
-
-            // parse/report the collision by some kind of type identifier (what did we hit)
         }
     }
 }

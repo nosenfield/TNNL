@@ -16,6 +16,8 @@ namespace TNNL.Collidables
             }
         }
 
+        new public float CollisionPoints = 10000;
+
         public static event Action FinishLineCollision;
 
         // Handle my collision with objects of different types
@@ -25,15 +27,8 @@ namespace TNNL.Collidables
 
             if (shipView != null)
             {
-                ReportSectionComplete();
+                FinishLineCollision?.Invoke();
             }
-        }
-
-        private void ReportSectionComplete()
-        {
-            DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
-
-            FinishLineCollision?.Invoke();
         }
     }
 }

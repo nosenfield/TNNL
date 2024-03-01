@@ -15,6 +15,8 @@ namespace TNNL.Collidables
             }
         }
 
+        new public float CollisionPoints = 1000;
+
         public float Amount;
 
         // Handle my collision with objects of different types

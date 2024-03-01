@@ -18,6 +18,8 @@ namespace TNNL.Collidables
         }
         public float Damage;
 
+        new public float CollisionPoints = 1;
+
         // Handle my collision with objects of different types
         public override void OnTriggerEnter(Collider other)
         {
