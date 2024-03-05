@@ -22,8 +22,6 @@ namespace TNNL.Level
         [SerializeField] private GameObject finishLinePrefab;
         [SerializeField] private GameObject wormHolePrefab;
         private int FINISH_LINE_ROWS = 2;
-
-        [SerializeField] private LevelSection section;
         private List<AbstractCollidable> cubes;
 
         int levelIndex = -1;
@@ -85,8 +83,10 @@ namespace TNNL.Level
 
             int curRow = 0;
             int curCol = 0;
+            WormHole firstWarpReached = null;
 
             levelContainer.transform.position = Vector3.zero;
+
 
             for (int i = 0; i < section.Notations.Length; i++)
             {
@@ -98,6 +98,7 @@ namespace TNNL.Level
                     // make default cube
                     cube = GameObject.Instantiate(defaultTerrainPrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                     cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
+                    cube.name = $"{cube.name}-{curRow}_{curCol}";
 
                     curCol++;
                     if (curCol == section.Width)
@@ -108,6 +109,7 @@ namespace TNNL.Level
                 }
 
                 // we've hit the notated index
+
                 switch (section.Notations[i].Type)
                 {
                     case LevelBlockType.DefaultTerrain:
@@ -141,9 +143,26 @@ namespace TNNL.Level
                         cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
 
                         cube = GameObject.Instantiate(wormHolePrefab, new Vector3(curCol, curRow * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+
+                        // this will link warps in a first-come first-serve manner
+                        // may need revisiting if we include multiple warps in a level
+
+                        if (firstWarpReached == null)
+                        {
+                            Debug.Log("warpA == null, first warp reached");
+                            Debug.Log($"wormhole is: {cube.GetComponentInChildren<WormHole>()}");
+                            firstWarpReached = cube.GetComponentInChildren<WormHole>();
+                            Debug.Log($"warpA is {firstWarpReached}");
+                        }
+                        else
+                        {
+                            WormHole.PairWarps(firstWarpReached, cube.GetComponentInChildren<WormHole>());
+                            firstWarpReached = null;
+                        }
                         break;
                 }
 
+                cube.name = $"{cube.name}-{curRow}_{curCol}";
                 cubes.Add(cube.GetComponentInChildren<AbstractCollidable>());
                 cube.SetActive(section.Notations[i].IsActive);
 
