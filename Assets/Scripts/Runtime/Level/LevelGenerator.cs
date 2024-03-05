@@ -70,17 +70,17 @@ namespace TNNL.Level
                 }
 
                 int warpRowA = Mathf.RoundToInt(section.Height * Random.Range(section.MinWarpLocationByPercent, section.MaxWarpLocationByPercent - warpDistance));
-                int warpColA = Random.Range(0, section.Width);
+                float buffer = .2f;
+                int warpCol = Random.Range(Mathf.CeilToInt(section.Width * buffer), Mathf.FloorToInt(section.Width * (1 - buffer)));
 
                 DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpRowA: {warpRowA}");
 
                 int warpRowB = warpRowA + Mathf.RoundToInt(section.Height * warpDistance);
-                int warpColB = Random.Range(0, section.Width);
                 DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpRowB: {warpRowB}");
 
-                int indexA = section.Width * warpRowA + warpColA;
+                int indexA = section.Width * warpRowA + warpCol;
                 DefaultLogger.Instance.Log(LogLevel.DEBUG, $"indexA: {indexA}");
-                int indexB = section.Width * warpRowB + warpColB;
+                int indexB = section.Width * warpRowB + warpCol;
                 DefaultLogger.Instance.Log(LogLevel.DEBUG, $"indexB: {indexB}");
 
                 int j;

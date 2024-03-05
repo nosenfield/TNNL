@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
 --- !u!114 &241056444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,7 +2961,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
 --- !u!114 &976776088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3066,6 +3066,7 @@ GameObject:
   - component: {fileID: 1009220993}
   - component: {fileID: 1009220992}
   - component: {fileID: 1009220996}
+  - component: {fileID: 1009220997}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -3199,6 +3200,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GenerateController: 1
+--- !u!114 &1009220997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009220989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b48047cce344874b473900168354e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 531877490}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Warpable
+      Entry: 10
+      Data: 0
 --- !u!1 &1080091010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4695,11 +4721,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSections:
-  - {fileID: 11400000, guid: e02d29894755a4ec2ae884755488ee51, type: 2}
   - {fileID: 11400000, guid: a317759c7d33148f8bf1edd4ed57635c, type: 2}
   - {fileID: 11400000, guid: a51753b59eae74c62adc60e0c375a954, type: 2}
   - {fileID: 11400000, guid: 131f278325d694b79a35280f4c917878, type: 2}
   - {fileID: 11400000, guid: 190e30bdd5dbc4adab66326fdc4636aa, type: 2}
+  - {fileID: 11400000, guid: 9c3dd65b0c3d64e19907e665533b0e25, type: 2}
   levelContainer: {fileID: 471715918}
   levelBacking: {fileID: 1086595478}
   defaultTerrainPrefab: {fileID: 2505928986221501812, guid: 384f1059ebc6a42e5971614552eb588e, type: 3}
@@ -4707,7 +4733,6 @@ MonoBehaviour:
   shieldPrefab: {fileID: 8367612401388265235, guid: b67de98db4ef04a2db024cef2ba08137, type: 3}
   finishLinePrefab: {fileID: 244819861968602584, guid: 3c764c9cbe0d24acc954af7bc8fbd172, type: 3}
   wormHolePrefab: {fileID: 8564890143891999548, guid: 0677a24a334874207aa6c636dd30b980, type: 3}
-  section: {fileID: 11400000, guid: a317759c7d33148f8bf1edd4ed57635c, type: 2}
 --- !u!4 &2085311132
 Transform:
   m_ObjectHideFlags: 0

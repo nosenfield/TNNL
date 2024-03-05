@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
+  m_Name: _TestSection
+  m_EditorClassIdentifier: 
+  DisplayName: TestSection Mini
+  HighScore: 29010
+  Width: 60
+  Height: 200
+  ChanceForShieldInLine: 0.05
+  ChanceForMineInLine: 0.1
+  GenerateWarp: 1
+  MinWarpLocationByPercent: 0.25
+  MaxWarpLocationByPercent: 0.75
+  MinWarpDistance: 0.25
+  MaxWarpDistance: 0.5
+  MineCount: 19
+  ShieldCount: 12
+  Notations:
+  - Index: 585
+    IsActive: 1
+    Type: 2
+  - Index: 610
+    IsActive: 1
+    Type: 1
+  - Index: 860
+    IsActive: 1
+    Type: 1
+  - Index: 2104
+    IsActive: 1
+    Type: 2
+  - Index: 2590
+    IsActive: 1
+    Type: 2
+  - Index: 2766
+    IsActive: 1
+    Type: 2
+  - Index: 2924
+    IsActive: 1
+    Type: 1
+  - Index: 3036
+    IsActive: 1
+    Type: 1
+  - Index: 3379
+    IsActive: 1
+    Type: 2
+  - Index: 3548
+    IsActive: 1
+    Type: 2
+  - Index: 3986
+    IsActive: 1
+    Type: 4
+  - Index: 4022
+    IsActive: 1
+    Type: 2
+  - Index: 4238
+    IsActive: 1
+    Type: 1
+  - Index: 4605
+    IsActive: 1
+    Type: 1
+  - Index: 5043
+    IsActive: 1
+    Type: 1
+  - Index: 5217
+    IsActive: 1
+    Type: 1
+  - Index: 5602
+    IsActive: 1
+    Type: 1
+  - Index: 5659
+    IsActive: 1
+    Type: 1
+  - Index: 6589
+    IsActive: 1
+    Type: 1
+  - Index: 6806
+    IsActive: 1
+    Type: 2
+  - Index: 7538
+    IsActive: 1
+    Type: 1
+  - Index: 8025
+    IsActive: 1
+    Type: 1
+  - Index: 8066
+    IsActive: 1
+    Type: 4
+  - Index: 8226
+    IsActive: 1
+    Type: 1
+  - Index: 9100
+    IsActive: 1
+    Type: 2
+  - Index: 9186
+    IsActive: 1
+    Type: 1
+  - Index: 9461
+    IsActive: 1
+    Type: 1
+  - Index: 9601
+    IsActive: 1
+    Type: 1
+  - Index: 10440
+    IsActive: 1
+    Type: 1
+  - Index: 10616
+    IsActive: 1
+    Type: 2
+  - Index: 10898
+    IsActive: 1
+    Type: 1
+  - Index: 11748
+    IsActive: 1
+    Type: 2
+  - Index: 11959
+    IsActive: 1
+    Type: 2
+  - Index: 11999
+    IsActive: 1
+    Type: 0
+  - Index: 12000
+    IsActive: 1
+    Type: 3
