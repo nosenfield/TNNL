@@ -21,6 +21,8 @@ public class UserData
         TotalPoints = 0;
     }
 
+    // Point value increases should be handled through a PointsEarned event dispatched through an event hub
+    // This creates a layer of abstraction between the UserData and the many future gameplay/meta mechanics that will affect TotalPoints, Lives, etc.
     void ShieldCollisionListener(AbstractCollidable collidable)
     {
         // NOTE

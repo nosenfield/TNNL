@@ -28,6 +28,9 @@ namespace TNNL.UI
             ShipController.ShipCollision -= CollisionListener;
         }
 
+        // NOTE
+        // Replace CollisionListener through the ShipController/ShieldController with a Collision or PointsEarned event raised through an event hub
+        ///
         void CollisionListener(AbstractCollidable collidable)
         {
             int points = collidable.CollisionPoints;
