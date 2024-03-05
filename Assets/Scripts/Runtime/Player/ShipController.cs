@@ -23,6 +23,9 @@ namespace TNNL.Player
                 case CollisionType.FinishLine:
                     Debug.Log("Crossed the finish line!");
                     break;
+                case CollisionType.WormHole:
+                    Debug.Log("Hit a worm hole!");
+                    break;
             }
 
             ShipCollision?.Invoke(collidable);

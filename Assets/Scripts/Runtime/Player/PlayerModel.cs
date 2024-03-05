@@ -193,5 +193,10 @@ namespace TNNL.Player
         {
             boostTime = boostMaxTime + overloadPenalty;
         }
+
+        public void WarpTo(float _yPosition)
+        {
+            yPosition = _yPosition;
+        }
     }
 }

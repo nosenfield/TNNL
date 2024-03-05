@@ -1,4 +1,5 @@
 using System;
+using TNNL.Collidables;
 using TNNL.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,11 +42,12 @@ namespace TNNL.Player
             model.SetDefaults();
             ActivatePlayer();
         }
-
+        
         private void UpdatePlayerForLevel(float levelWidth)
         {
-            model.SetXVelocity(levelWidth - view.GetComponentInChildren<ShieldView>().MaxScale, 3f);
-            model.SetYVelocity((levelWidth - view.GetComponentInChildren<ShieldView>().MaxScale) / 3f);
+            float secondsToTravelLevelWidth = 3f;
+            model.SetXVelocity(levelWidth - view.GetComponentInChildren<ShieldView>().MaxScale, secondsToTravelLevelWidth);
+            model.SetYVelocity((levelWidth - view.GetComponentInChildren<ShieldView>().MaxScale) / secondsToTravelLevelWidth);
         }
 
         public void ActivatePlayer()
@@ -68,6 +70,12 @@ namespace TNNL.Player
         {
             view.DoUpdate = false;
             model.DoUpdate = false;
+        }
+
+        public void WarpTo(WormHole warpDestination)
+        {
+            Debug.Log("PlayerController.Warp()");
+            model.WarpTo(warpDestination.gameObject.transform.position.y);
         }
 
         // Boost the ship forward

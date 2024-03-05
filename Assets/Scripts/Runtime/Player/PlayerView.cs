@@ -1,9 +1,10 @@
+using TNNL.Collidables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace TNNL.Player
 {
-    public class PlayerView : MonoBehaviour
+    public class PlayerView : MonoBehaviour, IWarpable
     {
         public InputActionAsset actions;
         [SerializeField] private bool GenerateController;
@@ -52,6 +53,11 @@ namespace TNNL.Player
         void OnDisable()
         {
             actions?.FindActionMap("Gameplay").Disable();
+        }
+
+        public void Warp(WormHole warpDestination)
+        {
+            controller.WarpTo(warpDestination);
         }
     }
 }
