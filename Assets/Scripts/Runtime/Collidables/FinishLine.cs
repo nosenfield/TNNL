@@ -8,6 +8,8 @@ namespace TNNL.Collidables
 {
     public class FinishLine : AbstractCollidable
     {
+        public static event Action FinishLineCollision;
+
         public override CollisionType Type
         {
             get
@@ -23,8 +25,6 @@ namespace TNNL.Collidables
                 return 10000;
             }
         }
-
-        public static event Action FinishLineCollision;
 
         // Handle my collision with objects of different types
         public override void OnTriggerEnter(Collider other)
