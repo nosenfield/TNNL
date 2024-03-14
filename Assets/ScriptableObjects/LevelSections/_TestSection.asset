@@ -13,121 +13,209 @@ MonoBehaviour:
   m_Name: _TestSection
   m_EditorClassIdentifier: 
   DisplayName: TestSection Mini
-  HighScore: 29010
+  HighScore: 0
   Width: 60
-  Height: 200
-  ChanceForShieldInLine: 0.05
+  Height: 400
   ChanceForMineInLine: 0.1
+  ChanceForShieldInLine: 0.01
+  ChanceForInvincibilityInLine: 0.0025
+  MinDistanceBetweenInvincibility: 50
   GenerateWarp: 1
   MinWarpLocationByPercent: 0.25
   MaxWarpLocationByPercent: 0.75
   MinWarpDistance: 0.25
   MaxWarpDistance: 0.5
-  MineCount: 19
-  ShieldCount: 12
+  GenerateElectricGates: 1
+  MinElectricGatesLocationByPercent: 0.1
+  MaxElectricGatesLocationByPercent: 0.95
+  MinElectricGates: 1
+  MaxElectricGates: 3
+  MineCount: 48
+  ShieldCount: 7
+  InvincibilityCount: 2
+  WarpCount: 1
+  ElectricGateCount: 1
   Notations:
-  - Index: 585
-    IsActive: 1
-    Type: 2
-  - Index: 610
+  - Index: 166
     IsActive: 1
     Type: 1
-  - Index: 860
+  - Index: 789
     IsActive: 1
     Type: 1
-  - Index: 2104
-    IsActive: 1
-    Type: 2
-  - Index: 2590
-    IsActive: 1
-    Type: 2
-  - Index: 2766
-    IsActive: 1
-    Type: 2
-  - Index: 2924
+  - Index: 1155
     IsActive: 1
     Type: 1
-  - Index: 3036
+  - Index: 1406
     IsActive: 1
     Type: 1
-  - Index: 3379
+  - Index: 2235
     IsActive: 1
-    Type: 2
-  - Index: 3548
+    Type: 1
+  - Index: 2469
     IsActive: 1
-    Type: 2
-  - Index: 3986
+    Type: 1
+  - Index: 3459
+    IsActive: 1
+    Type: 1
+  - Index: 3496
+    IsActive: 1
+    Type: 1
+  - Index: 4246
+    IsActive: 1
+    Type: 1
+  - Index: 4485
+    IsActive: 1
+    Type: 1
+  - Index: 4631
+    IsActive: 1
+    Type: 1
+  - Index: 4717
+    IsActive: 1
+    Type: 6
+  - Index: 4791
+    IsActive: 1
+    Type: 1
+  - Index: 4995
+    IsActive: 1
+    Type: 1
+  - Index: 5196
+    IsActive: 1
+    Type: 1
+  - Index: 6749
     IsActive: 1
     Type: 4
-  - Index: 4022
+  - Index: 7359
+    IsActive: 1
+    Type: 1
+  - Index: 7397
+    IsActive: 1
+    Type: 1
+  - Index: 7718
+    IsActive: 1
+    Type: 1
+  - Index: 7917
+    IsActive: 1
+    Type: 1
+  - Index: 8282
+    IsActive: 1
+    Type: 1
+  - Index: 8820
+    IsActive: 1
+    Type: 5
+  - Index: 9221
+    IsActive: 1
+    Type: 1
+  - Index: 9305
+    IsActive: 1
+    Type: 1
+  - Index: 10136
+    IsActive: 1
+    Type: 1
+  - Index: 10176
+    IsActive: 1
+    Type: 1
+  - Index: 10465
+    IsActive: 1
+    Type: 1
+  - Index: 10928
     IsActive: 1
     Type: 2
-  - Index: 4238
-    IsActive: 1
-    Type: 1
-  - Index: 4605
-    IsActive: 1
-    Type: 1
-  - Index: 5043
-    IsActive: 1
-    Type: 1
-  - Index: 5217
-    IsActive: 1
-    Type: 1
-  - Index: 5602
-    IsActive: 1
-    Type: 1
-  - Index: 5659
-    IsActive: 1
-    Type: 1
-  - Index: 6589
-    IsActive: 1
-    Type: 1
-  - Index: 6806
+  - Index: 11107
     IsActive: 1
     Type: 2
-  - Index: 7538
+  - Index: 11161
     IsActive: 1
     Type: 1
-  - Index: 8025
+  - Index: 11637
     IsActive: 1
     Type: 1
-  - Index: 8066
+  - Index: 11751
+    IsActive: 1
+    Type: 1
+  - Index: 11897
+    IsActive: 1
+    Type: 2
+  - Index: 11991
+    IsActive: 1
+    Type: 1
+  - Index: 12152
+    IsActive: 1
+    Type: 1
+  - Index: 12222
+    IsActive: 1
+    Type: 1
+  - Index: 12263
+    IsActive: 1
+    Type: 1
+  - Index: 12521
+    IsActive: 1
+    Type: 1
+  - Index: 12716
+    IsActive: 1
+    Type: 1
+  - Index: 12823
+    IsActive: 1
+    Type: 2
+  - Index: 13514
+    IsActive: 1
+    Type: 1
+  - Index: 14088
+    IsActive: 1
+    Type: 6
+  - Index: 14175
+    IsActive: 1
+    Type: 1
+  - Index: 14269
+    IsActive: 1
+    Type: 1
+  - Index: 14847
+    IsActive: 1
+    Type: 1
+  - Index: 15148
+    IsActive: 1
+    Type: 1
+  - Index: 15187
+    IsActive: 1
+    Type: 1
+  - Index: 15289
+    IsActive: 1
+    Type: 1
+  - Index: 15569
     IsActive: 1
     Type: 4
-  - Index: 8226
+  - Index: 16860
     IsActive: 1
     Type: 1
-  - Index: 9100
+  - Index: 17695
+    IsActive: 1
+    Type: 1
+  - Index: 17769
+    IsActive: 1
+    Type: 1
+  - Index: 18426
     IsActive: 1
     Type: 2
-  - Index: 9186
+  - Index: 19715
     IsActive: 1
     Type: 1
-  - Index: 9461
+  - Index: 20926
     IsActive: 1
     Type: 1
-  - Index: 9601
-    IsActive: 1
-    Type: 1
-  - Index: 10440
-    IsActive: 1
-    Type: 1
-  - Index: 10616
+  - Index: 21491
     IsActive: 1
     Type: 2
-  - Index: 10898
+  - Index: 22333
     IsActive: 1
     Type: 1
-  - Index: 11748
+  - Index: 22892
+    IsActive: 1
+    Type: 1
+  - Index: 23390
     IsActive: 1
     Type: 2
-  - Index: 11959
+  - Index: 23577
     IsActive: 1
-    Type: 2
-  - Index: 11999
-    IsActive: 1
-    Type: 0
-  - Index: 12000
+    Type: 1
+  - Index: 24000
     IsActive: 1
     Type: 3
