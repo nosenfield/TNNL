@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2485079717130125562}
   - component: {fileID: 849407203718198732}
   - component: {fileID: 3731750731129280279}
-  - component: {fileID: 7626541256624544702}
+  - component: {fileID: 3300579369586915456}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &7626541256624544702
+--- !u!114 &3300579369586915456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,11 +73,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2632275718156381513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfcc4aabebb5e4deab74a16db5e2a9bf, type: 3}
+  m_Script: {fileID: 11500000, guid: abbc4efb2893d437ea2d7dadefbf3cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 8564890143891999548}
-  other: {fileID: 0}
+  DurationInSeconds: 5
 --- !u!1 &8564890143891999548
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8267350129349386506}
   m_Layer: 0
-  m_Name: WormHole-Container
+  m_Name: Invincibility-Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
-  m_LocalScale: {x: 4, y: 3, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8267350129349386506}
@@ -172,7 +172,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d164b7cf042ec411789de23812c25b9d, type: 2}
+  - {fileID: 2100000, guid: e9046260509cf44608d2ed0b61dced48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

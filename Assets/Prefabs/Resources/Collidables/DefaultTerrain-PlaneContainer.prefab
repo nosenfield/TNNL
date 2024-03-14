@@ -103,6 +103,18 @@ PrefabInstance:
       propertyPath: container
       value: 
       objectReference: {fileID: 2271593971196660811}
+    - target: {fileID: 7887264431549311807, guid: f31924ff39abd499c99bf5c92cb78289, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887264431549311807, guid: f31924ff39abd499c99bf5c92cb78289, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887264431549311807, guid: f31924ff39abd499c99bf5c92cb78289, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
