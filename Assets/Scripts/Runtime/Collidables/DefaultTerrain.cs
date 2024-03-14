@@ -1,4 +1,3 @@
-using System.Collections;
 using TNNL.Player;
 using UnityEngine;
 
@@ -7,13 +6,13 @@ namespace TNNL.Collidables
     /// <summary>
     /// the TerrainCube behaviour is placed on the prefab. adjustable damage allows for tweaking and differentiation (ie. terrain types w/ 2x damage)
     /// </summary>
-    public class Terrain : AbstractCollidable
+    public class DefaultTerrain : AbstractCollidable
     {
         public override CollisionType Type
         {
             get
             {
-                return CollisionType.Terrain;
+                return CollisionType.DefaultTerrain;
             }
         }
         public float Damage;

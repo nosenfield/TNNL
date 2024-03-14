@@ -23,7 +23,7 @@ namespace TNNL.Player
         private float colliderStartingRadius = .5f; //
         private float colliderMinRadius;
 
-        void Awake()
+        void Start()
         {
             colliderMinRadius = MinScale / MaxScale * colliderStartingRadius;
 
@@ -38,12 +38,17 @@ namespace TNNL.Player
             this.model = model;
         }
 
-        public void Update()
+        void Update()
         {
             if (model != null && DoUpdate)
             {
                 UpdateAppearance(model.PercentHealth);
             }
+        }
+
+        void FixedUpdate()
+        {
+            controller?.FixedUpdate();
         }
 
         public void UpdateAppearance(float percentHealth)

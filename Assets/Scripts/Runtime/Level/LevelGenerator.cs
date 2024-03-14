@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using nosenfield.Logging;
+using TNNL.Collidables;
 using UnityEngine;
 
 namespace TNNL.Level
@@ -14,50 +16,74 @@ namespace TNNL.Level
         {
             List<LevelBlockNotation> notations = new List<LevelBlockNotation>();
 
-            int ShieldCount = 0;
-            int MineCount = 0;
+            section.ShieldCount = 0;
+            section.MineCount = 0;
+            section.InvincibilityCount = 0;
+            section.WarpCount = 0;
+            section.ElectricGateCount = 0;
+
+            float distanceSinceInvincibility = 0;
+
+            // Generates:
+            // - shields
+            // - mines
+            // - invincibility
 
             for (int i = 0; i < section.Height; i++)
             {
                 bool generateShield = Random.Range(0f, 1f) < section.ChanceForShieldInLine;
                 bool generateMine = Random.Range(0f, 1f) < section.ChanceForMineInLine;
 
+                // for every 10 rows since generation of the previous invisibility, increase the chance by 1x
+                bool generateInvincibility = distanceSinceInvincibility >= section.MinDistanceBetweenInvincibility && Random.Range(0f, 1f) * (section.MinDistanceBetweenInvincibility / distanceSinceInvincibility) < section.ChanceForInvincibilityInLine;
+
                 if (generateShield)
                 {
                     notations.Add(new LevelBlockNotation(section.Width * i + Random.Range(0, section.Width), LevelBlockType.ShieldBoost, true));
-                    ShieldCount++;
+                    section.ShieldCount++;
                 }
-                else if (generateMine)
+
+                if (generateMine)
                 {
                     notations.Add(new LevelBlockNotation(section.Width * i + Random.Range(0, section.Width), LevelBlockType.Mine, true));
-                    MineCount++;
+                    section.MineCount++;
                 }
+
+                if (generateInvincibility)
+                {
+                    notations.Add(new LevelBlockNotation(section.Width * i + Random.Range(0, section.Width), LevelBlockType.Invincibility, true));
+                    section.InvincibilityCount++;
+                    distanceSinceInvincibility = 0;
+                }
+
+                distanceSinceInvincibility++;
             }
 
-            // if the very last block in our section is not already defined, define a default cube.
-            // this allows our level recreation method to only iterate over the defined indexes and fill all others with default terrain blocks
-            int finalIndex = section.Width * section.Height - 1;
-            if (notations.Count == 0 || notations[notations.Count - 1].Index != finalIndex)
-            {
-                notations.Add(new LevelBlockNotation(finalIndex, LevelBlockType.DefaultTerrain, true));
-            }
+            // NOTE
+            // We are automatically adding a FinishLine block at the end of the section so we no longer need to add a final terrain section block
+            //
+            // [Deprecated]
+            // int finalIndex = section.Width * section.Height - 1;
+            // if (notations.Count == 0 || notations[notations.Count - 1].Index != finalIndex)
+            // {
+            //     notations.Add(new LevelBlockNotation(finalIndex, LevelBlockType.DefaultTerrain, true));
+            // }
+            ///
 
-            notations.Add(new LevelBlockNotation(finalIndex + 1, LevelBlockType.FinishLine, true));
+            // Adds:
+            // - finish Line
+
+            notations.Add(new LevelBlockNotation(section.Width * section.Height, LevelBlockType.FinishLine, true));
+
+            // generate Warp
 
             if (section.GenerateWarp)
             {
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"Generating warp...");
 
                 float availableDistance = section.MaxWarpLocationByPercent - section.MinWarpLocationByPercent;
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"availableDistance: {availableDistance}");
                 float minWarpDistance = Mathf.Min(section.MinWarpDistance, availableDistance);
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"minWarpDistance: {minWarpDistance}");
                 float maxWarpDistance = Mathf.Min(section.MaxWarpDistance, availableDistance);
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"maxWarpDistance: {maxWarpDistance}");
-
                 float warpDistance = Random.Range(minWarpDistance, maxWarpDistance);
-
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpDistance: {warpDistance}");
 
                 if (section.MinWarpDistance > availableDistance)
                 {
@@ -73,57 +99,67 @@ namespace TNNL.Level
                 float buffer = .2f;
                 int warpCol = Random.Range(Mathf.CeilToInt(section.Width * buffer), Mathf.FloorToInt(section.Width * (1 - buffer)));
 
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpRowA: {warpRowA}");
 
                 int warpRowB = warpRowA + Mathf.RoundToInt(section.Height * warpDistance);
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"warpRowB: {warpRowB}");
 
                 int indexA = section.Width * warpRowA + warpCol;
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"indexA: {indexA}");
                 int indexB = section.Width * warpRowB + warpCol;
-                DefaultLogger.Instance.Log(LogLevel.DEBUG, $"indexB: {indexB}");
 
-                int j;
-                for (j = 0; j < notations.Count; j++)
-                {
-                    if (indexA > notations[j].Index)
-                    {
-                        continue;
-                    }
-                    else if (indexA < notations[j].Index)
-                    {
-                        notations.Insert(j, new LevelBlockNotation(indexA, LevelBlockType.WormHole, true));
-                        break;
-                    }
-                    else // if (indexA == notations[j].Index)
-                    {
-                        notations[j] = new LevelBlockNotation(indexA, LevelBlockType.WormHole, true);
-                        break;
-                    }
-                }
+                InsertNotation(new LevelBlockNotation(indexA, LevelBlockType.WormHole, true), notations, true);
+                InsertNotation(new LevelBlockNotation(indexB, LevelBlockType.WormHole, true), notations, true);
 
-                for (j = j + 1; j < notations.Count; j++)
+                section.WarpCount++;
+            }
+
+            if (section.GenerateElectricGates)
+            {
+                int maxPossibleRow = Mathf.FloorToInt(section.MaxElectricGatesLocationByPercent * section.Height);
+                int maxRowForCurrentGate;
+                int minRowForCurrentGate = Mathf.FloorToInt(section.Height * section.MinElectricGatesLocationByPercent);
+                for (int i = (int)Random.Range((float)section.MinElectricGates, (float)section.MaxElectricGates) - 1; i >= 0; i--)
                 {
-                    if (indexB > notations[j].Index)
-                    {
-                        continue;
-                    }
-                    else if (indexB < notations[j].Index)
-                    {
-                        notations.Insert(j, new LevelBlockNotation(indexB, LevelBlockType.WormHole, true));
-                        break;
-                    }
-                    else // if (indexB == notations[j].Index)
-                    {
-                        notations[j] = new LevelBlockNotation(indexB, LevelBlockType.WormHole, true);
-                        break;
-                    }
+                    maxRowForCurrentGate = maxPossibleRow - i * ElectricGate.MinRowsBetweenGates;
+                    int rowForGate = Random.Range(minRowForCurrentGate, maxRowForCurrentGate);
+
+                    // create notation for gate at specified row and insert into notations
+                    int index = rowForGate * section.Width;
+                    InsertNotation(new LevelBlockNotation(index, LevelBlockType.ElectricGate, true), notations, true);
+
+                    minRowForCurrentGate = rowForGate + ElectricGate.MinRowsBetweenGates;
+
+                    section.ElectricGateCount++;
                 }
             }
 
             section.Notations = notations.ToArray();
-            section.ShieldCount = ShieldCount;
-            section.MineCount = MineCount;
+        }
+
+        private static void InsertNotation(LevelBlockNotation notation, List<LevelBlockNotation> notations, bool overwrite)
+        {
+            // NOTE
+            // LevelParser is no longer dependent upon our notations being in a specific order,
+            // so inserting the warps and gates is unneeded.
+            // We could just add these notations to our list of all notations,
+            // with the knowledge that doing so could allow a Warp or ElectricGate to share an index and overlap with a mine/shield/invincibility
+            /// 
+
+            int index = System.Array.BinarySearch(notations.ToArray(), notation);
+            index = index >= 0 ? index : ~index;
+            if (index >= notations.Count)
+            {
+                notations.Insert(index, notation);
+            }
+            else if (notations[index].Index == notation.Index)
+            {
+                if (overwrite)
+                {
+                    notations[index] = notation;
+                }
+            }
+            else
+            {
+                notations.Insert(index, notation);
+            }
         }
     }
 }

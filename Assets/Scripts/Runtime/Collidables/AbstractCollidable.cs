@@ -6,11 +6,13 @@ namespace TNNL.Collidables
 {
     public enum CollisionType
     {
-        Terrain,
+        DefaultTerrain,
         Mine,
         ShieldBoost,
         FinishLine,
         WormHole,
+        ElectricGate,
+        Invincibility,
     }
 
     public abstract class AbstractCollidable : MonoBehaviour

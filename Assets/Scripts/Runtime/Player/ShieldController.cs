@@ -24,6 +24,14 @@ namespace TNNL.Player
             OverlayUI.StartRunClicked += ResetShield;
         }
 
+        public void FixedUpdate()
+        {
+            if (model.SecondsInvincibleRemaining > 0f)
+            {
+                model.SecondsInvincibleRemaining = Mathf.Max(0f, model.SecondsInvincibleRemaining - Time.fixedDeltaTime);
+            }
+        }
+
         private void ResetShield()
         {
             model.ResetShield();
@@ -33,8 +41,8 @@ namespace TNNL.Player
         {
             switch (collidable.Type)
             {
-                case CollisionType.Terrain:
-                    model.DamageShield(((Collidables.Terrain)collidable).Damage);
+                case CollisionType.DefaultTerrain:
+                    model.DamageShield(((Collidables.DefaultTerrain)collidable).Damage);
                     break;
                 case CollisionType.Mine:
                     Debug.Log("Hit a mine!");
@@ -43,6 +51,14 @@ namespace TNNL.Player
                 case CollisionType.ShieldBoost:
                     Debug.Log("Grabbed a shield!");
                     model.HealShield(((ShieldBoost)collidable).Amount);
+                    break;
+                case CollisionType.ElectricGate:
+                    Debug.Log("Hit electric gate!");
+                    ((ElectricGate)collidable).SetModelToDamage(model);
+                    break;
+                case CollisionType.Invincibility:
+                    Debug.Log("Grabbed invincibility!");
+                    model.SecondsInvincibleRemaining = ((Invincibility)collidable).DurationInSeconds;
                     break;
                 default:
                     Debug.Log("Unspecified shield collision!");

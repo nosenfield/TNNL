@@ -16,10 +16,24 @@ namespace TNNL.Player
         /// Emit a registration as the "active" model?
         /// </summary>
         public static Action<float> HealthUpdate;
+        public static Action<float> InvincibilityUpdate;
 
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private float startingHealth;
+        [SerializeField] private float secondsInvincibleRemaining;
+        public float SecondsInvincibleRemaining
+        {
+            get
+            {
+                return secondsInvincibleRemaining;
+            }
+            set
+            {
+                secondsInvincibleRemaining = value;
+                InvincibilityUpdate?.Invoke(value);
+            }
+        }
         public float PercentHealth
         {
             get
@@ -32,6 +46,7 @@ namespace TNNL.Player
         {
             this.health = this.startingHealth = startingHealth;
             this.maxHealth = maxHealth;
+            this.SecondsInvincibleRemaining = 0f;
         }
 
         /// <summary>
@@ -42,8 +57,13 @@ namespace TNNL.Player
         /// <exception cref="System.Exception">This is the exception text.</exception>
         public float DamageShield(float amount)
         {
+
             if (amount < 0) throw new System.Exception("Damage amount specificed is less than 0");
-            ChangeShield(-amount);
+            if (SecondsInvincibleRemaining == 0f)
+            {
+                ChangeShield(-amount);
+            }
+
             return health;
         }
 
@@ -63,6 +83,13 @@ namespace TNNL.Player
         private void ChangeShield(float amount)
         {
             health += amount;
+
+            // don't allow the health to go below 0 as a negative scale creates a reversed, but visible view component
+            if (health < 0f)
+            {
+                health = 0f;
+            }
+
             HealthUpdate.Invoke(PercentHealth);
         }
 

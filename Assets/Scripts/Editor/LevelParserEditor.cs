@@ -18,6 +18,11 @@ namespace TNNL.Level
             {
                 parser.LoadNextLevel();
             }
+
+            if (GUILayout.Button("UnloadLevel"))
+            {
+                parser.ClearLevel();
+            }
         }
 
     }

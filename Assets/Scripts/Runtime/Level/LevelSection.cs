@@ -1,5 +1,6 @@
 
 using System;
+using nosenfield;
 using UnityEngine;
 
 namespace TNNL.Level
@@ -11,8 +12,10 @@ namespace TNNL.Level
         public int HighScore;
         public int Width;
         public int Height;
-        public float ChanceForShieldInLine = 0.01f;
         public float ChanceForMineInLine = 0.1f;
+        public float ChanceForShieldInLine = 0.01f;
+        public float ChanceForInvincibilityInLine = 0.005f;
+        public float MinDistanceBetweenInvincibility = 200;
         public bool GenerateWarp = false;
         /// <summary>
         /// the minimum percentage of map before a warp can appear
@@ -30,8 +33,16 @@ namespace TNNL.Level
         /// the maximum percentage of map between warp points
         /// </summary>
         public float MaxWarpDistance = .5f;
-        public int MineCount;
-        public int ShieldCount;
+        public bool GenerateElectricGates; // this currently generates full-width electric gates
+        public float MinElectricGatesLocationByPercent = .1f;
+        public float MaxElectricGatesLocationByPercent = .95f;
+        public int MinElectricGates = 3;
+        public int MaxElectricGates = 5;
+        [ReadOnly] public int MineCount;
+        [ReadOnly] public int ShieldCount;
+        [ReadOnly] public int InvincibilityCount;
+        [ReadOnly] public int WarpCount;
+        [ReadOnly] public int ElectricGateCount;
         public LevelBlockNotation[] Notations; // this is an array notating all non-default cubes & inactive default cubes
     }
 
@@ -41,13 +52,17 @@ namespace TNNL.Level
     /// 
 
     [Serializable]
-    public class LevelBlockNotation
+    public class LevelBlockNotation : IComparable<LevelBlockNotation>
     {
         public LevelBlockNotation(int index, LevelBlockType type, bool isActive)
         {
-            this.Index = index;
-            this.Type = type;
-            this.IsActive = isActive;
+            Index = index;
+            Type = type;
+            IsActive = isActive;
+        }
+        public int CompareTo(LevelBlockNotation other)
+        {
+            return Index.CompareTo(other.Index);
         }
         public int Index;
         public bool IsActive;
@@ -60,7 +75,9 @@ namespace TNNL.Level
         Mine,
         ShieldBoost,
         FinishLine,
-        WormHole
+        WormHole,
+        ElectricGate,
+        Invincibility
     }
 
 }
