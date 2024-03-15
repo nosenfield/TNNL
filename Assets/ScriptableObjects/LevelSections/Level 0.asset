@@ -16,15 +16,25 @@ MonoBehaviour:
   HighScore: 0
   Width: 60
   Height: 800
-  ChanceForShieldInLine: 0.05
   ChanceForMineInLine: 0.1
+  ChanceForShieldInLine: 0.05
+  ChanceForInvincibilityInLine: 0.005
+  MinDistanceBetweenInvincibility: 200
   GenerateWarp: 0
   MinWarpLocationByPercent: 0.25
   MaxWarpLocationByPercent: 0.75
   MinWarpDistance: 0.1
   MaxWarpDistance: 0.5
+  GenerateElectricGates: 0
+  MinElectricGatesLocationByPercent: 0.1
+  MaxElectricGatesLocationByPercent: 0.95
+  MinElectricGates: 3
+  MaxElectricGates: 5
   MineCount: 0
   ShieldCount: 0
+  InvincibilityCount: 0
+  WarpCount: 0
+  ElectricGateCount: 0
   Notations:
   - Index: 181
     IsActive: 1
