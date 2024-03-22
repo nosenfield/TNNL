@@ -1,6 +1,7 @@
 using TMPro;
 using TNNL.Data;
 using TNNL.Level;
+using TNNL.RuntimeData;
 using UnityEngine;
 
 namespace TNNL.UI
@@ -16,7 +17,7 @@ namespace TNNL.UI
             }
         }
 
-        UserData playerData;
+        PlayerRuntimeData playerData;
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI livesText;
         [SerializeField] TextMeshProUGUI levelNameDisplay;
@@ -31,7 +32,7 @@ namespace TNNL.UI
             instance = this;
         }
 
-        public void SetPlayerData(UserData playerData)
+        public void SetPlayerData(PlayerRuntimeData playerData)
         {
             this.playerData = playerData;
         }

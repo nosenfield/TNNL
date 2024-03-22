@@ -3,6 +3,7 @@ using TNNL.Collidables;
 using TNNL.Data;
 using TNNL.Level;
 using TNNL.Player;
+using TNNL.RuntimeData;
 using TNNL.UI;
 using TNNL.UI.UIToolkit;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace TNNL
     {
         private readonly nosenfield.Logging.Logger logger = new();
         [SerializeField] private GameObject overlayUI;
-        [SerializeField] private UserData playerData;
+        [SerializeField] private PlayerRuntimeData playerData;
 
         void Awake()
         {
@@ -22,7 +23,7 @@ namespace TNNL
             OverlayUI.NextLevelClicked += LoadNextLevel;
             PlayerController.PlayerShipDestroyed += GameOver;
 
-            playerData = new UserData();
+            playerData = new PlayerRuntimeData();
         }
 
         void Start()
@@ -34,8 +35,8 @@ namespace TNNL
 
         void StartRun()
         {
-            playerData.CurrentRun--;
-            if (playerData.CurrentRun <= 0)
+            playerData.ShipsRemaining--;
+            if (playerData.ShipsRemaining <= 0)
             {
                 ResetLevel();
                 playerData.ResetPlayerData();
