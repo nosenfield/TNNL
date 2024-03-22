@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
-using TNNL.Animation;
 using TNNL.Collidables;
-using TNNL.Level;
 using TNNL.Player;
 using UnityEngine;
 

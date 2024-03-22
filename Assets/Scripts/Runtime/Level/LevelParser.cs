@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using nosenfield.PersistentData;
 using TNNL.Collidables;
+using TNNL.Data;
 using TNNL.Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -31,20 +33,15 @@ namespace TNNL.Level
         {
             get
             {
-
                 return levelSections[levelIndex].DisplayName;
             }
         }
 
-        public int HighScore
+        public string CurrentLevelId
         {
             get
             {
-                return levelSections[levelIndex].HighScore;
-            }
-            set
-            {
-                levelSections[levelIndex].HighScore = value;
+                return levelSections[levelIndex].Id;
             }
         }
 

@@ -8,8 +8,8 @@ namespace TNNL.Level
     [CreateAssetMenu(fileName = "LevelSection", menuName = "ScriptableObjects/LevelSection", order = 1)]
     public class LevelSection : ScriptableObject
     {
+        public string Id;
         public string DisplayName;
-        public int HighScore;
         public int Width;
         public int Height;
         public float ChanceForMineInLine = 0.1f;
@@ -44,6 +44,14 @@ namespace TNNL.Level
         [ReadOnly] public int WarpCount;
         [ReadOnly] public int ElectricGateCount;
         public LevelBlockNotation[] Notations; // this is an array notating all non-default cubes & inactive default cubes
+
+        void OnEnable()
+        {
+            if (String.IsNullOrEmpty(Id))
+            {
+                Id = name;
+            }
+        }
     }
 
     /// <summary>

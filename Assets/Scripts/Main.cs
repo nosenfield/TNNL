@@ -1,5 +1,6 @@
 using nosenfield.Logging;
 using TNNL.Collidables;
+using TNNL.Data;
 using TNNL.Level;
 using TNNL.Player;
 using TNNL.UI;
@@ -10,6 +11,7 @@ namespace TNNL
 {
     public class Main : MonoBehaviour
     {
+        private readonly nosenfield.Logging.Logger logger = new();
         [SerializeField] private GameObject overlayUI;
         [SerializeField] private UserData playerData;
 
@@ -87,7 +89,6 @@ namespace TNNL
 
         void FinishLineCollisionListener()
         {
-            DefaultLogger.Instance.Log(LogLevel.DEBUG, "Player collided with finish line");
             FinishLine.FinishLineCollision -= FinishLineCollisionListener;
 
             PauseGameplay();
@@ -103,9 +104,9 @@ namespace TNNL
 
         void RecordScore()
         {
-            if (playerData.TotalPoints > LevelParser.Instance.HighScore)
+            if (playerData.TotalPoints > PlayerSaveData.GetHighScore(LevelParser.Instance.CurrentLevelId))
             {
-                LevelParser.Instance.HighScore = playerData.TotalPoints;
+                PlayerSaveData.SetHighScore(LevelParser.Instance.CurrentLevelId, playerData.TotalPoints);
             }
         }
 

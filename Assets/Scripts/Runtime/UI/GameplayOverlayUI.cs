@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
-using TNNL.Animation;
-using TNNL.Collidables;
+using TNNL.Data;
 using TNNL.Level;
-using TNNL.Player;
 using UnityEngine;
 
 namespace TNNL.UI
@@ -44,7 +40,8 @@ namespace TNNL.UI
         {
             scoreText.text = playerData?.TotalPoints.ToString();
             levelNameDisplay.text = LevelParser.Instance.CurrentLevelName;
-            highScoreDisplay.text = LevelParser.Instance.HighScore.ToString();
+
+            highScoreDisplay.text = PlayerSaveData.GetHighScore(LevelParser.Instance.CurrentLevelId).ToString();
         }
 
         void Update()
