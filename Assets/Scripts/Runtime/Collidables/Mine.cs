@@ -24,6 +24,12 @@ namespace TNNL.Collidables
 
         public override int CollisionPoints
         {
+            // NOTE
+            // Do mines need to have negative point values?
+            // Does it help establish good items vs. bad items for first time users?
+            // Or is damaging the shield enough of a negative to convey?
+            ///
+
             get
             {
                 return -500;
@@ -36,6 +42,7 @@ namespace TNNL.Collidables
             ShieldView shield = other.GetComponentInParent<ShieldView>();
             if (shield != null)
             {
+                DispatchPointCollection();
                 Deactivate();
             }
         }

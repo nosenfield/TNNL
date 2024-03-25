@@ -1,6 +1,5 @@
-using nosenfield.Logging;
-using TNNL.Collidables;
 using TNNL.Data;
+using TNNL.Events;
 using TNNL.Level;
 using TNNL.Player;
 using TNNL.RuntimeData;
@@ -78,7 +77,7 @@ namespace TNNL
         {
             HideMenuBar();
 
-            FinishLine.FinishLineCollision += FinishLineCollisionListener;
+            EventAggregator.Subscribe<LevelCheckpointEvent>(LevelCheckpointListener);
             PlayerController.Instance.ActivatePlayer();
 
             // count down the user
@@ -88,9 +87,10 @@ namespace TNNL
             // launch the ship
         }
 
-        void FinishLineCollisionListener()
+        void LevelCheckpointListener(object e)
         {
-            FinishLine.FinishLineCollision -= FinishLineCollisionListener;
+            LevelCheckpointEvent levelCheckpointEvent = (LevelCheckpointEvent)e;
+            EventAggregator.Unsubscribe<LevelCheckpointEvent>(LevelCheckpointListener);
 
             PauseGameplay();
 

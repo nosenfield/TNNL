@@ -1,4 +1,5 @@
 using System;
+using nosenfield;
 using TNNL.Collidables;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace TNNL.Player
 
         // mvc 
         [SerializeField] private bool GenerateController;
-        ShipController controller;
+        [SerializeField][ReadOnly] ShipController controller;
 
         void Awake()
         {
@@ -28,13 +29,9 @@ namespace TNNL.Player
         {
             AbstractCollidable collidable = other.GetComponentInParent<AbstractCollidable>();
 
-            switch (collidable)
+            if (collidable != null && !collidable.Dirty)
             {
-                case null:
-                    break;
-                default:
-                    ShipCollision?.Invoke(collidable);
-                    break;
+                ShipCollision?.Invoke(collidable);
             }
 
             // parse/report the collision by some kind of type identifier (what did we hit)

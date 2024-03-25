@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
   m_Name: Level 5-Gate Warp
   m_EditorClassIdentifier: 
+  Id: Level 5-Gate Warp
   DisplayName: Level 5-Gate Warp
-  HighScore: 0
   Width: 60
   Height: 800
-  ChanceForShieldInLine: 0.05
-  MineCount: 76
-  ShieldCount: 38
   ChanceForMineInLine: 0.1
+  ChanceForShieldInLine: 0.05
+  ChanceForInvincibilityInLine: 0.005
+  MinDistanceBetweenInvincibility: 200
   GenerateWarp: 1
   MinWarpLocationByPercent: 0.25
   MaxWarpLocationByPercent: 0.8
@@ -30,6 +30,11 @@ MonoBehaviour:
   MaxElectricGatesLocationByPercent: 0.95
   MinElectricGates: 2
   MaxElectricGates: 3
+  MineCount: 76
+  ShieldCount: 38
+  InvincibilityCount: 0
+  WarpCount: 0
+  ElectricGateCount: 0
   Notations:
   - Index: 549
     IsActive: 1

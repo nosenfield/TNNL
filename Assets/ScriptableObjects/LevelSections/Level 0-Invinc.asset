@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
   m_Name: Level 0-Invinc
   m_EditorClassIdentifier: 
+  Id: Level 0-Invinc
   DisplayName: Level 0-Invinc
-  HighScore: 0
   Width: 60
   Height: 800
   ChanceForMineInLine: 0.1

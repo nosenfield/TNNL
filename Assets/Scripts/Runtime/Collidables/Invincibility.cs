@@ -28,13 +28,10 @@ namespace TNNL.Collidables
         public override void OnTriggerEnter(Collider other)
         {
             ShieldView shield = other.GetComponentInParent<ShieldView>();
-            switch (shield)
+            if (shield != null)
             {
-                case null:
-                    break;
-                default:
-                    Deactivate();
-                    break;
+                DispatchPointCollection();
+                Deactivate();
             }
         }
     }

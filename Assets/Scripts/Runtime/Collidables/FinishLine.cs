@@ -1,15 +1,12 @@
 using UnityEngine;
-using UnityEngine.Events;
 using TNNL.Player;
-using nosenfield.Logging;
-using System;
+using TNNL.Events;
+using TNNL.Level;
 
 namespace TNNL.Collidables
 {
     public class FinishLine : AbstractCollidable
     {
-        public static event Action FinishLineCollision;
-
         public override CollisionType Type
         {
             get
@@ -33,7 +30,9 @@ namespace TNNL.Collidables
 
             if (shipView != null)
             {
-                FinishLineCollision?.Invoke();
+                DispatchPointCollection();
+                dirty = true;
+                LevelCheckpointEvent.Dispatch(LevelParser.Instance.GetCurrentSection());
             }
         }
     }

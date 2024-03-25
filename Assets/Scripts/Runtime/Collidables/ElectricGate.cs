@@ -49,6 +49,10 @@ namespace TNNL.Collidables
             {
                 DefaultLogger.Instance.Log(LogLevel.DEBUG, "Shield collided with electric gate");
                 doDamage = true;
+                // We need access to the ShieldModel instance to damage it.
+                // The model is provided via collision listeners of the shield system.
+                // The model could be set here if we had access to it via ShieldView.model
+                // or some other interface (ie. ShieldMVC.model)
             }
         }
 

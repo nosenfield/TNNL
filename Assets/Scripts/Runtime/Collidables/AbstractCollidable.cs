@@ -1,5 +1,6 @@
 // the base collidable behaviour that all collidable game objects can extend
 using System.Collections;
+using TNNL.Events;
 using UnityEngine;
 
 namespace TNNL.Collidables
@@ -24,6 +25,10 @@ namespace TNNL.Collidables
         }
 
         protected bool dirty;
+        public bool Dirty
+        {
+            get { return dirty; }
+        }
         public virtual int CollisionPoints
         {
             get
@@ -59,6 +64,13 @@ namespace TNNL.Collidables
         void OnDestroy()
         {
             GameObject.Destroy(container);
+        }
+
+        protected void DispatchPointCollection()
+        {
+            if (dirty) return;
+
+            PointCollectionEvent.Dispatch(CollisionPoints, this);
         }
     }
 }

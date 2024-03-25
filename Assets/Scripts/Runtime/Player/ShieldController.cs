@@ -1,5 +1,7 @@
 using System;
+using nosenfield.Logging;
 using TNNL.Collidables;
+using TNNL.Events;
 using TNNL.UI.UIToolkit;
 using UnityEngine;
 
@@ -7,7 +9,7 @@ namespace TNNL.Player
 {
     public class ShieldController
     {
-        public static Action<AbstractCollidable> ShieldCollision;
+        private nosenfield.Logging.Logger logger = new();
         public static Action ShieldDestroyed;
         private ShieldModel model;
         private ShieldView view;
@@ -45,34 +47,32 @@ namespace TNNL.Player
                     model.DamageShield(((Collidables.DefaultTerrain)collidable).Damage);
                     break;
                 case CollisionType.Mine:
-                    Debug.Log("Hit a mine!");
+                    logger.Log(LogLevel.DEBUG, "Hit a mine!");
                     model.DamageShield(((Mine)collidable).Damage);
                     break;
                 case CollisionType.ShieldBoost:
-                    Debug.Log("Grabbed a shield!");
+                    logger.Log(LogLevel.DEBUG, "Grabbed a shield!");
                     model.HealShield(((ShieldBoost)collidable).Amount);
                     break;
                 case CollisionType.ElectricGate:
-                    Debug.Log("Hit electric gate!");
+                    logger.Log(LogLevel.DEBUG, "Hit electric gate!");
                     ((ElectricGate)collidable).SetModelToDamage(model);
                     break;
                 case CollisionType.Invincibility:
-                    Debug.Log("Grabbed invincibility!");
+                    logger.Log(LogLevel.DEBUG, "Grabbed invincibility!");
                     model.SecondsInvincibleRemaining = ((Invincibility)collidable).DurationInSeconds;
                     break;
                 default:
-                    Debug.Log("Unspecified shield collision!");
+                    logger.Log(LogLevel.DEBUG, "Unspecified shield collision!");
                     return;
             }
-
-            ShieldCollision?.Invoke(collidable);
         }
 
         private void HealthUpdateListener(float percentHealth)
         {
             if (percentHealth <= 0)
             {
-                Debug.Log("Shield is destroyed!");
+                logger.Log(LogLevel.DEBUG, "Shield is destroyed!");
                 ShieldDestroyed?.Invoke();
             }
             else

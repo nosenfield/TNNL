@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using nosenfield.PersistentData;
 using TNNL.Collidables;
-using TNNL.Data;
 using TNNL.Player;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TNNL.Level
 {
@@ -43,6 +40,15 @@ namespace TNNL.Level
             {
                 return levelSections[levelIndex].Id;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A copy of the current level section</returns>
+        public LevelSection GetCurrentSection()
+        {
+            return ScriptableObject.Instantiate(levelSections[levelIndex]);
         }
 
         void Awake()
