@@ -23,9 +23,6 @@ namespace TNNL.UI
         [SerializeField] TextMeshProUGUI levelNameDisplay;
         [SerializeField] TextMeshProUGUI highScoreDisplay;
         [SerializeField] GameObject levelInfo;
-        [SerializeField] GameObject mineCollisionPointAnim;
-        [SerializeField] GameObject shieldCollisionPointAnim;
-        [SerializeField] RectTransform animationLayer;
 
         void Awake()
         {

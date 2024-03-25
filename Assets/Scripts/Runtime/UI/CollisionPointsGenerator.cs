@@ -1,6 +1,6 @@
 using TMPro;
 using TNNL.Collidables;
-using TNNL.Player;
+using TNNL.Events;
 using UnityEngine;
 
 namespace TNNL.UI
@@ -14,50 +14,57 @@ namespace TNNL.UI
 
         void Start()
         {
-            ShieldController.ShieldCollision += CollisionListener;
-            ShipController.ShipCollision += CollisionListener;
+            EventAggregator.Subscribe<PointCollectionEvent>(PointCollectionListener);
         }
 
         void OnDestroy()
         {
-            ShieldController.ShieldCollision -= CollisionListener;
-            ShipController.ShipCollision -= CollisionListener;
+            EventAggregator.Unsubscribe<PointCollectionEvent>(PointCollectionListener);
         }
 
-        // NOTE
-        // Replace CollisionListener through the ShipController/ShieldController with a Collision or PointsEarned event raised through an event hub
-        ///
-        void CollisionListener(AbstractCollidable collidable)
+        void PointCollectionListener(object e)
         {
-            int points = collidable.CollisionPoints;
+            PointCollectionEvent pcEvent = e as PointCollectionEvent;
+            int points = pcEvent.Points;
             GameObject prefab = null;
-            switch (collidable.Type)
+            GameObject anim = null;
+            GameObject associatedObject = null;
+            switch (pcEvent.AssociatedObject)
             {
-                case CollisionType.Mine:
+                case Mine:
                     prefab = mineCollisionPointAnim;
+                    associatedObject = (pcEvent.AssociatedObject as Mine).gameObject;
                     break;
-                case CollisionType.ShieldBoost:
+                case ShieldBoost:
                     prefab = shieldCollisionPointAnim;
+                    associatedObject = (pcEvent.AssociatedObject as ShieldBoost).gameObject;
                     break;
-                case CollisionType.FinishLine:
+                case FinishLine:
                     prefab = finishLineCollisionPointAnim;
+                    associatedObject = (pcEvent.AssociatedObject as FinishLine).gameObject;
                     break;
             }
 
+            // NOTE
+            // Animating the point values is done via an animator w/ the following properties:
+            // - anchored position.y + 100
+            // - text color.a fade  = 0
+            // - event at end of animation to trigger gameobject removal
+            //
+            // Uncomment the line below to return to programmatic animation
+            ///
+            // Utilities.AnimateGameObjectToPosition(this, anim, anim.transform.position, anim.transform.position + new Vector3(0f, 100f, 0f), 1f, EasingFunction.EaseOutSine);
+
             if (prefab != null)
             {
-                GameObject anim = GameObject.Instantiate(prefab, animationLayer);
+                anim = GameObject.Instantiate(prefab, animationLayer);
                 anim.GetComponentInChildren<TextMeshProUGUI>().text = points > 0 ? "+" + points.ToString() : points.ToString();
-                Vector3 position = RectTransformUtility.WorldToScreenPoint(UnityEngine.Camera.main, collidable.transform.TransformPoint(Vector3.zero));
-                anim.transform.position = position;
+            }
 
-                // Utilities.AnimateGameObjectToPosition(this, anim, anim.transform.position, anim.transform.position + new Vector3(0f, 100f, 0f), 1f, EasingFunction.EaseOutSine);
-                // NOTE
-                // Animating the point values is now done via an animator w/ the following properties:
-                // - anchored position.y + 100
-                // - text color.a fade  = 0
-                // - event at end of animation to trigger gameobject removal
-                ///
+            if (associatedObject != null)
+            {
+                Vector3 position = RectTransformUtility.WorldToScreenPoint(UnityEngine.Camera.main, associatedObject.transform.TransformPoint(Vector3.zero));
+                anim.transform.position = position;
             }
         }
     }

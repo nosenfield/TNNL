@@ -1,10 +1,11 @@
 using System;
 using TNNL.Collidables;
+using TNNL.Events;
 using TNNL.Player;
+using UnityEngine;
 
 namespace TNNL.RuntimeData
 {
-    [Serializable]
     public class PlayerRuntimeData
     {
         public int TotalPoints = 0;
@@ -13,32 +14,24 @@ namespace TNNL.RuntimeData
 
         public PlayerRuntimeData()
         {
-            ShieldController.ShieldCollision += ShieldCollisionListener;
-            ShipController.ShipCollision += ShieldCollisionListener;
+            // add listener for any ICollision event
+            EventAggregator.Subscribe<PointCollectionEvent>(PointCollectionListener);
+        }
+
+        public void PointCollectionListener(object e)
+        {
+            PointCollectionEvent pointCollectionEvent = (PointCollectionEvent)e;
+            TotalPoints += pointCollectionEvent.Points;
+            if (TotalPoints < 0)
+            {
+                TotalPoints = 0;
+            }
         }
 
         public void ResetPlayerData()
         {
             ShipsRemaining = StartingShips;
             TotalPoints = 0;
-        }
-
-        // Point value increases should be handled through a PointsEarned event dispatched through an event hub
-        // This creates a layer of abstraction between the UserData and the many future gameplay/meta mechanics that will affect TotalPoints, Lives, etc.
-        void ShieldCollisionListener(AbstractCollidable collidable)
-        {
-            // NOTE
-            // Points earned in collisions feel more closely related to our meta system than our physics system.
-            // Are the Collidable classes the right place to store these?
-            // Consider:
-            // - a separate config pairing collidable types to point values
-            ///
-
-            TotalPoints += collidable.CollisionPoints;
-            if (TotalPoints < 0)
-            {
-                TotalPoints = 0;
-            }
         }
     }
 }
