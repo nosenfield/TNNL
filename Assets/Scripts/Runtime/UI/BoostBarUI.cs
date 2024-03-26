@@ -12,13 +12,13 @@ namespace TNNL.UI
 
         void Awake()
         {
-            PlayerController.PlayerModelCreated += AssignModel;
+            PlayerMVC.SetCurrentPlayer += AssignPlayer;
             overloadGraphic.SetActive(false);
         }
 
-        void AssignModel(PlayerModel model)
+        void AssignPlayer(PlayerMVC playerMVC)
         {
-            playerModel = model;
+            playerModel = playerMVC.Model;
         }
 
         void Update()

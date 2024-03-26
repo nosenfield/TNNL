@@ -1,19 +1,23 @@
-using System;
-using TNNL.Collidables;
+using System.Collections.Generic;
 using TNNL.Events;
-using TNNL.Player;
-using UnityEngine;
 
 namespace TNNL.RuntimeData
 {
+    public class ShipData
+    {
+        public string CheckpointReached = ""; // what is the last known location of our ship in the level progression
+        public bool IsAlive = true; // is this ship still active
+    }
+
     public class PlayerRuntimeData
     {
+        private int numStartingShips = 3; // Unless this is going to be modifited at Runtime, this is more of a "config" kind of value
         public int TotalPoints = 0;
-        public int ShipsRemaining = 0;
-        public int StartingShips = 3;
+        public List<ShipData> ShipData;
 
-        public PlayerRuntimeData()
+        public PlayerRuntimeData(List<ShipData> shipData)
         {
+            ShipData = shipData;
             // add listener for any ICollision event
             EventAggregator.Subscribe<PointCollectionEvent>(PointCollectionListener);
         }
@@ -30,8 +34,12 @@ namespace TNNL.RuntimeData
 
         public void ResetPlayerData()
         {
-            ShipsRemaining = StartingShips;
             TotalPoints = 0;
+            ShipData = new List<ShipData>();
+            for (int i = 0; i < numStartingShips; i++)
+            {
+                ShipData.Add(new ShipData());
+            }
         }
     }
 }

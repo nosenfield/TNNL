@@ -16,12 +16,21 @@ namespace TNNL.Camera
         void Awake()
         {
             LevelParser.LevelCreated += UpdateSize;
+            PlayerMVC.SetCurrentPlayer += AssignPlayer;
+        }
+
+        void AssignPlayer(PlayerMVC playerMVC)
+        {
+            player = playerMVC.View;
         }
 
         // Update is called once per frame
         void Update()
         {
-            UpdatePosition(player.gameObject.transform.position.y + cameraSize * 2 * percentVerticalBuffer * PlayerModel.Direction);
+            if (player != null)
+            {
+                UpdatePosition(player.gameObject.transform.position.y + cameraSize * 2 * percentVerticalBuffer * PlayerModel.Direction);
+            }
         }
 
         void UpdatePosition(float y)

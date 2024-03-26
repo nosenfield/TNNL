@@ -14,6 +14,7 @@ namespace TNNL
         private readonly nosenfield.Logging.Logger logger = new();
         [SerializeField] private GameObject overlayUI;
         [SerializeField] private PlayerRuntimeData playerData;
+        [SerializeField] private GameObject playerContainer;
 
         void Awake()
         {
@@ -21,29 +22,35 @@ namespace TNNL
             OverlayUI.StartRunClicked += StartRun;
             OverlayUI.NextLevelClicked += LoadNextLevel;
             PlayerController.PlayerShipDestroyed += GameOver;
-
-            playerData = new PlayerRuntimeData();
         }
 
         void Start()
         {
-            ResetLevel();
+            playerData = new PlayerRuntimeData(PlayerSaveData.GetShipData());
+            PlayerMVC.CreatePlayers(playerData, playerContainer);
+
+            InitializeGame();
             GameplayOverlayUI.Instance.SetPlayerData(playerData);
             GameplayOverlayUI.Instance.UpdateUI();
         }
 
+        void InitializeGame()
+        {
+            playerData.ResetPlayerData();
+            PlayerSaveData.SetShipData(playerData.ShipData);
+            PlayerMVC.CreatePlayers(playerData, playerContainer);
+            ResetLevel();
+
+        }
+
         void StartRun()
         {
-            playerData.ShipsRemaining--;
-            if (playerData.ShipsRemaining <= 0)
+            if (PlayerMVC.GetCurrentShip() == null)
             {
-                ResetLevel();
-                playerData.ResetPlayerData();
+                InitializeGame();
             }
 
             GameplayOverlayUI.Instance.UpdateUI();
-
-            PlayerController.Instance.ResetPlayer();
             GameplayOverlayUI.Instance.GameplayStarted();
             StartGameplay();
         }
@@ -68,6 +75,9 @@ namespace TNNL
             RecordScore();
             GameplayOverlayUI.Instance.UpdateUI();
 
+            // Record progress
+            PlayerMVC.GetCurrentShip().ShipData.IsAlive = false;
+
             // show UI
             GameplayOverlayUI.Instance.GameplayEnded();
             ShowMenuBar();
@@ -78,7 +88,7 @@ namespace TNNL
             HideMenuBar();
 
             EventAggregator.Subscribe<LevelCheckpointEvent>(LevelCheckpointListener);
-            PlayerController.Instance.ActivatePlayer();
+            PlayerMVC.GetCurrentShip().Controller.Activate();
 
             // count down the user
 
@@ -92,11 +102,15 @@ namespace TNNL
             LevelCheckpointEvent levelCheckpointEvent = (LevelCheckpointEvent)e;
             EventAggregator.Unsubscribe<LevelCheckpointEvent>(LevelCheckpointListener);
 
-            PauseGameplay();
+            EnterTransitionState();
 
             // Add score updates
             RecordScore();
             GameplayOverlayUI.Instance.UpdateUI();
+
+            // Record progress
+            PlayerMVC.GetCurrentShip().ShipData.CheckpointReached = LevelParser.Instance.CurrentLevelId;
+
 
             // show UI
             GameplayOverlayUI.Instance.GameplayEnded();
@@ -111,9 +125,9 @@ namespace TNNL
             }
         }
 
-        void PauseGameplay()
+        void EnterTransitionState()
         {
-            PlayerController.Instance.PausePlayer();
+            PlayerMVC.GetCurrentShip().Controller.EnterTransitionState();
         }
 
         void HideMenuBar()

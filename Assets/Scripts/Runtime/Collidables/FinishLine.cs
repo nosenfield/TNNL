@@ -31,7 +31,6 @@ namespace TNNL.Collidables
             if (shipView != null)
             {
                 DispatchPointCollection();
-                dirty = true;
                 LevelCheckpointEvent.Dispatch(LevelParser.Instance.GetCurrentSection());
             }
         }

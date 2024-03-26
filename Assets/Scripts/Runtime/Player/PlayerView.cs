@@ -1,3 +1,4 @@
+using nosenfield;
 using TNNL.Collidables;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,41 +7,33 @@ namespace TNNL.Player
 {
     public class PlayerView : MonoBehaviour, IWarpable
     {
-        public InputActionAsset actions;
-        [SerializeField] private bool GenerateController;
-        PlayerController controller;
-        [SerializeField] PlayerModel model;
+        public InputActionAsset Actions;
+        PlayerMVC mvc;
+        [SerializeField][ReadOnly] PlayerModel model; // expose the model in the inspector
         public bool DoUpdate;
         // [SerializeField] private GameObject boostAnim;
 
-        void Start()
+        public void SetMVC(PlayerMVC playerMVC)
         {
-            if (GenerateController)
-            {
-                controller = new PlayerController(this);
-            }
-        }
-
-        public void SetModel(PlayerModel model)
-        {
-            this.model = model;
+            mvc = playerMVC;
+            model = playerMVC.Model;
         }
 
         public void FixedUpdate()
         {
-            controller?.FixedUpdate();
+            mvc.Controller?.FixedUpdate();
 
-            if (model != null && DoUpdate)
+            if (mvc.Model != null && DoUpdate)
             {
-                transform.position = new Vector3(model.XPosition, model.YPosition);
+                transform.position = new Vector3(mvc.Model.XPosition, mvc.Model.YPosition);
             }
         }
 
         public void Update()
         {
-            controller?.Update();
+            mvc.Controller?.Update();
 
-            if (model != null && DoUpdate)
+            if (mvc.Model != null && DoUpdate)
             {
                 // boostAnim.SetActive(model.IsBoosting);
             }
@@ -48,16 +41,16 @@ namespace TNNL.Player
 
         void OnEnable()
         {
-            actions?.FindActionMap("Gameplay").Enable();
+            Actions?.FindActionMap("Gameplay").Enable();
         }
         void OnDisable()
         {
-            actions?.FindActionMap("Gameplay").Disable();
+            Actions?.FindActionMap("Gameplay").Disable();
         }
 
         public void Warp(WormHole warpDestination)
         {
-            controller.WarpTo(warpDestination);
+            mvc.Controller.WarpTo(warpDestination);
         }
     }
 }

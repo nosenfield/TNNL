@@ -8,92 +8,88 @@ namespace TNNL.Player
 {
     public class PlayerController
     {
-        public static PlayerController Instance;
-        public static Action<PlayerModel> PlayerModelCreated;
         public static Action PlayerShipDestroyed;
-        private PlayerView view;
-        private PlayerModel model;
+        Player.PlayerMVC mvc;
 
-        public PlayerController(PlayerView view)
+        public void SetMVC(PlayerMVC playerMVC)
         {
-            this.view = view;
-            model = new PlayerModel();
-            view.SetModel(model);
-
             // NOTE
             // We've opened up the PlayerController and LevelParser as a Singletons. That means:
             // - Listenening for static events on LevelParser could instead be a direct call from LevelParser to our PlayerController Singleton
             // - LevelParser.LevelCreated does not need to be static, it could be a member field accessible through the static Instance.LevelCreated
             ///
 
-            LevelParser.LevelCreated += UpdatePlayerForLevel;
-            ShieldController.ShieldDestroyed += ShieldDestroyed;
-
-            view.actions.FindActionMap("Gameplay").FindAction("Press").performed += OnPress;
-            view.actions.FindActionMap("Gameplay").FindAction("Release").performed += OnRelease;
-
-            PlayerModelCreated?.Invoke(model);
-
-            Instance = this;
+            mvc = playerMVC;
         }
 
-        public void ResetPlayer()
-        {
-            model.SetDefaults();
-            ActivatePlayer();
-        }
-        
         private void UpdatePlayerForLevel(float levelWidth)
         {
             float secondsToTravelLevelWidth = 3f;
-            model.SetXVelocity(levelWidth - view.GetComponentInChildren<ShieldView>().MaxScale, secondsToTravelLevelWidth);
-            model.SetYVelocity((levelWidth - view.GetComponentInChildren<ShieldView>().MaxScale) / secondsToTravelLevelWidth);
+            mvc.Model.SetXVelocity(levelWidth - mvc.View.GetComponentInChildren<ShieldView>().MaxScale, secondsToTravelLevelWidth);
+            mvc.Model.SetYVelocity((levelWidth - mvc.View.GetComponentInChildren<ShieldView>().MaxScale) / secondsToTravelLevelWidth);
         }
 
-        public void ActivatePlayer()
+        public void EnterTransitionState()
         {
-            view.DoUpdate = true;
-            model.DoUpdate = true;
+            // this method should stop the player's oscillation and bring them to neutral (center)
+            // we can have separate stopping locations for ship 1,2,3 via colliders
+
+            mvc.Model.SetXVelocity(0f, 1f);
+        }
+
+        public void Activate()
+        {
+            UpdatePlayerForLevel(LevelParser.Instance.GetCurrentSection().Width);
+
+            mvc.View.DoUpdate = true;
+            mvc.Model.DoUpdate = true;
+
+            mvc.View.Actions.FindActionMap("Gameplay").FindAction("Press").performed += OnPress;
+            mvc.View.Actions.FindActionMap("Gameplay").FindAction("Release").performed += OnRelease;
+
+            ShieldController.ShieldDestroyed += ShieldDestroyed;
         }
 
         public void FixedUpdate()
         {
-            model.FixedUpdate();
+            mvc.Model.FixedUpdate();
         }
 
         public void Update()
         {
-            model.Update();
+            mvc.Model.Update();
         }
 
-        public void PausePlayer()
+        public void Deactivate()
         {
-            view.DoUpdate = false;
-            model.DoUpdate = false;
+            mvc.View.DoUpdate = false;
+            mvc.Model.DoUpdate = false;
+
+            mvc.View.Actions.FindActionMap("Gameplay").FindAction("Press").performed -= OnPress;
+            mvc.View.Actions.FindActionMap("Gameplay").FindAction("Release").performed -= OnRelease;
+
+            ShieldController.ShieldDestroyed -= ShieldDestroyed;
         }
 
         public void WarpTo(WormHole warpDestination)
         {
-            Debug.Log("PlayerController.Warp()");
-            model.WarpTo(warpDestination.gameObject.transform.position.y);
+            mvc.Model.WarpTo(warpDestination.gameObject.transform.position.y);
         }
 
         // Boost the ship forward
         void OnPress(InputAction.CallbackContext context)
         {
-            Debug.Log("OnPress");
-            model.BoostRequested = true;
+            mvc.Model.BoostRequested = true;
         }
 
         void OnRelease(InputAction.CallbackContext context)
         {
-            Debug.Log("OnRelease");
-            model.BoostRequested = false;
+            mvc.Model.BoostRequested = false;
         }
 
         void ShieldDestroyed()
         {
-            model.DoUpdate = false;
+            Deactivate();
             PlayerShipDestroyed?.Invoke();
         }
     }

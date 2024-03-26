@@ -8,6 +8,7 @@ namespace TNNL.Player
     public class PlayerModel
     {
         public static float Direction = -1f;
+        PlayerMVC mvc;
         public bool DoUpdate;
         public bool BoostRequested;
 
@@ -63,7 +64,16 @@ namespace TNNL.Player
             SetDefaults();
         }
 
-        public void SetDefaults()
+        /// <summary>
+        /// Currently the model does not need MVC access. This is just here for consistency across the MVC
+        /// </summary>
+        /// <param name="playerMVC"></param>
+        public void SetMVC(PlayerMVC playerMVC)
+        {
+            mvc = playerMVC;
+        }
+
+        private void SetDefaults()
         {
             isBoosting = false;
             BoostRequested = false;
@@ -81,8 +91,8 @@ namespace TNNL.Player
             overloadPenalty = 1f;
             overloadRecoveryThreshold = 0f;
 
-            xPosition = 0;
-            yPosition = 0;
+            xPosition = 0f;
+            yPosition = 0f;
         }
 
         /// <summary>

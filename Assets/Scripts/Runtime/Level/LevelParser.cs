@@ -51,6 +51,44 @@ namespace TNNL.Level
             return ScriptableObject.Instantiate(levelSections[levelIndex]);
         }
 
+        /// <summary>
+        /// Compare the sequential order between levelA and levelB
+        /// </summary>
+        /// <param name="levelIdA"></param>
+        /// <param name="levelIdB"></param>
+        /// <returns>-1 if levelA comes before levelB. 1 if levelA comes after levelB. 0 if levelA == levelB</returns>
+        public int CompareLevelOrder(string levelIdA, string levelIdB)
+        {
+            if (levelIdA == levelIdB)
+            {
+                return 0;
+            }
+
+            if (String.IsNullOrEmpty(levelIdA))
+            {
+                return -1;
+            }
+
+            if (String.IsNullOrEmpty(levelIdB))
+            {
+                return 1;
+            }
+
+            for (int i = 0; i < levelSections.Length; i++)
+            {
+                if (levelSections[i].Id == levelIdA)
+                {
+                    return -1;
+                }
+                if (levelSections[i].Id == levelIdB)
+                {
+                    return 1;
+                }
+            }
+
+            return -1;
+        }
+
         void Awake()
         {
             Instance = this;
@@ -126,7 +164,7 @@ namespace TNNL.Level
                         break;
 
                     case LevelBlockType.FinishLine:
-                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(section.Width * .5f, (notatedRow - 1 + FINISH_LINE_ROWS * .5f) * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
+                        cube = GameObject.Instantiate(finishLinePrefab, new Vector3(section.Width * .5f, (notatedRow + section.Width * .5f) * PlayerModel.Direction, 0f), Quaternion.identity, levelContainer.transform);
                         cube.transform.localScale = new Vector3(section.Width, FINISH_LINE_ROWS, cube.transform.localScale.z);
                         break;
 
@@ -163,7 +201,7 @@ namespace TNNL.Level
             }
 
             levelContainer.transform.position = new Vector3(-section.Width * .5f, levelContainer.transform.position.y, levelContainer.transform.position.z);
-            levelBacking.transform.position = new Vector3(levelContainer.transform.position.x + section.Width * .5f, (levelContainer.transform.position.y + section.Height * .5f) * PlayerModel.Direction, levelBacking.transform.position.z);
+            levelBacking.transform.position = new Vector3(levelContainer.transform.position.x + section.Width * .5f, (levelContainer.transform.position.y + section.Height * .5f - 1) * PlayerModel.Direction, levelBacking.transform.position.z);
             levelBacking.transform.localScale = new Vector3(section.Width, section.Height, 1);
 
             LevelCreated?.Invoke(section.Width);
