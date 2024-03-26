@@ -12,210 +12,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
   m_Name: _TestSection
   m_EditorClassIdentifier: 
+  Id: _TestSection
   DisplayName: TestSection Mini
-  HighScore: 0
   Width: 60
-  Height: 400
+  Height: 120
   ChanceForMineInLine: 0.1
   ChanceForShieldInLine: 0.01
   ChanceForInvincibilityInLine: 0.0025
   MinDistanceBetweenInvincibility: 50
-  GenerateWarp: 1
+  GenerateWarp: 0
   MinWarpLocationByPercent: 0.25
   MaxWarpLocationByPercent: 0.75
   MinWarpDistance: 0.25
   MaxWarpDistance: 0.5
-  GenerateElectricGates: 1
+  GenerateElectricGates: 0
   MinElectricGatesLocationByPercent: 0.1
   MaxElectricGatesLocationByPercent: 0.95
   MinElectricGates: 1
   MaxElectricGates: 3
-  MineCount: 48
-  ShieldCount: 7
-  InvincibilityCount: 2
-  WarpCount: 1
-  ElectricGateCount: 1
+  MineCount: 12
+  ShieldCount: 1
+  InvincibilityCount: 0
+  WarpCount: 0
+  ElectricGateCount: 0
   Notations:
-  - Index: 166
+  - Index: 613
     IsActive: 1
     Type: 1
-  - Index: 789
+  - Index: 788
     IsActive: 1
     Type: 1
-  - Index: 1155
+  - Index: 1619
     IsActive: 1
     Type: 1
-  - Index: 1406
+  - Index: 2122
     IsActive: 1
     Type: 1
-  - Index: 2235
+  - Index: 2281
     IsActive: 1
     Type: 1
-  - Index: 2469
-    IsActive: 1
-    Type: 1
-  - Index: 3459
-    IsActive: 1
-    Type: 1
-  - Index: 3496
-    IsActive: 1
-    Type: 1
-  - Index: 4246
-    IsActive: 1
-    Type: 1
-  - Index: 4485
-    IsActive: 1
-    Type: 1
-  - Index: 4631
-    IsActive: 1
-    Type: 1
-  - Index: 4717
-    IsActive: 1
-    Type: 6
-  - Index: 4791
-    IsActive: 1
-    Type: 1
-  - Index: 4995
-    IsActive: 1
-    Type: 1
-  - Index: 5196
-    IsActive: 1
-    Type: 1
-  - Index: 6749
-    IsActive: 1
-    Type: 4
-  - Index: 7359
-    IsActive: 1
-    Type: 1
-  - Index: 7397
-    IsActive: 1
-    Type: 1
-  - Index: 7718
-    IsActive: 1
-    Type: 1
-  - Index: 7917
-    IsActive: 1
-    Type: 1
-  - Index: 8282
-    IsActive: 1
-    Type: 1
-  - Index: 8820
-    IsActive: 1
-    Type: 5
-  - Index: 9221
-    IsActive: 1
-    Type: 1
-  - Index: 9305
-    IsActive: 1
-    Type: 1
-  - Index: 10136
-    IsActive: 1
-    Type: 1
-  - Index: 10176
-    IsActive: 1
-    Type: 1
-  - Index: 10465
-    IsActive: 1
-    Type: 1
-  - Index: 10928
+  - Index: 3641
     IsActive: 1
     Type: 2
-  - Index: 11107
-    IsActive: 1
-    Type: 2
-  - Index: 11161
+  - Index: 4218
     IsActive: 1
     Type: 1
-  - Index: 11637
+  - Index: 4880
     IsActive: 1
     Type: 1
-  - Index: 11751
+  - Index: 4921
     IsActive: 1
     Type: 1
-  - Index: 11897
-    IsActive: 1
-    Type: 2
-  - Index: 11991
+  - Index: 5125
     IsActive: 1
     Type: 1
-  - Index: 12152
+  - Index: 5601
     IsActive: 1
     Type: 1
-  - Index: 12222
+  - Index: 6208
     IsActive: 1
     Type: 1
-  - Index: 12263
+  - Index: 6790
     IsActive: 1
     Type: 1
-  - Index: 12521
-    IsActive: 1
-    Type: 1
-  - Index: 12716
-    IsActive: 1
-    Type: 1
-  - Index: 12823
-    IsActive: 1
-    Type: 2
-  - Index: 13514
-    IsActive: 1
-    Type: 1
-  - Index: 14088
-    IsActive: 1
-    Type: 6
-  - Index: 14175
-    IsActive: 1
-    Type: 1
-  - Index: 14269
-    IsActive: 1
-    Type: 1
-  - Index: 14847
-    IsActive: 1
-    Type: 1
-  - Index: 15148
-    IsActive: 1
-    Type: 1
-  - Index: 15187
-    IsActive: 1
-    Type: 1
-  - Index: 15289
-    IsActive: 1
-    Type: 1
-  - Index: 15569
-    IsActive: 1
-    Type: 4
-  - Index: 16860
-    IsActive: 1
-    Type: 1
-  - Index: 17695
-    IsActive: 1
-    Type: 1
-  - Index: 17769
-    IsActive: 1
-    Type: 1
-  - Index: 18426
-    IsActive: 1
-    Type: 2
-  - Index: 19715
-    IsActive: 1
-    Type: 1
-  - Index: 20926
-    IsActive: 1
-    Type: 1
-  - Index: 21491
-    IsActive: 1
-    Type: 2
-  - Index: 22333
-    IsActive: 1
-    Type: 1
-  - Index: 22892
-    IsActive: 1
-    Type: 1
-  - Index: 23390
-    IsActive: 1
-    Type: 2
-  - Index: 23577
-    IsActive: 1
-    Type: 1
-  - Index: 24000
+  - Index: 7200
     IsActive: 1
     Type: 3
