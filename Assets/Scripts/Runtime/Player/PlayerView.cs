@@ -1,4 +1,5 @@
 using nosenfield;
+using Sirenix.OdinInspector;
 using TNNL.Collidables;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -39,18 +40,14 @@ namespace TNNL.Player
             }
         }
 
-        void OnEnable()
-        {
-            Actions?.FindActionMap("Gameplay").Enable();
-        }
-        void OnDisable()
-        {
-            Actions?.FindActionMap("Gameplay").Disable();
-        }
-
         public void Warp(WormHole warpDestination)
         {
             mvc.Controller.WarpTo(warpDestination);
+        }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }
