@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace nosenfield
+namespace nosenfield.Editor
 {
     public class ReadOnlyAttribute : PropertyAttribute
     {
