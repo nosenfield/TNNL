@@ -70,11 +70,6 @@ namespace nosenfield.Utilities
             return name;
         }
 
-        public static void SetGameObjectToPosition(GameObject gameobject, Vector3 startingPos, Vector3 targetPos, float percentComplete, EasingFunction.Function easingFunc)
-        {
-            gameobject.transform.position = new Vector3(easingFunc(startingPos.x, targetPos.x, percentComplete), easingFunc(startingPos.y, targetPos.y, percentComplete), gameobject.transform.position.z);
-        }
-
         public static void SetGameObjectToScale(GameObject gameobject, Vector3 startingScale, Vector3 targetScale, float percentComplete, EasingFunction.Function easingFunc)
         {
             gameobject.transform.localScale = new Vector3(easingFunc(startingScale.x, targetScale.x, percentComplete), easingFunc(startingScale.y, targetScale.y, percentComplete), gameobject.transform.localScale.z);

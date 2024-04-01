@@ -64,6 +64,8 @@ namespace nosenfield.PersistentData
         /// <returns>the data at the supplied file path as an instance of T</returns>
         public static T LoadDataOfType<T>(string directoryPath, string fileName) where T : class
         {
+            logger.Log(LogLevel.DEBUG, $"LoadDataOfType<{typeof(T)}>");
+
             T instance = null;
             string filePath = nosenfield.Utilities.PathCombine.Combine(directoryPath, fileName);
             StringHashPair stringHashPair = LoadFileContents(filePath);
@@ -98,9 +100,11 @@ namespace nosenfield.PersistentData
         /// <returns>The file contents deserialized into an instance of StringHashPair containing a string of serialized data and the hash of that string</returns>
         private static StringHashPair LoadFileContents(string filePath)
         {
+            logger.Log(LogLevel.DEBUG, $"LoadFileContents at: {filePath}");
             string fileLoc = nosenfield.Utilities.PathCombine.Combine(Application.persistentDataPath, filePath);
             if (!File.Exists(fileLoc))
             {
+                logger.Log(LogLevel.DEBUG, $"No file at: {fileLoc}");
                 return null;
             }
 
