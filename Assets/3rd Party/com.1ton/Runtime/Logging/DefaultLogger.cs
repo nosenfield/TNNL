@@ -33,7 +33,12 @@ namespace nosenfield.Logging
             }
         }
 
-        private DefaultLogger() { }
+        private DefaultLogger()
+        {
+#if !UNITY_EDITOR
+            _sensitivity = LogLevel.SILENT;
+#endif
+        }
         private static string GetTrace(StackTrace stackTrace)
         {
             // Resolve caller class and method via reflection

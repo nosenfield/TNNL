@@ -39,7 +39,13 @@ namespace nosenfield.Logging
             }
         }
 
-        public Logger() { }
+        public Logger()
+        {
+#if !UNITY_EDITOR
+            _sensitivity = LogLevel.SILENT;
+#endif
+
+        }
 
         public void Trace()
         {
