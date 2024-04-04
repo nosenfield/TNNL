@@ -929,10 +929,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions: {fileID: -944628639613478452, guid: ff26f04991c994056a46562eba6f83f2, type: 3}
   model:
-    DoUpdate: 0
+    UpdateX: 0
+    UpdateY: 0
     BoostRequested: 0
-    xPosition: 0
-    yPosition: 0
+    XPosition: 0
+    YPosition: 0
     isBoosting: 0
     timeInPeriod: 0
     period: 0
@@ -948,7 +949,6 @@ MonoBehaviour:
     overloadRecoveryThreshold: 0
     isOverloaded: 0
     overloadPenalty: 1
-  DoUpdate: 0
 --- !u!1 &5339902210480220882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1097,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GenerateController: 1
   DoUpdate: 1
+  model:
+    health: 0
+    maxHealth: 0
+    startingHealth: 0
+    secondsInvincibleRemaining: 0
   MinScale: 2
   MaxScale: 10
   sphereCollider: {fileID: 9054396330034883039}
@@ -1383,15 +1388,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 0b01080000005700610072007000610062006c00650000000000
+    SerializedFormat: 2
+    SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 3811811543584045034}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Warpable
+      Entry: 10
+      Data: 0
 --- !u!1 &6518372710030507773
 GameObject:
   m_ObjectHideFlags: 0

@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 824077408}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -654,16 +654,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSections:
-  - {fileID: 11400000, guid: e02d29894755a4ec2ae884755488ee51, type: 2}
+  - {fileID: 11400000, guid: 7cddfd8606b5146cc8127a9eca83fc5b, type: 2}
   levelContainer: {fileID: 824077408}
   levelBacking: {fileID: 1526842565}
+  startingLinePrefab: {fileID: 2220046574389073688, guid: bf29435516bf44d8db7c5d15eca47711, type: 3}
+  finishLinePrefab: {fileID: 2220046574389073688, guid: 95b38391bd24743a39ef461e2d09250e, type: 3}
+  stoppingLine: {fileID: 2220046574389073688, guid: 429fa8f50e88a49f0a7e2caf265f8b22, type: 3}
   defaultTerrainPrefab: {fileID: 2271593971196660811, guid: 5c497065be0fa4f43a0963439482971e, type: 3}
   minePrefab: {fileID: 244819861968602584, guid: 9c65d4e3bc4414a15ac24d5946362bdc, type: 3}
   shieldPrefab: {fileID: 244819861968602584, guid: cf577d857d62a46058937f668f4cf256, type: 3}
-  finishLinePrefab: {fileID: 2220046574389073688, guid: 95b38391bd24743a39ef461e2d09250e, type: 3}
   wormHolePrefab: {fileID: 8564890143891999548, guid: 0677a24a334874207aa6c636dd30b980, type: 3}
   electricGatePrefab: {fileID: 8564890143891999548, guid: bf0e47530ebac4a05b3f7b38e89efbb2, type: 3}
   invincibilityPrefab: {fileID: 8564890143891999548, guid: 0831be8de39354e829b555f38032c953, type: 3}
+  levelIndex: 0
 --- !u!4 &2085311132
 Transform:
   m_ObjectHideFlags: 0
