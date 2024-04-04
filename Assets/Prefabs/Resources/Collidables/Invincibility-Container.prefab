@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 8564890143891999548}
+  ExternalDirty: 0
   DurationInSeconds: 5
 --- !u!1 &8564890143891999548
 GameObject:

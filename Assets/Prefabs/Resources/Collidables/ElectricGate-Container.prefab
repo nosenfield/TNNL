@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 8564890143891999548}
+  ExternalDirty: 0
   DamagePerSecond: 10
   leftNode: {fileID: 3493104311449760287}
   rightNode: {fileID: 1466079561541698927}
