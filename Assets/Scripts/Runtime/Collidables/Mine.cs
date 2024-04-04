@@ -22,7 +22,7 @@ namespace TNNL.Collidables
         }
         public float Damage;
 
-        public override int CollisionPoints
+        protected override int CollisionPoints
         {
             // NOTE
             // Do mines need to have negative point values?
@@ -37,7 +37,7 @@ namespace TNNL.Collidables
         }
 
         // Handle my collision with objects of different types
-        public override void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
             ShieldView shield = other.GetComponentInParent<ShieldView>();
             if (shield != null)

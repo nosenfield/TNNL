@@ -14,7 +14,7 @@ namespace TNNL.Collidables
             }
         }
 
-        public override int CollisionPoints
+        protected override int CollisionPoints
         {
             get
             {
@@ -25,7 +25,7 @@ namespace TNNL.Collidables
         public float DurationInSeconds;
 
         // Handle my collision with objects of different types
-        public override void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
             ShieldView shield = other.GetComponentInParent<ShieldView>();
             if (shield != null)

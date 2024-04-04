@@ -1,5 +1,6 @@
 // the Mine behaviour is placed on the prefab. adjustable damage allows for tweaking and differentiation (ie. Supermine w/ 2x damage)
 using System.Collections.Generic;
+using TNNL.Events;
 using UnityEngine;
 
 namespace TNNL.Collidables
@@ -30,7 +31,7 @@ namespace TNNL.Collidables
             incoming = new List<IWarpable>();
         }
 
-        public override void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
             IWarpable warpable = other.GetComponentInParent<IWarpable>();
             if (warpable != null)

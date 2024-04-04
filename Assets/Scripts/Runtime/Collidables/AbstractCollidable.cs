@@ -7,10 +7,12 @@ namespace TNNL.Collidables
 {
     public enum CollisionType
     {
+        StartingLine,
+        FinishLine,
+        StoppingLine,
         DefaultTerrain,
         Mine,
         ShieldBoost,
-        FinishLine,
         WormHole,
         ElectricGate,
         Invincibility,
@@ -18,18 +20,16 @@ namespace TNNL.Collidables
 
     public abstract class AbstractCollidable : MonoBehaviour
     {
-        public GameObject container;
+        [SerializeField] protected GameObject container;
         public abstract CollisionType Type
         {
             get;
         }
 
-        protected bool dirty;
-        public bool Dirty
-        {
-            get { return dirty; }
-        }
-        public virtual int CollisionPoints
+        protected bool internalDirty;
+        public bool ExternalDirty;
+
+        protected virtual int CollisionPoints
         {
             get
             {
@@ -37,11 +37,12 @@ namespace TNNL.Collidables
             }
         }
 
-        public abstract void OnTriggerEnter(Collider other);
+        protected abstract void OnTriggerEnter(Collider other);
         public void Activate()
         {
             container.SetActive(true);
-            dirty = false;
+            internalDirty = false;
+            ExternalDirty = false;
         }
 
         /// <summary>
@@ -49,8 +50,8 @@ namespace TNNL.Collidables
         /// </summary>
         protected void Deactivate()
         {
-            if (dirty) return;
-            dirty = true;
+            if (internalDirty) return;
+            internalDirty = true;
 
             StartCoroutine(Routine());
 
@@ -68,7 +69,7 @@ namespace TNNL.Collidables
 
         protected void DispatchPointCollection()
         {
-            if (dirty) return;
+            if (internalDirty) return;
 
             PointCollectionEvent.Dispatch(CollisionPoints, this);
         }

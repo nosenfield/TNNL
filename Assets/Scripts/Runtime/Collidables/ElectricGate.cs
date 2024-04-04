@@ -25,7 +25,7 @@ namespace TNNL.Collidables
         public static int MinRowsBetweenGates = 10;
         public float DamagePerSecond = 10f;
 
-        public override int CollisionPoints
+        protected override int CollisionPoints
         {
             get
             {
@@ -41,7 +41,7 @@ namespace TNNL.Collidables
         [SerializeField] private float barBuffer = 1f;
 
         // Handle my collision with objects of different types
-        public override void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
             DefaultLogger.Instance.LogTrace();
             ShieldView shield = other.GetComponentInParent<ShieldView>();
