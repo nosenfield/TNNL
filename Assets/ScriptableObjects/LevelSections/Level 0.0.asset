@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
+  m_Name: Level 0.0
+  m_EditorClassIdentifier: 
+  Id: Level 0.0
+  DisplayName: Level 0.0
+  Width: 60
+  Height: 200
+  ChanceForMineInLine: 0.05
+  ChanceForShieldInLine: 0.075
+  ChanceForInvincibilityInLine: 0
+  MinDistanceBetweenInvincibility: 50
+  GenerateWarp: 0
+  MinWarpLocationByPercent: 0.25
+  MaxWarpLocationByPercent: 0.75
+  MinWarpDistance: 0.25
+  MaxWarpDistance: 0.5
+  GenerateElectricGates: 0
+  MinElectricGatesLocationByPercent: 0.1
+  MaxElectricGatesLocationByPercent: 0.95
+  MinElectricGates: 1
+  MaxElectricGates: 3
+  MineCount: 10
+  ShieldCount: 12
+  InvincibilityCount: 0
+  WarpCount: 0
+  ElectricGateCount: 0
+  Notations:
+  - Index: 390
+    IsActive: 1
+    Type: 2
+  - Index: 1127
+    IsActive: 1
+    Type: 2
+  - Index: 1817
+    IsActive: 1
+    Type: 2
+  - Index: 2318
+    IsActive: 1
+    Type: 1
+  - Index: 3495
+    IsActive: 1
+    Type: 1
+  - Index: 4538
+    IsActive: 1
+    Type: 1
+  - Index: 5005
+    IsActive: 1
+    Type: 2
+  - Index: 5813
+    IsActive: 1
+    Type: 2
+  - Index: 5999
+    IsActive: 1
+    Type: 1
+  - Index: 6371
+    IsActive: 1
+    Type: 1
+  - Index: 6641
+    IsActive: 1
+    Type: 2
+  - Index: 8408
+    IsActive: 1
+    Type: 2
+  - Index: 9075
+    IsActive: 1
+    Type: 1
+  - Index: 9352
+    IsActive: 1
+    Type: 2
+  - Index: 10870
+    IsActive: 1
+    Type: 2
+  - Index: 11502
+    IsActive: 1
+    Type: 1
+  - Index: 11846
+    IsActive: 1
+    Type: 2

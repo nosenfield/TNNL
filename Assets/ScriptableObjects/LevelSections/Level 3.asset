@@ -10,386 +10,335 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
-  m_Name: Level 5-Gate Warp
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  Id: Level 5-Gate Warp
-  DisplayName: Level 5-Gate Warp
+  Id: Level 3
+  DisplayName: Level 3
   Width: 60
   Height: 800
   ChanceForMineInLine: 0.1
-  ChanceForShieldInLine: 0.05
+  ChanceForShieldInLine: 0.03
   ChanceForInvincibilityInLine: 0.005
   MinDistanceBetweenInvincibility: 200
-  GenerateWarp: 1
+  GenerateWarp: 0
   MinWarpLocationByPercent: 0.25
-  MaxWarpLocationByPercent: 0.8
-  MinWarpDistance: 0.3
+  MaxWarpLocationByPercent: 0.75
+  MinWarpDistance: 0.1
   MaxWarpDistance: 0.5
-  GenerateElectricGates: 1
+  GenerateElectricGates: 0
   MinElectricGatesLocationByPercent: 0.1
   MaxElectricGatesLocationByPercent: 0.95
-  MinElectricGates: 2
-  MaxElectricGates: 3
-  MineCount: 76
-  ShieldCount: 38
+  MinElectricGates: 3
+  MaxElectricGates: 5
+  MineCount: 0
+  ShieldCount: 0
   InvincibilityCount: 0
   WarpCount: 0
   ElectricGateCount: 0
   Notations:
-  - Index: 549
+  - Index: 54
+    IsActive: 1
+    Type: 1
+  - Index: 607
+    IsActive: 1
+    Type: 1
+  - Index: 766
+    IsActive: 1
+    Type: 1
+  - Index: 945
+    IsActive: 1
+    Type: 1
+  - Index: 1056
+    IsActive: 1
+    Type: 1
+  - Index: 1226
+    IsActive: 1
+    Type: 1
+  - Index: 2531
     IsActive: 1
     Type: 2
-  - Index: 1122
+  - Index: 3648
     IsActive: 1
     Type: 2
-  - Index: 1446
+  - Index: 4158
     IsActive: 1
     Type: 1
-  - Index: 1557
+  - Index: 4289
     IsActive: 1
     Type: 1
-  - Index: 1737
+  - Index: 4530
     IsActive: 1
     Type: 1
-  - Index: 2219
+  - Index: 4818
     IsActive: 1
     Type: 1
-  - Index: 2226
-    IsActive: 1
-    Type: 1
-  - Index: 2505
+  - Index: 4968
     IsActive: 1
     Type: 2
-  - Index: 3006
+  - Index: 5398
+    IsActive: 1
+    Type: 1
+  - Index: 5996
     IsActive: 1
     Type: 2
-  - Index: 3260
+  - Index: 6095
     IsActive: 1
     Type: 1
-  - Index: 3560
-    IsActive: 1
-    Type: 1
-  - Index: 4341
-    IsActive: 1
-    Type: 1
-  - Index: 4685
-    IsActive: 1
-    Type: 1
-  - Index: 6778
+  - Index: 6145
     IsActive: 1
     Type: 2
-  - Index: 6874
+  - Index: 6385
+    IsActive: 1
+    Type: 1
+  - Index: 7019
+    IsActive: 1
+    Type: 1
+  - Index: 7218
+    IsActive: 1
+    Type: 1
+  - Index: 7902
+    IsActive: 1
+    Type: 1
+  - Index: 8123
     IsActive: 1
     Type: 2
-  - Index: 7042
-    IsActive: 1
-    Type: 1
-  - Index: 7585
+  - Index: 8527
     IsActive: 1
     Type: 2
-  - Index: 8045
+  - Index: 8803
     IsActive: 1
     Type: 1
-  - Index: 8347
-    IsActive: 1
-    Type: 2
-  - Index: 8753
+  - Index: 9190
     IsActive: 1
     Type: 2
-  - Index: 8888
+  - Index: 9854
     IsActive: 1
     Type: 1
-  - Index: 9135
-    IsActive: 1
-    Type: 2
-  - Index: 9303
-    IsActive: 1
-    Type: 2
-  - Index: 9779
+  - Index: 9905
     IsActive: 1
     Type: 1
-  - Index: 9878
-    IsActive: 1
-    Type: 1
-  - Index: 10103
+  - Index: 10139
     IsActive: 1
     Type: 2
-  - Index: 10232
+  - Index: 10717
     IsActive: 1
     Type: 1
-  - Index: 10601
+  - Index: 11867
+    IsActive: 1
+    Type: 1
+  - Index: 11900
+    IsActive: 1
+    Type: 1
+  - Index: 12571
+    IsActive: 1
+    Type: 1
+  - Index: 12739
+    IsActive: 1
+    Type: 1
+  - Index: 12899
+    IsActive: 1
+    Type: 1
+  - Index: 13347
+    IsActive: 1
+    Type: 1
+  - Index: 14366
     IsActive: 1
     Type: 2
-  - Index: 11033
+  - Index: 14482
+    IsActive: 1
+    Type: 1
+  - Index: 15187
+    IsActive: 1
+    Type: 1
+  - Index: 16749
+    IsActive: 1
+    Type: 1
+  - Index: 17110
+    IsActive: 1
+    Type: 1
+  - Index: 17999
+    IsActive: 1
+    Type: 1
+  - Index: 18460
+    IsActive: 1
+    Type: 1
+  - Index: 19046
     IsActive: 1
     Type: 2
-  - Index: 11114
-    IsActive: 1
-    Type: 1
-  - Index: 11465
+  - Index: 19683
     IsActive: 1
     Type: 2
-  - Index: 12512
+  - Index: 20659
     IsActive: 1
     Type: 1
-  - Index: 12581
+  - Index: 20951
+    IsActive: 1
+    Type: 1
+  - Index: 21092
+    IsActive: 1
+    Type: 1
+  - Index: 21238
+    IsActive: 1
+    Type: 1
+  - Index: 21370
+    IsActive: 1
+    Type: 1
+  - Index: 22169
     IsActive: 1
     Type: 2
-  - Index: 12758
+  - Index: 22548
     IsActive: 1
-    Type: 4
-  - Index: 13181
+    Type: 1
+  - Index: 22650
+    IsActive: 1
+    Type: 1
+  - Index: 23403
     IsActive: 1
     Type: 2
-  - Index: 13235
+  - Index: 25175
     IsActive: 1
     Type: 1
-  - Index: 13489
+  - Index: 25899
     IsActive: 1
     Type: 1
-  - Index: 14013
+  - Index: 27535
     IsActive: 1
     Type: 1
-  - Index: 14076
+  - Index: 27606
     IsActive: 1
     Type: 1
-  - Index: 14850
+  - Index: 28022
     IsActive: 1
     Type: 1
-  - Index: 15546
+  - Index: 28101
     IsActive: 1
     Type: 1
-  - Index: 15626
+  - Index: 28206
+    IsActive: 1
+    Type: 1
+  - Index: 29141
+    IsActive: 1
+    Type: 1
+  - Index: 29428
+    IsActive: 1
+    Type: 1
+  - Index: 30102
+    IsActive: 1
+    Type: 1
+  - Index: 30623
+    IsActive: 1
+    Type: 1
+  - Index: 31315
+    IsActive: 1
+    Type: 1
+  - Index: 32509
     IsActive: 1
     Type: 2
-  - Index: 16018
+  - Index: 32603
+    IsActive: 1
+    Type: 1
+  - Index: 32672
+    IsActive: 1
+    Type: 1
+  - Index: 33200
+    IsActive: 1
+    Type: 1
+  - Index: 33904
+    IsActive: 1
+    Type: 1
+  - Index: 34883
+    IsActive: 1
+    Type: 1
+  - Index: 34971
     IsActive: 1
     Type: 2
-  - Index: 16179
-    IsActive: 1
-    Type: 1
-  - Index: 16737
-    IsActive: 1
-    Type: 1
-  - Index: 17202
-    IsActive: 1
-    Type: 1
-  - Index: 17243
-    IsActive: 1
-    Type: 1
-  - Index: 17819
+  - Index: 35598
     IsActive: 1
     Type: 2
-  - Index: 19383
+  - Index: 35653
+    IsActive: 1
+    Type: 1
+  - Index: 35881
     IsActive: 1
     Type: 2
-  - Index: 20039
+  - Index: 36134
     IsActive: 1
     Type: 1
-  - Index: 21190
-    IsActive: 1
-    Type: 1
-  - Index: 21289
+  - Index: 36236
     IsActive: 1
     Type: 2
-  - Index: 21397
+  - Index: 36417
     IsActive: 1
     Type: 1
-  - Index: 21800
+  - Index: 36946
     IsActive: 1
     Type: 1
-  - Index: 23563
-    IsActive: 1
-    Type: 1
-  - Index: 24153
+  - Index: 37131
     IsActive: 1
     Type: 2
-  - Index: 24751
+  - Index: 37772
+    IsActive: 1
+    Type: 1
+  - Index: 38296
+    IsActive: 1
+    Type: 1
+  - Index: 38530
+    IsActive: 1
+    Type: 1
+  - Index: 38583
+    IsActive: 1
+    Type: 1
+  - Index: 40302
+    IsActive: 1
+    Type: 1
+  - Index: 40434
+    IsActive: 1
+    Type: 1
+  - Index: 40501
+    IsActive: 1
+    Type: 1
+  - Index: 40634
     IsActive: 1
     Type: 2
-  - Index: 25376
-    IsActive: 1
-    Type: 1
-  - Index: 25509
-    IsActive: 1
-    Type: 1
-  - Index: 25664
-    IsActive: 1
-    Type: 1
-  - Index: 26184
-    IsActive: 1
-    Type: 1
-  - Index: 27050
-    IsActive: 1
-    Type: 1
-  - Index: 27174
+  - Index: 40689
     IsActive: 1
     Type: 2
-  - Index: 27407
-    IsActive: 1
-    Type: 1
-  - Index: 28200
-    IsActive: 1
-    Type: 5
-  - Index: 28495
-    IsActive: 1
-    Type: 1
-  - Index: 29076
-    IsActive: 1
-    Type: 1
-  - Index: 29123
-    IsActive: 1
-    Type: 1
-  - Index: 29623
+  - Index: 41842
     IsActive: 1
     Type: 2
-  - Index: 29678
-    IsActive: 1
-    Type: 4
-  - Index: 29744
+  - Index: 42636
     IsActive: 1
     Type: 1
-  - Index: 29939
-    IsActive: 1
-    Type: 1
-  - Index: 29999
+  - Index: 42668
     IsActive: 1
     Type: 2
-  - Index: 30095
-    IsActive: 1
-    Type: 1
-  - Index: 30245
-    IsActive: 1
-    Type: 1
-  - Index: 30513
+  - Index: 42792
     IsActive: 1
     Type: 2
-  - Index: 31011
+  - Index: 43101
     IsActive: 1
     Type: 1
-  - Index: 31944
+  - Index: 44391
     IsActive: 1
     Type: 1
-  - Index: 32057
+  - Index: 44925
     IsActive: 1
     Type: 1
-  - Index: 32354
+  - Index: 45531
     IsActive: 1
     Type: 1
-  - Index: 32691
+  - Index: 46293
     IsActive: 1
     Type: 1
-  - Index: 32823
+  - Index: 47134
     IsActive: 1
     Type: 1
-  - Index: 34755
+  - Index: 47286
     IsActive: 1
     Type: 1
-  - Index: 34950
+  - Index: 47999
     IsActive: 1
-    Type: 1
-  - Index: 35284
-    IsActive: 1
-    Type: 2
-  - Index: 35567
-    IsActive: 1
-    Type: 2
-  - Index: 35723
-    IsActive: 1
-    Type: 1
-  - Index: 36591
-    IsActive: 1
-    Type: 1
-  - Index: 36821
-    IsActive: 1
-    Type: 2
-  - Index: 36850
-    IsActive: 1
-    Type: 1
-  - Index: 37065
-    IsActive: 1
-    Type: 1
-  - Index: 37238
-    IsActive: 1
-    Type: 1
-  - Index: 38090
-    IsActive: 1
-    Type: 2
-  - Index: 38529
-    IsActive: 1
-    Type: 1
-  - Index: 38997
-    IsActive: 1
-    Type: 1
-  - Index: 39001
-    IsActive: 1
-    Type: 1
-  - Index: 39589
-    IsActive: 1
-    Type: 1
-  - Index: 39776
-    IsActive: 1
-    Type: 1
-  - Index: 40018
-    IsActive: 1
-    Type: 1
-  - Index: 40313
-    IsActive: 1
-    Type: 1
-  - Index: 40382
-    IsActive: 1
-    Type: 1
-  - Index: 40678
-    IsActive: 1
-    Type: 1
-  - Index: 40684
-    IsActive: 1
-    Type: 1
-  - Index: 40800
-    IsActive: 1
-    Type: 5
-  - Index: 41462
-    IsActive: 1
-    Type: 1
-  - Index: 42408
-    IsActive: 1
-    Type: 2
-  - Index: 43367
-    IsActive: 1
-    Type: 2
-  - Index: 43542
-    IsActive: 1
-    Type: 2
-  - Index: 43783
-    IsActive: 1
-    Type: 1
-  - Index: 44493
-    IsActive: 1
-    Type: 2
-  - Index: 44706
-    IsActive: 1
-    Type: 1
-  - Index: 45143
-    IsActive: 1
-    Type: 2
-  - Index: 45305
-    IsActive: 1
-    Type: 2
-  - Index: 46151
-    IsActive: 1
-    Type: 1
-  - Index: 46297
-    IsActive: 1
-    Type: 1
-  - Index: 47247
-    IsActive: 1
-    Type: 1
-  - Index: 47374
-    IsActive: 1
-    Type: 1
-  - Index: 47495
-    IsActive: 1
-    Type: 1
+    Type: 0
   - Index: 48000
     IsActive: 1
     Type: 3

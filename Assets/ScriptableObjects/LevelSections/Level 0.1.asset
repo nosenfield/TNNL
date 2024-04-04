@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3e00780a2e94d8495d80f96866637b, type: 3}
+  m_Name: Level 0.1
+  m_EditorClassIdentifier: 
+  Id: Level 0.1
+  DisplayName: Level 0.1
+  Width: 60
+  Height: 400
+  ChanceForMineInLine: 0.05
+  ChanceForShieldInLine: 0.075
+  ChanceForInvincibilityInLine: 0
+  MinDistanceBetweenInvincibility: 50
+  GenerateWarp: 0
+  MinWarpLocationByPercent: 0.25
+  MaxWarpLocationByPercent: 0.75
+  MinWarpDistance: 0.25
+  MaxWarpDistance: 0.5
+  GenerateElectricGates: 0
+  MinElectricGatesLocationByPercent: 0.1
+  MaxElectricGatesLocationByPercent: 0.95
+  MinElectricGates: 1
+  MaxElectricGates: 3
+  MineCount: 19
+  ShieldCount: 28
+  InvincibilityCount: 0
+  WarpCount: 0
+  ElectricGateCount: 0
+  Notations:
+  - Index: 1002
+    IsActive: 1
+    Type: 1
+  - Index: 1322
+    IsActive: 1
+    Type: 1
+  - Index: 2098
+    IsActive: 1
+    Type: 1
+  - Index: 2281
+    IsActive: 1
+    Type: 2
+  - Index: 3487
+    IsActive: 1
+    Type: 2
+  - Index: 3774
+    IsActive: 1
+    Type: 2
+  - Index: 3820
+    IsActive: 1
+    Type: 2
+  - Index: 4655
+    IsActive: 1
+    Type: 2
+  - Index: 6278
+    IsActive: 1
+    Type: 1
+  - Index: 6830
+    IsActive: 1
+    Type: 2
+  - Index: 8530
+    IsActive: 1
+    Type: 2
+  - Index: 8920
+    IsActive: 1
+    Type: 1
+  - Index: 9979
+    IsActive: 1
+    Type: 2
+  - Index: 10531
+    IsActive: 1
+    Type: 2
+  - Index: 10703
+    IsActive: 1
+    Type: 2
+  - Index: 11261
+    IsActive: 1
+    Type: 1
+  - Index: 11546
+    IsActive: 1
+    Type: 2
+  - Index: 11967
+    IsActive: 1
+    Type: 1
+  - Index: 13184
+    IsActive: 1
+    Type: 1
+  - Index: 14172
+    IsActive: 1
+    Type: 2
+  - Index: 14669
+    IsActive: 1
+    Type: 1
+  - Index: 14761
+    IsActive: 1
+    Type: 2
+  - Index: 15554
+    IsActive: 1
+    Type: 2
+  - Index: 16315
+    IsActive: 1
+    Type: 2
+  - Index: 16813
+    IsActive: 1
+    Type: 1
+  - Index: 16925
+    IsActive: 1
+    Type: 1
+  - Index: 17178
+    IsActive: 1
+    Type: 1
+  - Index: 17679
+    IsActive: 1
+    Type: 2
+  - Index: 17951
+    IsActive: 1
+    Type: 2
+  - Index: 18948
+    IsActive: 1
+    Type: 1
+  - Index: 18976
+    IsActive: 1
+    Type: 2
+  - Index: 18999
+    IsActive: 1
+    Type: 1
+  - Index: 19069
+    IsActive: 1
+    Type: 2
+  - Index: 19424
+    IsActive: 1
+    Type: 1
+  - Index: 19748
+    IsActive: 1
+    Type: 1
+  - Index: 19894
+    IsActive: 1
+    Type: 1
+  - Index: 20177
+    IsActive: 1
+    Type: 2
+  - Index: 20300
+    IsActive: 1
+    Type: 1
+  - Index: 20665
+    IsActive: 1
+    Type: 2
+  - Index: 20646
+    IsActive: 1
+    Type: 1
+  - Index: 21030
+    IsActive: 1
+    Type: 2
+  - Index: 21141
+    IsActive: 1
+    Type: 2
+  - Index: 21251
+    IsActive: 1
+    Type: 2
+  - Index: 21865
+    IsActive: 1
+    Type: 2
+  - Index: 22040
+    IsActive: 1
+    Type: 2
+  - Index: 22326
+    IsActive: 1
+    Type: 2
+  - Index: 22899
+    IsActive: 1
+    Type: 2
