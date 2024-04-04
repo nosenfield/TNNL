@@ -60,7 +60,7 @@ namespace TNNL.Level
             }
 
             // NOTE
-            // We are automatically adding a FinishLine block at the end of the section so we no longer need to add a final terrain section block
+            // We now add a FinishLine block annotation the end of the section so we no longer need to add a terrain section block
             //
             // [Deprecated]
             // int finalIndex = section.Width * section.Height - 1;
@@ -70,10 +70,12 @@ namespace TNNL.Level
             // }
             ///
 
-            // Adds:
-            // - finish Line
-
-            notations.Add(new LevelBlockNotation(section.Width * section.Height, LevelBlockType.FinishLine, true));
+            // NOTE
+            // We now add a premade "finish line" section at the end of every level at parse time
+            //
+            // [Deprecated]
+            // notations.Add(new LevelBlockNotation(section.Width * section.Height, LevelBlockType.FinishLine, true));
+            ///
 
             // generate Warp
 
