@@ -9,25 +9,11 @@ namespace TNNL.Player
     {
         public static float Direction = -1f;
         PlayerMVC mvc;
-        public bool DoUpdate;
+        public bool UpdateX;
+        public bool UpdateY;
         public bool BoostRequested;
-
-        [SerializeField] private float xPosition;
-        public float XPosition
-        {
-            get
-            {
-                return xPosition;
-            }
-        }
-        [SerializeField] private float yPosition;
-        public float YPosition
-        {
-            get
-            {
-                return yPosition;
-            }
-        }
+        public float XPosition;
+        public float YPosition;
         [SerializeField] private bool isBoosting;
 
         [SerializeField] private float timeInPeriod;
@@ -73,7 +59,7 @@ namespace TNNL.Player
             mvc = playerMVC;
         }
 
-        private void SetDefaults()
+        public void SetDefaults()
         {
             isBoosting = false;
             BoostRequested = false;
@@ -91,8 +77,8 @@ namespace TNNL.Player
             overloadPenalty = 1f;
             overloadRecoveryThreshold = 0f;
 
-            xPosition = 0f;
-            yPosition = 0f;
+            XPosition = 0f;
+            YPosition = 0f;
         }
 
         /// <summary>
@@ -118,15 +104,11 @@ namespace TNNL.Player
 
         public void Update()
         {
-            if (!DoUpdate) return;
-
             boostTime = CalculateBoostTime();
         }
 
         public void FixedUpdate()
         {
-            if (!DoUpdate) return;
-
             if (!isOverloaded && boostTime > boostMaxTime)
             {
                 Debug.Log($"Boost overloaded! {Time.time}");
@@ -152,11 +134,7 @@ namespace TNNL.Player
                 }
             }
 
-            if (isBoosting)
-            {
-                yPosition = CalculateBoostedYPosition();
-            }
-            else
+            if (UpdateX && !isBoosting)
             {
                 timeInPeriod += Time.fixedDeltaTime;
                 if (timeInPeriod > period)
@@ -165,8 +143,12 @@ namespace TNNL.Player
                 }
 
                 float percentComplete = timeInPeriod / period;
-                xPosition = CalculateXPosition(percentComplete);
-                yPosition = CalculateYPosition();
+                XPosition = CalculateXPosition(percentComplete);
+            }
+
+            if (UpdateY)
+            {
+                YPosition = isBoosting ? CalculateBoostedYPosition() : CalculateYPosition();
             }
         }
 
@@ -179,12 +161,12 @@ namespace TNNL.Player
 
         private float CalculateYPosition()
         {
-            return yPosition += yVelocity * Time.fixedDeltaTime * Direction;
+            return YPosition += yVelocity * Time.fixedDeltaTime * Direction;
         }
 
         private float CalculateBoostedYPosition()
         {
-            return yPosition += yVelocity * boostDistanceMultiplier * Time.fixedDeltaTime * Direction;
+            return YPosition += yVelocity * boostDistanceMultiplier * Time.fixedDeltaTime * Direction;
         }
 
         private float CalculateBoostTime()
@@ -206,7 +188,18 @@ namespace TNNL.Player
 
         public void WarpTo(float _yPosition)
         {
-            yPosition = _yPosition;
+            YPosition = _yPosition;
+        }
+
+        public void AdjustY(float amount)
+        {
+            YPosition += amount;
+        }
+
+        public void ClearFlags()
+        {
+            isBoosting = false;
+            isOverloaded = false;
         }
     }
 }
