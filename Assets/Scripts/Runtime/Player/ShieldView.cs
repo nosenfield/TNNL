@@ -1,7 +1,7 @@
 using System;
+using Sirenix.OdinInspector;
 using TNNL.Collidables;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TNNL.Player
 {
@@ -9,12 +9,9 @@ namespace TNNL.Player
     {
         // events
         public Action<AbstractCollidable> ShieldCollision;
-
-        // mvc 
-        [SerializeField] private bool GenerateController;
         public bool DoUpdate;
-        ShieldController controller;
-        ShieldModel model;
+        private ShieldMVC mvc;
+        [SerializeField][ReadOnly] private ShieldModel model;
 
         // member vars
         public float MinScale; // the scale of the shield game object when at 0% health. note, this should match the scale of the ship
@@ -26,16 +23,12 @@ namespace TNNL.Player
         void Start()
         {
             colliderMinRadius = MinScale / MaxScale * colliderStartingRadius;
-
-            if (GenerateController)
-            {
-                controller = new ShieldController(this);
-            }
         }
 
-        public void SetModel(ShieldModel model)
+        public void SetMVC(ShieldMVC shieldMVC)
         {
-            this.model = model;
+            mvc = shieldMVC;
+            model = mvc.Model;
         }
 
         void Update()
@@ -48,10 +41,10 @@ namespace TNNL.Player
 
         void FixedUpdate()
         {
-            controller?.FixedUpdate();
+            mvc.Controller?.FixedUpdate();
         }
 
-        public void UpdateAppearance(float percentHealth)
+        private void UpdateAppearance(float percentHealth)
         {
             // set the visual scale of the orb and the scale of the collider
             float newScale = MinScale + (MaxScale - MinScale) * percentHealth;
@@ -64,7 +57,7 @@ namespace TNNL.Player
 
             if (collidable != null)
             {
-                ShieldCollision?.Invoke(collidable);
+                mvc.Controller?.HandleCollision(collidable);
             }
         }
     }

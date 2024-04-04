@@ -1,8 +1,7 @@
 using System;
+using System.Collections;
 using nosenfield.Logging;
 using TNNL.Collidables;
-using TNNL.Events;
-using TNNL.UI.UIToolkit;
 using UnityEngine;
 
 namespace TNNL.Player
@@ -10,85 +9,74 @@ namespace TNNL.Player
     public class ShieldController
     {
         private nosenfield.Logging.Logger logger = new();
-        public static Action ShieldDestroyed;
-        private ShieldModel model;
-        private ShieldView view;
+        private ShieldMVC mvc;
 
-        public ShieldController(ShieldView view)
+        public void SetMVC(ShieldMVC shieldMVC)
         {
-            this.view = view;
-            model = new ShieldModel(ShieldModel.DefaultShieldStartingHealth, ShieldModel.DefaultShieldMaxHealth);
-            view.SetModel(model);
-
-            view.ShieldCollision += CollisionListener;
-            ShieldModel.HealthUpdate += HealthUpdateListener;
-
-            OverlayUI.StartRunClicked += ResetShield;
+            mvc = shieldMVC;
         }
 
         public void FixedUpdate()
         {
-            if (model.SecondsInvincibleRemaining > 0f)
+            if (mvc.Model.SecondsInvincibleRemaining > 0f)
             {
-                model.SecondsInvincibleRemaining = Mathf.Max(0f, model.SecondsInvincibleRemaining - Time.fixedDeltaTime);
+                mvc.Model.SecondsInvincibleRemaining = Mathf.Max(0f, mvc.Model.SecondsInvincibleRemaining - Time.fixedDeltaTime);
             }
         }
 
-        private void ResetShield()
+        public void ResetShield()
         {
-            model.ResetShield();
+            mvc.View.StartCoroutine(Routine());
+            IEnumerator Routine()
+            {
+                while (mvc.Model.PercentHealth < 1)
+                {
+                    mvc.Model.HealShield(1);
+                    yield return new WaitForEndOfFrame();
+                }
+
+                mvc.Model.ResetShield();
+            }
         }
 
-        private void CollisionListener(AbstractCollidable collidable)
+        public void HandleCollision(AbstractCollidable collidable)
         {
+            if (collidable.ExternalDirty)
+            {
+                logger.Log(LogLevel.DEBUG, "Collidable already processed. Skipping");
+                return;
+            }
+
             switch (collidable.Type)
             {
                 case CollisionType.DefaultTerrain:
-                    model.DamageShield(((Collidables.DefaultTerrain)collidable).Damage);
+                    mvc.Model.DamageShield(((Collidables.DefaultTerrain)collidable).Damage);
+                    collidable.ExternalDirty = true;
                     break;
                 case CollisionType.Mine:
                     logger.Log(LogLevel.DEBUG, "Hit a mine!");
-                    model.DamageShield(((Mine)collidable).Damage);
+                    mvc.Model.DamageShield(((Mine)collidable).Damage);
+                    collidable.ExternalDirty = true;
                     break;
                 case CollisionType.ShieldBoost:
                     logger.Log(LogLevel.DEBUG, "Grabbed a shield!");
-                    model.HealShield(((ShieldBoost)collidable).Amount);
+                    mvc.Model.HealShield(((ShieldBoost)collidable).Amount);
+                    collidable.ExternalDirty = true;
                     break;
                 case CollisionType.ElectricGate:
                     logger.Log(LogLevel.DEBUG, "Hit electric gate!");
-                    ((ElectricGate)collidable).SetModelToDamage(model);
+                    ((ElectricGate)collidable).SetModelToDamage(mvc.Model);
+                    collidable.ExternalDirty = true;
                     break;
                 case CollisionType.Invincibility:
                     logger.Log(LogLevel.DEBUG, "Grabbed invincibility!");
-                    model.SecondsInvincibleRemaining = ((Invincibility)collidable).DurationInSeconds;
+                    mvc.Model.SecondsInvincibleRemaining = ((Invincibility)collidable).DurationInSeconds;
+                    collidable.ExternalDirty = true;
                     break;
                 default:
                     logger.Log(LogLevel.DEBUG, "Unspecified shield collision!");
                     return;
             }
-        }
-
-        private void HealthUpdateListener(float percentHealth)
-        {
-            if (percentHealth <= 0)
-            {
-                logger.Log(LogLevel.DEBUG, "Shield is destroyed!");
-                ShieldDestroyed?.Invoke();
-            }
-            else
-            {
-
-            }
-        }
-
-        // NOTE
-        // This is not yet called by our view object to which it is tied.
-        // We could attach to another view which is instantiated without the createController attribute
-        ///
-        public void OnDestroy()
-        {
-            view.ShieldCollision -= CollisionListener;
-            ShieldModel.HealthUpdate -= HealthUpdateListener;
         }
     }
 }

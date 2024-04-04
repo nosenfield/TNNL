@@ -1,4 +1,5 @@
 using System;
+using TNNL.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,15 +10,7 @@ namespace TNNL.Player
     {
         public static float DefaultShieldStartingHealth = 10f;
         public static float DefaultShieldMaxHealth = 10f;
-
-        /// <summary>
-        /// HealthUpdate emits the new percentage of health as a float between 0 and 1. this currently throws an error because it has no listeners.
-        /// Who needs to listen to this event and how will they get the reference to the event through this model which is instantiated by the controller?
-        /// Emit a registration as the "active" model?
-        /// </summary>
-        public static Action<float> HealthUpdate;
-        public static Action<float> InvincibilityUpdate;
-
+        private ShieldMVC mvc;
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private float startingHealth;
@@ -31,7 +24,7 @@ namespace TNNL.Player
             set
             {
                 secondsInvincibleRemaining = value;
-                InvincibilityUpdate?.Invoke(value);
+                ShieldInvincibilityUpdateEvent.Dispatch(value);
             }
         }
         public float PercentHealth
@@ -47,6 +40,11 @@ namespace TNNL.Player
             this.health = this.startingHealth = startingHealth;
             this.maxHealth = maxHealth;
             this.SecondsInvincibleRemaining = 0f;
+        }
+
+        public void SetMVC(ShieldMVC shieldMVC)
+        {
+            mvc = shieldMVC;
         }
 
         /// <summary>
@@ -90,13 +88,13 @@ namespace TNNL.Player
                 health = 0f;
             }
 
-            HealthUpdate.Invoke(PercentHealth);
+            ShieldHealthUpdateEvent.Dispatch(PercentHealth);
         }
 
         public float ResetShield()
         {
             health = startingHealth;
-            HealthUpdate.Invoke(PercentHealth);
+            ShieldHealthUpdateEvent.Dispatch(PercentHealth);
             return health;
         }
     }
