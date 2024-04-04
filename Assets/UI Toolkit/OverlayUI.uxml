@@ -1,12 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/OverlayUI.uss?fileID=7433441132597879392&amp;guid=1e4b78af2194a43d4aebdf769b3d4461&amp;type=3#OverlayUI" />
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-start; top: auto;">
-        <ui:VisualElement name="ButtonBar" style="flex-grow: 0; justify-content: space-around; flex-direction: column; max-height: none; flex-shrink: 0; top: 75%;">
-            <ui:Button text="Start Run" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartRunButton" class="button-default" style="flex-grow: 0; flex-shrink: 0;" />
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row; max-height: none; justify-content: space-around;">
-                <ui:Button text="Reset Level" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResetLevelButton" class="button-default" style="flex-grow: 1; flex-shrink: 0;" />
-                <ui:Button text="Next Level" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextLevelButton" class="button-default" style="flex-grow: 1; flex-shrink: 0;" />
+    <ui:VisualElement name="Body" style="flex-grow: 1; justify-content: flex-start; top: auto; flex-direction: column-reverse;">
+        <ui:VisualElement name="ButtonBar" style="flex-grow: 0; justify-content: space-around; flex-direction: column; max-height: none; flex-shrink: 0; top: -5%;">
+            <ui:Button text="&#10;Start Run&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartRunButton" class="button-default" style="flex-grow: 0; flex-shrink: 0;" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; max-height: none; justify-content: space-around; display: flex;">
+                <ui:Button text="Reset Level" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResetLevelButton" class="button-default" style="flex-grow: 1; flex-shrink: 0; display: none;" />
+                <ui:Button text="Next Level" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextLevelButton" class="button-default" style="flex-grow: 1; flex-shrink: 0; display: none;" />
             </ui:VisualElement>
+            <ui:Button text="Reset High Score" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResetDataButton" class="button-default" style="flex-grow: 0; flex-shrink: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
