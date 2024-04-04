@@ -63,7 +63,9 @@ namespace TNNL.UI
 
             if (associatedObject != null)
             {
+                float animWidth = (anim.transform as RectTransform).rect.width;
                 Vector3 position = RectTransformUtility.WorldToScreenPoint(UnityEngine.Camera.main, associatedObject.transform.TransformPoint(Vector3.zero));
+                position.x = Mathf.Clamp(position.x, animWidth * .75f, Screen.width - animWidth * .75f);
                 anim.transform.position = position;
             }
         }

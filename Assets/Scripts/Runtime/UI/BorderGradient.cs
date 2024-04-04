@@ -1,4 +1,4 @@
-using TNNL.Player;
+using TNNL.Events;
 using UnityEngine;
 
 namespace TNNL.UI
@@ -7,20 +7,28 @@ namespace TNNL.UI
     {
         [SerializeField] Animator animator;
 
+        void Awake()
+        {
+
+        }
+
         void Start()
         {
-            ShieldModel.HealthUpdate += HealthUpdateListener;
-            ShieldModel.InvincibilityUpdate += InvincibilityUpdateListener;
+            EventAggregator.Subscribe<ShieldHealthUpdateEvent>(ShieldHealthUpdateEventListener);
+            EventAggregator.Subscribe<ShieldInvincibilityUpdateEvent>(ShieldInvincibilityUpdateEventListener);
         }
 
-        void HealthUpdateListener(float shieldHealth)
+        void ShieldHealthUpdateEventListener(object e)
         {
-            animator.SetFloat("shieldHealth", shieldHealth);
+            ShieldHealthUpdateEvent shieldHealthUpdateEvent = (ShieldHealthUpdateEvent)e;
+
+            animator.SetFloat("shieldHealth", shieldHealthUpdateEvent.PercentHealth);
         }
 
-        void InvincibilityUpdateListener(float secondsRemaining)
+        void ShieldInvincibilityUpdateEventListener(object e)
         {
-            animator.SetBool("isInvincible", secondsRemaining > 0f);
+            ShieldInvincibilityUpdateEvent shieldInvincibilityUpdateEvent = (ShieldInvincibilityUpdateEvent)e;
+            animator.SetBool("isInvincible", shieldInvincibilityUpdateEvent.SecondsInvincibleRemaining > 0f);
         }
     }
 }
