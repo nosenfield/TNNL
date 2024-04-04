@@ -14,7 +14,7 @@ namespace TNNL.Data
         [NonSerialized] private static readonly string DirectoryPath = "UserData";
         [NonSerialized] private static readonly string FileName = "PlayerSaveData";
         [JsonProperty] private readonly Dictionary<string, int> highScores = new();
-        [JsonProperty] private List<ShipData> shipData = new();
+        [JsonProperty] private List<AttemptData> attempts = new();
 
 
         private static PlayerSaveData instance;
@@ -22,7 +22,9 @@ namespace TNNL.Data
         {
             get
             {
+#if UNITY_EDITOR || !UNITY_WEBGL
                 instance ??= PersistentDataService.LoadDataOfType<PlayerSaveData>(DirectoryPath, FileName);
+#endif
                 instance ??= new PlayerSaveData();
                 return instance;
             }
@@ -59,14 +61,19 @@ namespace TNNL.Data
             Save();
         }
 
-        public static List<ShipData> GetShipData()
+        public static List<AttemptData> GetAttempts()
         {
-            return Instance.shipData;
+            return Instance.attempts;
         }
 
-        public static void SetShipData(List<ShipData> shipData)
+        public static void SetAttempts(List<AttemptData> attempts)
         {
-            Instance.shipData = shipData;
+            Instance.attempts = attempts;
+        }
+
+        public static void ResetData()
+        {
+            instance = new PlayerSaveData();
         }
     }
 }

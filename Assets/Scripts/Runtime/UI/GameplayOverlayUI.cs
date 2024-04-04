@@ -23,6 +23,7 @@ namespace TNNL.UI
         [SerializeField] TextMeshProUGUI levelNameDisplay;
         [SerializeField] TextMeshProUGUI highScoreDisplay;
         [SerializeField] GameObject levelInfo;
+        [SerializeField] GameObject gameOverText;
 
         void Awake()
         {
@@ -42,6 +43,11 @@ namespace TNNL.UI
             highScoreDisplay.text = PlayerSaveData.GetHighScore(LevelParser.Instance.CurrentLevelId).ToString();
         }
 
+        public void SetGameOverVisible(bool visible)
+        {
+            gameOverText.SetActive(visible);
+        }
+
         void Update()
         {
             // NOTE
@@ -51,12 +57,12 @@ namespace TNNL.UI
             scoreText.text = playerData?.TotalPoints.ToString();
         }
 
-        public void GameplayStarted()
+        public void HideOverlay()
         {
             levelInfo.SetActive(false);
         }
 
-        public void GameplayEnded()
+        public void ShowOverlay()
         {
             levelInfo.SetActive(true);
         }

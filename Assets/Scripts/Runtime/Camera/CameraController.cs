@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using nosenfield.Logging;
 using TNNL.Level;
 using TNNL.Player;
 using UnityEngine;
 using UnityEngine.UI;
+using static nosenfield.Animation.EasingFunction;
 
 namespace TNNL.Camera
 {
@@ -12,22 +14,47 @@ namespace TNNL.Camera
         private float cameraSize = 0f;
         [SerializeField] private float percentVerticalBuffer = 0f; // the percentage of the screen to shift the viewport by
         [SerializeField] private PlayerView player;
+        bool inTransition;
 
         void Awake()
         {
             LevelParser.LevelCreated += UpdateSize;
-            PlayerMVC.SetCurrentPlayer += AssignPlayer;
+            Main.SetCurrentPlayer += AssignPlayer;
         }
 
         void AssignPlayer(PlayerMVC playerMVC)
         {
             player = playerMVC.View;
+
+            inTransition = true;
+
+            float startingY = transform.position.y;
+            float endingY = player.transform.position.y;
+            float rowsPerSecond = 200;
+            float duration = Mathf.Max(.5f, Mathf.Min(3f, Math.Abs(startingY - player.transform.position.y) / rowsPerSecond));
+            float threshold = 1f;
+            Function easingFunc = nosenfield.Animation.EasingFunction.EaseOutCirc;
+
+            StartCoroutine(Routine());
+            IEnumerator Routine()
+            {
+                float t = 0f;
+                while (t < duration && Math.Pow(transform.position.y - player.transform.position.y, 2) > threshold)
+                {
+                    UpdatePosition(easingFunc(startingY, player.transform.position.y, t / duration));
+                    t += Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+
+                UpdatePosition(easingFunc(startingY, player.transform.position.y, 1f));
+                inTransition = false;
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (player != null)
+            if (player != null && !inTransition)
             {
                 UpdatePosition(player.gameObject.transform.position.y + cameraSize * 2 * percentVerticalBuffer * PlayerModel.Direction);
             }

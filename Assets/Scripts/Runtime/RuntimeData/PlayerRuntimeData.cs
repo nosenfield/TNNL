@@ -1,23 +1,26 @@
+using System;
 using System.Collections.Generic;
 using TNNL.Events;
 
 namespace TNNL.RuntimeData
 {
-    public class ShipData
+    [Serializable]
+    public class AttemptData
     {
         public string CheckpointReached = ""; // what is the last known location of our ship in the level progression
         public bool IsAlive = true; // is this ship still active
     }
 
+    [Serializable]
     public class PlayerRuntimeData
     {
-        private int numStartingShips = 3; // Unless this is going to be modifited at Runtime, this is more of a "config" kind of value
+        private int numAttempts = 3; // Unless this is going to be modifited at Runtime, this is more of a "config" kind of value
         public int TotalPoints = 0;
-        public List<ShipData> ShipData;
+        public List<AttemptData> Attempts;
 
-        public PlayerRuntimeData(List<ShipData> shipData)
+        public PlayerRuntimeData(List<AttemptData> attempts)
         {
-            ShipData = shipData;
+            Attempts = attempts;
             // add listener for any ICollision event
             EventAggregator.Subscribe<PointCollectionEvent>(PointCollectionListener);
         }
@@ -32,13 +35,13 @@ namespace TNNL.RuntimeData
             }
         }
 
-        public void ResetPlayerData()
+        public void ResetAttemptsAndScore()
         {
             TotalPoints = 0;
-            ShipData = new List<ShipData>();
-            for (int i = 0; i < numStartingShips; i++)
+            Attempts = new List<AttemptData>();
+            for (int i = 0; i < numAttempts; i++)
             {
-                ShipData.Add(new ShipData());
+                Attempts.Add(new AttemptData());
             }
         }
     }

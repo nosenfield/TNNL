@@ -12,7 +12,7 @@ namespace TNNL.UI
 
         void Awake()
         {
-            PlayerMVC.SetCurrentPlayer += AssignPlayer;
+            Main.SetCurrentPlayer += AssignPlayer;
             overloadGraphic.SetActive(false);
         }
 
