@@ -40,9 +40,9 @@ public class EventAggregator
         Type eventType = typeof(TEvent);
         if (subscribers.ContainsKey(eventType))
         {
-            foreach (var handler in subscribers[eventType])
+            for (int i = subscribers[eventType].Count - 1; i >= 0; i--)
             {
-                handler(ev);
+                subscribers[eventType][i](ev);
             }
         }
     }
