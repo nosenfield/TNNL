@@ -1,6 +1,6 @@
 using System;
 using TMPro;
-using TNNL.Collidables;
+using TNNL.Events;
 using TNNL.Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,21 +16,29 @@ namespace TNNL.UI
         [SerializeField] GameObject criticalAlert;
         [SerializeField] Image uiHousing;
 
-        void Start()
+        void Awake()
         {
-            ShieldModel.HealthUpdate += HealthUpdateListener;
+            healthText.color = DefaultColor;
+            uiHousing.color = DefaultColor;
+            criticalAlert.SetActive(false);
         }
 
-        void HealthUpdateListener(float shieldHealth)
+        void Start()
         {
-            if (shieldHealth < .3f)
+            EventAggregator.Subscribe<ShieldHealthUpdateEvent>(ShieldHealthUpdateEventListener);
+        }
+
+        void ShieldHealthUpdateEventListener(object e)
+        {
+            ShieldHealthUpdateEvent shieldHealthUpdateEvent = (ShieldHealthUpdateEvent)e;
+            if (shieldHealthUpdateEvent.PercentHealth < .3f)
             {
                 healthText.color = CriticalColor;
                 uiHousing.color = CriticalColor;
                 criticalAlert.SetActive(true);
 
             }
-            else if (shieldHealth < .5f)
+            else if (shieldHealthUpdateEvent.PercentHealth < .5f)
             {
                 healthText.color = WarningColor;
                 uiHousing.color = WarningColor;
@@ -43,13 +51,13 @@ namespace TNNL.UI
                 criticalAlert.SetActive(false);
             }
 
-            if (shieldHealth >= .1f)
+            if (shieldHealthUpdateEvent.PercentHealth >= .1f)
             {
-                healthText.text = $"{Math.Max(0, Math.Round(shieldHealth * 100)).ToString()}%";
+                healthText.text = $"{Math.Max(0, Math.Round(shieldHealthUpdateEvent.PercentHealth * 100)).ToString()}%";
             }
             else
             {
-                healthText.text = $"{Math.Max(0, (shieldHealth * 100)).ToString("0.0")}";
+                healthText.text = $"{Math.Max(0, (shieldHealthUpdateEvent.PercentHealth * 100)).ToString("0.0")}";
             }
 
 

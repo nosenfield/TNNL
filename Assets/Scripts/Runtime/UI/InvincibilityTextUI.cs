@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using TNNL.Collidables;
+using TNNL.Events;
 using TNNL.Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,12 +15,13 @@ namespace TNNL.UI
 
         void Awake()
         {
-            ShieldModel.InvincibilityUpdate += InvincibilityUpdateListener;
+            EventAggregator.Subscribe<ShieldInvincibilityUpdateEvent>(ShieldInvincibilityUpdateEventListener);
         }
 
-        void InvincibilityUpdateListener(float invincibilityRemainingInSeconds)
+        void ShieldInvincibilityUpdateEventListener(object e)
         {
-            if (invincibilityRemainingInSeconds == 0f)
+            ShieldInvincibilityUpdateEvent shieldInvincibilityUpdateEvent = (ShieldInvincibilityUpdateEvent)e;
+            if (shieldInvincibilityUpdateEvent.SecondsInvincibleRemaining == 0f)
             {
                 invincibilityUI.SetActive(false);
 
@@ -27,7 +29,7 @@ namespace TNNL.UI
             else
             {
                 invincibilityUI.SetActive(true);
-                invincibilityText.text = $"{Math.Max(0, invincibilityRemainingInSeconds).ToString("0.0")}";
+                invincibilityText.text = $"{Math.Max(0, shieldInvincibilityUpdateEvent.SecondsInvincibleRemaining).ToString("0.0")}";
             }
         }
 
